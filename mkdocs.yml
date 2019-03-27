@@ -1,0 +1,62 @@
+site_name: Wirecard POS
+
+theme:
+  name: 'material'
+
+markdown_extensions:
+  - codehilite
+  - admonition
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - 'stylesheets/minimal-epossdk.css'
+extra_javascript:
+  - 'javascript/external-links.js'
+
+extra:
+  logo: 'images/logo.svg'
+  social:
+    - type: 'github'
+      link: 'https://github.com/WirecardMobileServices/Wirecard-ePOS-iOS/issues'
+    - type: 'apple'
+      link: 'https://github.com/WirecardMobileServices/Wirecard-ePOS-iOS'
+    - type: 'android'
+      link: 'https://github.com/WirecardMobileServices/Wirecard-ePOS-Android'
+  palette:
+    primary: 'indigo'
+    accent: 'red'
+
+# Page tree
+nav:
+  - Welcome: index.md
+  - Start:
+    - Getting Started: start.md
+    - The Basics: basics.md
+    - Using this Documentation: using.md
+    - The POS Architecture: pos-architecture.md
+    - The SDK Architecture: sdk-architecture.md
+  - Setup:
+    - Set up on Android:
+      - Set up with Gradle: int-setup-android-gradle.md
+      - Set up Manually: int-setup-android-manual.md
+      - Integration Tests: int-tests-a.md
+      - Design Principles: int-ov-a.md
+    - Set up on iOS:
+      - Set up with Cocoapods (Recommended): int-setup-ios-cocoa.md
+      - Set up Manually: int-setup-ios-manual.md
+      - iOS Integration Tests: int-tests-i.md
+    - SDK Initialization: int-initialization.md
+  - Glossary: glossary.md

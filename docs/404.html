@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,20 +32,20 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="/assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.1.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
-        <title>Wirecard POS</title>
+        <title>Wirecard ePOS</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/application.11e41852.css">
+      <link rel="stylesheet" href="/assets/stylesheets/application.982221ab.css">
       
       
     
     
-      <script src="/assets/javascripts/modernizr.20ef595d.js"></script>
+      <script src="/assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -58,6 +58,9 @@
     
     
       <link rel="stylesheet" href="/stylesheets/minimal-epossdk.css">
+    
+    
+      
     
     
   </head>
@@ -79,7 +82,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="/." title="Wirecard POS" class="md-header-nav__button md-logo">
+        <a href="/." title="Wirecard ePOS" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -91,22 +94,19 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Wirecard POS
-              </span>
-              <span class="md-header-nav__topic">
-                
-              </span>
-            
+            <span class="md-header-nav__topic">
+              Wirecard ePOS
+            </span>
+            <span class="md-header-nav__topic">
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -129,7 +129,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -151,12 +150,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="/." title="Wirecard POS" class="md-nav__button md-logo">
+    <a href="/." title="Wirecard ePOS" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    Wirecard POS
+    Wirecard ePOS
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -198,8 +197,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/start.md" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="/start/" title="Getting started" class="md-nav__link">
+      Getting started
     </a>
   </li>
 
@@ -210,8 +209,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/basics.md" title="The Basics" class="md-nav__link">
-      The Basics
+    <a href="/auth/" title="Authentication" class="md-nav__link">
+      Authentication
     </a>
   </li>
 
@@ -222,32 +221,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/using.md" title="Using this Documentation" class="md-nav__link">
-      Using this Documentation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="/pos-architecture.md" title="The POS Architecture" class="md-nav__link">
-      The POS Architecture
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="/sdk-architecture.md" title="The SDK Architecture" class="md-nav__link">
-      The SDK Architecture
+    <a href="/user/" title="User management" class="md-nav__link">
+      User management
     </a>
   </li>
 
@@ -267,14 +242,38 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
-      Setup
+      Sale
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
-        Setup
+        Sale
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="/sale/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="/multitender/" title="Multi-tender sale" class="md-nav__link">
+      Multi-tender sale
+    </a>
+  </li>
+
         
           
           
@@ -283,14 +282,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
     
-    <label class="md-nav__link" for="nav-3-1">
-      Set up on Android
+    <label class="md-nav__link" for="nav-3-3">
+      Items
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-1">
-        Set up on Android
+      <label class="md-nav__title" for="nav-3-3">
+        Items
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -301,8 +300,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/int-setup-android-gradle.md" title="Set up with Gradle" class="md-nav__link">
-      Set up with Gradle
+    <a href="/items/" title="General" class="md-nav__link">
+      General
     </a>
   </li>
 
@@ -313,32 +312,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/int-setup-android-manual.md" title="Set up Manually" class="md-nav__link">
-      Set up Manually
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="/int-tests-a.md" title="Integration Tests" class="md-nav__link">
-      Integration Tests
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="/int-ov-a.md" title="Design Principles" class="md-nav__link">
-      Design Principles
+    <a href="/discounts/" title="Discounts" class="md-nav__link">
+      Discounts
     </a>
   </li>
 
@@ -355,14 +330,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
     
-    <label class="md-nav__link" for="nav-3-2">
-      Set up on iOS
+    <label class="md-nav__link" for="nav-3-4">
+      Payments
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-2">
-        Set up on iOS
+      <label class="md-nav__title" for="nav-3-4">
+        Payments
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -373,8 +348,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/int-setup-ios-cocoa.md" title="Set up with Cocoapods (Recommended)" class="md-nav__link">
-      Set up with Cocoapods (Recommended)
+    <a href="/cash/" title="Cash" class="md-nav__link">
+      Cash
     </a>
   </li>
 
@@ -385,8 +360,8 @@
 
 
   <li class="md-nav__item">
-    <a href="/int-setup-ios-manual.md" title="Set up Manually" class="md-nav__link">
-      Set up Manually
+    <a href="/card/" title="Card" class="md-nav__link">
+      Card
     </a>
   </li>
 
@@ -397,26 +372,26 @@
 
 
   <li class="md-nav__item">
-    <a href="/int-tests-i.md" title="iOS Integration Tests" class="md-nav__link">
-      iOS Integration Tests
+    <a href="/alipay/" title="AliPay" class="md-nav__link">
+      AliPay
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="/wechat/" title="WeChat Pay" class="md-nav__link">
+      WeChat Pay
     </a>
   </li>
 
         
       </ul>
     </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="/int-initialization.md" title="SDK Initialization" class="md-nav__link">
-      SDK Initialization
-    </a>
   </li>
 
         
@@ -474,7 +449,6 @@
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="/assets/fonts/font-awesome.css">
     
@@ -486,21 +460,17 @@
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="/assets/javascripts/application.9e1f3b71.js"></script>
+      <script src="/assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"/"}})</script>
       
         <script src="/javascript/external-links.js"></script>
-      
-    
-    
       
     
   </body>

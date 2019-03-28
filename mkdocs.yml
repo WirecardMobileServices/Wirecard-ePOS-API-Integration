@@ -45,20 +45,19 @@ extra:
 nav:
   - Welcome: index.md
   - Start:
-    - Getting Started: start.md
-    - The Basics: basics.md
-    - Using this Documentation: using.md
-    - The POS Architecture: pos-architecture.md
-    - The SDK Architecture: sdk-architecture.md
-  - Setup:
-    - Set up on Android:
-      - Set up with Gradle: int-setup-android-gradle.md
-      - Set up Manually: int-setup-android-manual.md
-      - Integration Tests: int-tests-a.md
-      - Design Principles: int-ov-a.md
-    - Set up on iOS:
-      - Set up with Cocoapods (Recommended): int-setup-ios-cocoa.md
-      - Set up Manually: int-setup-ios-manual.md
-      - iOS Integration Tests: int-tests-i.md
-    - SDK Initialization: int-initialization.md
+    - Getting started: start.md
+    - Authentication: auth.md
+    - User management: user.md
+
+  - Sale:
+    - Getting started: sale.md
+    - Multi-tender sale: multitender.md
+    - Items:
+      - General: items.md
+      - Discounts: discounts.md
+    - Payments:
+      - Cash: cash.md
+      - Card: card.md
+      - AliPay: alipay.md
+      - WeChat Pay: wechat.md
   - Glossary: glossary.md

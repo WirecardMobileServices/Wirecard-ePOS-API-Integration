@@ -40,9 +40,19 @@ For example, if the browser uses Aladdin as the username and OpenSesame
 as the password, then the field's value is the base64-encoding of
 Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization
 header will appear as: “Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l”
+
 Example of CURL request: 
 - curl -X GET
-"http://switch.wirecard.sys/mswitch-server/v1/cardTypes" -H "accept:
+"https://switch.wirecard.com/mswitch-server/v1/info/version" -H "accept:
 application/json" -H "Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l" 
-- curl -X GET "http://switch.wirecard.sys/mswitch-server/v1/cardTypes" -H
+- curl -X GET "https://switch.wirecard.com/mswitch-server/v1/info/version" -H
 "accept: application/json" -u Aladdin:OpenSesame
+
+## Test Environment
+
+Wirecard ePOS backend TEST environment is provided to API integrators for their development purposes. In case your credentials are valid for ePOS backend TEST environment, please refer to https://switch-test.wirecard.com/mswitch-server/ 
+
+One can test the validity of credentials by calling:
+
+GET https://switch-test.wirecard.com/mswitch-server/v1/info/version
+

@@ -44,14 +44,14 @@ extra:
 # Page tree
 nav:
   - Welcome: index.md
-  - Start: start.md
+  - Start:
     - Getting started: start.md
     - Security: auth.md
     - User management: user.md
-  - Sale: sale.md
+  - Sale:
     - Getting started: sale.md
     - Multi-tender sale: multitender.md
-    - Items: items.md
+    - Items:
       - General: items.md
       - Discounts: discounts.md
     - Payments:
@@ -60,15 +60,15 @@ nav:
       - AliPay: alipay.md
       - WeChat Pay: wechat.md
   - Product catalogue:
-   - Getting started:
-   - Catalogue hierarchy:
-   - Product item:
+    - Getting started: card.md
+    - Catalogue hierarchy: card.md
+    - Product item: card.md
   - Merchant management:
-    - Getting started:
-    - Shop management:
+    - Getting started: card.md
+    - Shop management: card.md
   - Cash management:
-   - Getting started:
-   - Cash registers:
-   - Shifts:
-  - Terminal management:
+    - Getting started: card.md
+    - Cash registers: card.md
+    - Shifts: card.md
+  - Terminal management: card.md
   - Glossary: glossary.md

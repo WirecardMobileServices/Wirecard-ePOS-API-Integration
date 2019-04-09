@@ -3,4 +3,4 @@
 
 
 ## Overview
-Wirecard ePOS Switch Backend Integration
+Wirecard ePOS API Integration

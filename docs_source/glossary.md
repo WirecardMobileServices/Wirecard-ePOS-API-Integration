@@ -28,6 +28,8 @@ Merchant
 
 Partner
 
+Payment service provider
+
 Payment transaction
 
 Purchase
@@ -39,6 +41,10 @@ Return
 ### S
 
 Sale
+
+### T
+
+Transaction
 
 ### U
 

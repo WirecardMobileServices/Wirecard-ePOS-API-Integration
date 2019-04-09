@@ -4,7 +4,7 @@
 testers and business analysts. Wirecard ePOS combines smart cash-register, 
 product catalogue and payment acceptance into one solution.
 
-Wirecard ePOS solution can be utilized by retailers in following ways:
+Wirecard ePOS solution can be utilized in following ways:
 
 - Wirecard ePOS API - for retailers who prefer direct API (backend-to-backend) integration
 - Wirecard ePOS SDK - for retailers who want to develop their own iOS or Android application

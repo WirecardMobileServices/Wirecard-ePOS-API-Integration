@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Wirecard-ePOS-Switch-Integration.iml" filepath="$PROJECT_DIR$/Wirecard-ePOS-Switch-Integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wirecard-ePOS-API-Integration.iml" filepath="$PROJECT_DIR$/Wirecard-ePOS-API-Integration.iml" />
     </modules>
   </component>
 </project>

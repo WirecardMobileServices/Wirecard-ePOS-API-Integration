@@ -29,11 +29,21 @@ First of all, you need to have Wirecard ePOS API credentials (username & passwor
 
 ## Testing Environment
 
-Wirecard ePOS API TEST environment is provided to API integrators for their development purposes. In case your credentials are valid for ePOS TEST environment, please refer to the following URL:
+**Wirecard ePOS TEST environment** is provided to API integrators for their development purposes. In case your credentials are valid for ePOS TEST environment, please refer to the following URL:
        
     https://switch-test.wirecard.com/mswitch-server/
 
-You can test your credentials with this API request:
+!!! Tip
+    
+    - You have received user account credentials to TEST environment.
+    - You can check the received credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: 
+        
+        >curl -X GET "https://switch-test.wirecard.com/mswitch-server/v1/info/version" -H "accept: text/plain" -u {YourUsername}:{YourPassword}
+    
+        Upon successful authentication, system responds with its version.
+        
+## Production Environment
 
-    GET https://switch-test.wirecard.com/mswitch-server/v1/info/version
+**Wirecard ePOS PROD environment** is available on the following URL:
 
+    https://switch.wirecard.com/mswitch-server/

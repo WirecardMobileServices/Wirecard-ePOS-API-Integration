@@ -49,7 +49,7 @@ nav:
     - Getting Started: getting-started.md
   - Core Integration:
     - Overview: core_overview.md
-    - Sale Processing:
+    - Sale Model:
       - General: sale-general.md
       - Payment Methods:
         - Cash: cash.md

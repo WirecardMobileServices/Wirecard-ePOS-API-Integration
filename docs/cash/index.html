@@ -265,11 +265,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" checked>
     
     <label class="md-nav__link" for="nav-3-2">
-      Sale Processing
+      Sale Model
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-2">
-        Sale Processing
+        Sale Model
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -680,7 +680,25 @@
                 
                   <h1>Cash</h1>
                 
-                
+                <p>The simplest payment method is cash. It is one-step payment method what means that only one request to Wirecard ePOS API is needed.</p>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">POST /v1/sales</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;multitender&quot;: &quot;true&quot;,</span>
+<span class="err">  &quot;operation&quot; : &quot;PURCHASE&quot;,</span>
+<span class="err">  &quot;note&quot;: &quot;My First Sale&quot;,</span>
+<span class="err">  &quot;totalAmount&quot; : 10.0,</span>
+<span class="err">  &quot;currencyCode&quot; : &quot;EUR&quot;,</span>
+<span class="err">  &quot;payments&quot; : [</span>
+<span class="err">          {</span>
+<span class="err">            &quot;paymentMethod&quot; : &quot;CASH&quot;,</span>
+<span class="err">            &quot;transactionType&quot; : &quot;PURCHASE&quot;,</span>
+<span class="err">            &quot;amount&quot; : 10.0</span>
+<span class="err">        }</span>
+<span class="err">  ]</span>
+<span class="err">}</span>
+</pre></div>
                 
                   
                 

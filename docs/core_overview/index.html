@@ -270,11 +270,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
     
     <label class="md-nav__link" for="nav-3-2">
-      Sale Processing
+      Sale Model
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-2">
-        Sale Processing
+        Sale Model
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -676,7 +676,29 @@
                 
                   <h1>Overview</h1>
                 
-                
+                <p>At the core of Wirecard ePOS solution is payment acceptance. This chapter provides all information in order to successfully process <strong>Payment Transaction</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Payment Transaction</strong> (also called payment) is a monetary transaction with specific <em>amount</em>, <em>payment method</em> and <em>type</em>.</p>
+</div>
+<p>In context of Wirecard ePOS, every Payment Transaction is part of <a href="../sale-general/"><strong>Sale</strong></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Sale</strong> is central ePOS object. It must contain <em>amount</em> to pay and at least one <em>payment transaction</em>. Additionally, Sale may include <em>sale items</em> (also called shopping basket), reference to <em>merchant shop</em>, reference to <em>cash register</em> and other optional sale information.</p>
+</div>
+<p>Wirecard ePOS allows merchants to pay Sale total amount by multiple payments. It is possible to use any combination of payment methods.</p>
+<p>Wirecard ePOS supports following <strong>payment methods</strong>:</p>
+<ul>
+<li><a href="../cash/">Cash</a></li>
+<li><a href="../card/">Card</a> (EMV/Magstripe)</li>
+<li><a href="../alipay/">Alipay</a> (barcode payment)</li>
+<li><a href="../wechat/">WeChat</a> (barcode payment)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Accepted card schemes are <strong>VISA</strong> and <strong>Mastercard</strong>.</p>
+<p><strong>American Express</strong>, <strong>UnionPay International</strong> and <strong>JCB</strong> card schemes are coming soon.</p>
+</div>
                 
                   
                 

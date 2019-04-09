@@ -1,4 +1,4 @@
-site_name: Wirecard ePOS
+site_name: Wirecard ePOS API
 docs_dir: docs_source
 site_dir: docs
 
@@ -45,30 +45,32 @@ extra:
 nav:
   - Welcome: index.md
   - Start:
-    - Getting started: start.md
-    - Security: auth.md
-    - User management: user.md
-  - Sale:
-    - Getting started: sale.md
-    - Multi-tender sale: multitender.md
-    - Items:
+    - Introduction: start.md
+    - Getting Started: auth.md
+  - Core Integration:
+    - Overview: sale.md
+    - Sale Processing:
+      - General: multitender.md
+      - Payments:
+        - Cash: cash.md
+        - Card: card.md
+        - AliPay: alipay.md
+        - WeChat Pay: wechat.md
+  - Advanced Integration:
+    - Sale Items:
       - General: items.md
       - Discounts: discounts.md
-    - Payments:
-      - Cash: cash.md
-      - Card: card.md
-      - AliPay: alipay.md
-      - WeChat Pay: wechat.md
-  - Product catalogue:
-    - Getting started: card.md
-    - Catalogue hierarchy: card.md
-    - Product item: card.md
-  - Merchant management:
-    - Getting started: card.md
-    - Shop management: card.md
-  - Cash management:
-    - Getting started: card.md
-    - Cash registers: card.md
-    - Shifts: card.md
-  - Terminal management: card.md
+    - User management: user.md
+    - Product catalogue:
+      - General: card.md
+      - Catalogue hierarchy: card.md
+      - Product item: card.md
+    - Merchant management:
+      - General: card.md
+      - Shop management: card.md
+    - Cash Register:
+      - General: card.md
+      - Cash registers: card.md
+      - Shifts: card.md
+    - Terminal management: card.md
   - Glossary: glossary.md

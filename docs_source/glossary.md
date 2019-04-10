@@ -14,6 +14,8 @@ Acquirer
 
 ### B
 
+Basic Access Authentication
+
 Backend system
 
 ### I
@@ -28,11 +30,11 @@ Merchant
 
 Partner
 
+Payment method
+
 Payment service provider
 
-Payment transaction
-
-Purchase
+**Payment transaction** (alias payment) - monetary transaction with specific amount, payment method and type.
 
 ### R
 
@@ -42,9 +44,15 @@ Return
 
 Sale
 
+Sale-Purchase
+
+Sale-Return
+
 ### T
 
 Transaction
+
+Transaction type
 
 ### U
 

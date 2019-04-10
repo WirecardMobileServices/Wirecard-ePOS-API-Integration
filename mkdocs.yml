@@ -55,23 +55,24 @@ nav:
         - Cash: cash.md
         - Card: card.md
         - Alipay: alipay.md
-        - WeChat: wechat.md
+        - WeChat Pay: wechat.md
+      - Multi-tender Model: multi-tender.md
+    - User Management: user.md
   - Advanced Integration:
     - Overview: advanced_overview.md
     - Sale Items:
       - General: items.md
       - Discounts: discounts.md
-    - User Management: user.md
     - Product Catalogue:
-      - General: card.md
-      - Categories: card.md
-      - Product stock: card.md
+      - General: terminal-management.md
+      - Categories: terminal-management.md
+      - Product stock: terminal-management.md
     - Merchant Management:
-      - General: card.md
-      - Shop Management: card.md
+      - General: terminal-management.md
+      - Shop Management: terminal-management.md
     - Cash Register:
-      - General: card.md
-      - Shift: card.md
+      - General: terminal-management.md
+      - Shift: terminal-management.md
       - Shift Report: shift_reports.md
-    - Terminal management: card.md
+    - Terminal management: terminal-management.md
   - Glossary: glossary.md

@@ -1,0 +1,1 @@
+_Advanced Integration_ chapter guides you through advanced information for partners who want to provide value added services on top of payment acceptance functionality.

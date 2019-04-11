@@ -22,7 +22,7 @@ In the following chapters you will find API requests and responses based on paym
 - [Alipay](alipay.md)
 - [WeChat](wechat.md)
 
-If you look for integration of multiple payments per one Sale, then see the [Multi-tender model](multi-tender.md) chapter which includes detailed API examples.
+If you look for integration of multiple payments in one _Sale-Purchase_, then see the [Multi-tender model](multi-tender.md) chapter which includes detailed API examples.
 
 !!! Tip
     

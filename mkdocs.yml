@@ -68,7 +68,7 @@ nav:
       - Categories: terminal-management.md
       - Product stock: terminal-management.md
     - Merchant Management:
-      - General: terminal-management.md
+      - General: merchant-management.md
       - Shop Management: terminal-management.md
     - Cash Register:
       - General: terminal-management.md

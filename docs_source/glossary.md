@@ -2,6 +2,8 @@
 
 ePOS
 
+ISO
+
 mPOS
 
 POS

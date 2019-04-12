@@ -13,6 +13,7 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
     {
         "multitender": "true",
         "operation" : "PURCHASE",
+        "externalId": "123456789",
         "note": "My First Sale",
         "externalId": "123456789",
         "totalAmount" : 10.0,
@@ -27,8 +28,8 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
     }
 
 - **"multitender"** - boolean flag
-    - "TRUE" - compliant with newest Sale Model, which is described in this integration guide
-    - "FALSE" or omitting this element - deprecated, old Sale Model is not addressed in this integration guide
+    - "TRUE" - required; compliant with newest Sale Model, which is described in this integration guide
+    - "FALSE" - deprecated; old Sale Model is not addressed in this integration guide
 - **"operation"** - defines type of Sale request; "PURCHASE" operation creates new Sale-Purchase record
 - **_"note"_** - _optional_ - note is forwarded to payment gateway
 - **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
@@ -99,13 +100,13 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
 
 !!! Important
     
-    After successful PURCHASE operation, [GET a Sale call](#get-a-sale-call) is advised, as it provides compelete Sale information.
+    After successful PURCHASE operation, [GET a Sale call](#get-a-sale-call) is advised, as it provides complete Sale information.
 
 ## Reverse & Cancel Operation
 
 _REVERSE_ operation is typically used in case _Sale-Purchase_ was created accidentally. _REVERSE_ operation serves for reversing particular _purchase_ transaction.
 
-_CANCEL_ operation is used to change state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only if the purchase transaction is reversed. 
+_CANCEL_ operation is used to change state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only as long as the purchase transaction is reversed. 
 
 In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
 
@@ -124,11 +125,11 @@ In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REV
     }
 
 - **"operation"** - defines type of Sale request
-- **"originalSaleId"** - ID of original Sale-Purchase
-- **"payments"**
+- **"originalSaleId"** - identifier of original Sale-Purchase
+- **"payments"** - payment-specific information; one payment transaction per request is supported
     - **"paymentMethod"** - defines payment method; it must be same as original payment transaction
-    - **"transactionType"** - defines type of this transaction
-    - **"originalTransactionId"** - ID of original purchase transaction
+    - **"transactionType"** - defines type of this transaction; REVERSE operation must include REVERSAL transaction type
+    - **"originalTransactionId"** - identifier of original purchase transaction
 
 ### Reverse Response
 
@@ -168,8 +169,8 @@ In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REV
 - **"payments"** - specific information for every payment method
     - **"paymentMethod"** - echoed from request
     - **"transactionType"** - echoed from request
-    - **"id"** - echoed from request; identifier of transaction
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
+    - **"id"** - identifier of reversal transaction
+    - **"timeStamp"** - date-time when reversal transaction was processed by payment gateway
     - **"statuses"**
         - **"result"** - "SUCCESS" means transaction is successful
         - **"code"** - code "1000" means transaction is successful
@@ -185,7 +186,7 @@ In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard 
     }
     
 - **"operation"** - defines type of Sale request
-- **"originalSaleId"** - ID of original Sale-Purchase
+- **"originalSaleId"** - identifier of original Sale-Purchase
 
 ### Cancel Response
 
@@ -210,7 +211,7 @@ In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard 
 
 ## Return Operation
 
-_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. _RETURN_ operation can only contain _refund_ transaction. Wirecard ePOS support partial and full returns.
+_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full returns.
 
 In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETURN_ request defined below:
 
@@ -236,11 +237,12 @@ In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETU
 - **_"note"_** - _optional_ - note is forwarded to payment gateway
 - **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
 - **"totalAmount"** - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase
-- **"originalSaleId"** - ID of original Sale-Purchase
-- **"payments"**
+- **"currencyCode"** - must be same as for original Sale-Purchase
+- **"originalSaleId"** - identifier of original Sale-Purchase
+- **"payments"** - payment-specific information; one payment transaction per request is supported
     - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of this transaction; "REFUND" transaction type is used only for CASH payment method (otherwise it is "REFERENCE_REFUND")
-    - **"originalTransactionId"** - ID of original purchase transaction
+    - **"transactionType"** - defines type of this transaction; must be "REFUND" when payment method is CASH
+    - **"amount"** - defines amount to be refunded
 
 ### Response
 
@@ -301,44 +303,43 @@ You can see below an example of GET a Sale call with excluded _merchant_ and _us
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/19267cf3a3cb4e2d8131917b5c092a0d?excludeField=merchant&excludeField=user
     
     {
-      "id": "19267cf3a3cb4e2d8131917b5c092a0d",
-      "type": "PURCHASE",
-      "status": "COMPLETED",
-      "totalAmount": 10,
-      "note": "My First Sale",
-      "externalId": null,
-      "externalCashierId": null,
-      "customerId": null,
-      "initialized": "2019-04-11T13:36:11.521Z",
-      "shop": null,
-      "currency": {
-        "number": 978,
-        "code": "EUR",
-        "name": "Euro",
-        "minorUnit": 2
-      },
-      "unitPricesIncludeTax": null,
-      "items": [
-      ],
-      "transactions": [
-        {
-          "type": "CASH_PURCHASE",
-          "id": "7a8f701dd40743e0ad942ae32cd0e9d8",
+          "id": "19267cf3a3cb4e2d8131917b5c092a0d",
+          "type": "PURCHASE",
           "status": "COMPLETED",
-          "amount": 10,
-          "lastUpdated": "2019-04-11T13:36:11.597Z",
+          "totalAmount": 10,
+          "note": "My First Sale",
+          "externalId": null,
+          "externalCashierId": null,
+          "customerId": null,
           "initialized": "2019-04-11T13:36:11.521Z",
-          "message": null
-        }
-      ],
-      "location": null,
-      "clientInfo": null,
-      "merchantReceiptId": 245,
-      "cancelledBy": null,
-      "shiftId": null,
-      "cashRegisterId": null,
-      "emailForReceipt": null,
-      "emailForReceiptProvided": false,
-      "multitender": true
+          "shop": null,
+          "currency": {
+                "number": 978,
+                "code": "EUR",
+                "name": "Euro",
+                "minorUnit": 2
+          },
+          "unitPricesIncludeTax": null,
+          "items": [
+          ],
+          "transactions": [
+                {
+                      "type": "CASH_PURCHASE",
+                      "id": "7a8f701dd40743e0ad942ae32cd0e9d8",
+                      "status": "COMPLETED",
+                      "amount": 10,
+                      "lastUpdated": "2019-04-11T13:36:11.597Z",
+                      "initialized": "2019-04-11T13:36:11.521Z",
+                      "message": null
+                }
+          ],
+          "location": null,
+          "clientInfo": null,
+          "merchantReceiptId": 245,
+          "cancelledBy": null,
+          "shiftId": null,
+          "cashRegisterId": null,
+          "emailForReceipt": null,
+          "emailForReceiptProvided": false,
+          "multitender": true
     }
-

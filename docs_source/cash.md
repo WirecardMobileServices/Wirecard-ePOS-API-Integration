@@ -81,8 +81,8 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
 - **"operation"** - echoed from request
 - **"timeStamp"** - date-time when response was constructed
 - **"status"**
-    - **"code"** - code "1000" means operation is successful (taken from _payments.statuses.code_)
-    - **"result"** - "SUCCESS" means operation is successful (taken from _payments.statuses.result_)
+    - **"code"** - code "1000" means operation is successful
+    - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 - **"payments"** - specific information for every payment method
@@ -162,8 +162,8 @@ In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REV
 - **"operation"** - echoed from request
 - **"timeStamp"** - date-time when response was constructed
 - **"status"**
-    - **"code"** - code "1000" means operation is successful (taken from _payments.statuses.code_)
-    - **"result"** - "SUCCESS" means operation is successful (taken from _payments.statuses.result_)
+    - **"code"** - code "1000" means operation is successful
+    - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - echoed from request; Sale-Purchase identifier
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 - **"payments"** - specific information for every payment method
@@ -204,8 +204,8 @@ In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard 
 - **"operation"** - echoed from request
 - **"timeStamp"** - date-time when response was constructed
 - **"status"**
-    - **"code"** - code "1000" means operation is successful (taken from _payments.statuses.code_)
-    - **"result"** - "SUCCESS" means operation is successful (taken from _payments.statuses.result_)
+    - **"code"** - code "1000" means operation is successful
+    - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - echoed from request; Sale-Purchase identifier
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 
@@ -277,8 +277,8 @@ In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETU
 - **"operation"** - echoed from request
 - **"timeStamp"** - date-time when response was constructed
 - **"status"**
-    - **"code"** - code "1000" means operation is successful (taken from _payments.statuses.code_)
-    - **"result"** - "SUCCESS" means operation is successful (taken from _payments.statuses.result_)
+    - **"code"** - code "1000" means operation is successful
+    - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - Sale-Return identifier assigned by Wirecard ePOS
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 - **"payments"** - specific information for every payment method

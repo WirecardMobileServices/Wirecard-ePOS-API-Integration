@@ -10,7 +10,7 @@ In context of Wirecard ePOS, every Payment Transaction is part of [**Sale**](sal
 
     **Sale** is central ePOS object. It must contain _amount_ to pay and at least one _payment transaction_. Additionally, Sale may include _sale items_ (also called shopping basket), reference to _merchant shop_, reference to _cash register_ and other optional sale information.
 
-Wirecard ePOS allows merchants to divide total amount to pay to multiple payment transactions.
+Wirecard ePOS allows merchants to divide total amount to multiple payment transactions.
 
 !!! Example
     Jeans in value of 100 € are paid by two payment transactions: 60 € is paid by _card_ and 40 € is paid in _cash_.

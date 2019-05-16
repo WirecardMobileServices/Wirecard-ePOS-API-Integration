@@ -1,12 +1,12 @@
 ## Acronyms
 
-ePOS
+ISO - 
 
-ISO
+mPOS - mobile Point of Sale
 
-mPOS
+POS - Point of Sale
 
-POS
+WD - Wirecard
 
 ## Terminology
 

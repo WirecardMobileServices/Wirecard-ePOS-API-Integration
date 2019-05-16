@@ -55,7 +55,7 @@ nav:
         - Cash: cash.md
         - Card: card.md
         - Alipay: alipay.md
-        - WeChat Pay: wechat.md
+        - WeChat: wechat.md
       - Multi-tender Model: multi-tender.md
     - User Management: user.md
   - Advanced Integration:

@@ -26,9 +26,7 @@ If you look for integration of multiple payments in one _Sale-Purchase_, then se
 
 !!! Tip
     
-    - You have received user account credentials to TEST environment.
-    - You can check the received credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: 
+    If you have user account on TEST environment, you can check the received credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: 
     
-        >curl -X GET "https://switch-test.wirecard.com/mswitch-server/v1/info/version" -H "accept: text/plain" -u {YourUsername}:{YourPassword}
-
-        Upon successful authentication, system responds with its version.
+        curl -X GET "https://switch-test.wirecard.com/mswitch-server/v1/info/version" -H "accept: text/plain" -u {YourUsername}:{YourPassword}
+    Upon successful authentication, response includes current system version.

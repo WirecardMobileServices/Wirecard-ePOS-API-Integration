@@ -37,7 +37,7 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
 - **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
 - **"totalAmount"** - defines amount of Sale-Purchase 
 - **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - payment-specific information; one payment transaction per request is supported
+- **"payments"** - payment-specific information; one payment transaction per one request is supported
     - **"paymentMethod"** - defines payment method
     - **"transactionType"** - defines type of this transaction; "PURCHASE" transaction type moves funds from end-consumer to merchant
     - **"amount"** - defines transaction amount
@@ -51,6 +51,8 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
     - transaction type - e.g. alipay _purchase_ transaction, cash _purchase_ transaction, etc.
     
 ### Response
+
+Code **1000** indicates that Alipay purchase transaction is completed successfully.
 
     {
         "operation": "PURCHASE",
@@ -92,8 +94,8 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
 - **"operation"** - echoed from request
 - **"timeStamp"** - date-time when response was constructed
 - **"status"**
-    - **"code"** - code "1000" means operation is successful (taken from _payments.statuses.code_)
-    - **"result"** - "SUCCESS" means operation is successful (taken from _payments.statuses.result_)
+    - **"code"** - code "1000" means operation is successful
+    - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 - **"payments"** - specific information for every payment method
@@ -105,16 +107,16 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
         - **"result"** - "SUCCESS" means transaction is successful
         - **"code"** - code "1000" means transaction is successful
         - **"message"** - message provided by payment gateway
-        - **"alipayPayTime"** - date-time in Alipay system
-        - **"alipayTransId"** - transaction identifier in Alipay System
-        - **"alipayBuyerLoginId"** - end-consumer (buyer) identifier in Alipay system
-        - **"exchangeRate"** - exchange rate between Sale currency and CNY
-        - **"transAmountCny"** - amount in CNY (Chinese Yuan)
-        - **"merchantName"** - merchant name in Alipay system
-        - **"terminalId"** - terminal identifier
-        - **"gatewayReference"** - reference to transaction in payment gateway
+    - **"alipayPayTime"** - date-time in Alipay system
+    - **"alipayTransId"** - transaction identifier in Alipay System
+    - **"alipayBuyerLoginId"** - end-consumer (buyer) identifier in Alipay system
+    - **"exchangeRate"** - exchange rate between Sale currency and CNY
+    - **"transAmountCny"** - amount in CNY (Chinese Yuan)
+    - **"merchantName"** - merchant name in Alipay system
+    - **"terminalId"** - terminal identifier
+    - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
 - **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as barcode
+- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode
 - **"multitender"** - echoed from request
 
 !!! Important

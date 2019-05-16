@@ -482,8 +482,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../wechat/" title="WeChat Pay" class="md-nav__link">
-      WeChat Pay
+    <a href="../wechat/" title="WeChat" class="md-nav__link">
+      WeChat
     </a>
   </li>
 
@@ -982,7 +982,7 @@
 <li><strong><em>"externalId"</em></strong> - <em>optional</em> - meant to be used for integrator tracking purpose; it is forwarded to payment gateway</li>
 <li><strong>"totalAmount"</strong> - defines amount of Sale-Purchase </li>
 <li><strong>"currencyCode"</strong> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
-<li><strong>"payments"</strong> - payment-specific information; one payment transaction per request is supported<ul>
+<li><strong>"payments"</strong> - payment-specific information; one payment transaction per one request is supported<ul>
 <li><strong>"paymentMethod"</strong> - defines payment method</li>
 <li><strong>"transactionType"</strong> - defines type of this transaction; "PURCHASE" transaction type moves funds from end-consumer to merchant</li>
 <li><strong>"amount"</strong> - defines transaction amount</li>
@@ -999,6 +999,7 @@
 </ul>
 </div>
 <h3 id="response">Response</h3>
+<p>Code <strong>1000</strong> indicates that Alipay purchase transaction is completed successfully.</p>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot;: &quot;PURCHASE&quot;,
     &quot;timeStamp&quot;: &quot;2019-04-12T12:27:43.069Z&quot;,
@@ -1042,8 +1043,8 @@
 <li><strong>"operation"</strong> - echoed from request</li>
 <li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
 <li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is successful (taken from <em>payments.statuses.code</em>)</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful (taken from <em>payments.statuses.result</em>)</li>
+<li><strong>"code"</strong> - code "1000" means operation is successful</li>
+<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
 </ul>
 </li>
 <li><strong>"id"</strong> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
@@ -1057,6 +1058,8 @@
 <li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
 <li><strong>"code"</strong> - code "1000" means transaction is successful</li>
 <li><strong>"message"</strong> - message provided by payment gateway</li>
+</ul>
+</li>
 <li><strong>"alipayPayTime"</strong> - date-time in Alipay system</li>
 <li><strong>"alipayTransId"</strong> - transaction identifier in Alipay System</li>
 <li><strong>"alipayBuyerLoginId"</strong> - end-consumer (buyer) identifier in Alipay system</li>
@@ -1064,13 +1067,11 @@
 <li><strong>"transAmountCny"</strong> - amount in CNY (Chinese Yuan)</li>
 <li><strong>"merchantName"</strong> - merchant name in Alipay system</li>
 <li><strong>"terminalId"</strong> - terminal identifier</li>
-<li><strong>"gatewayReference"</strong> - reference to transaction in payment gateway</li>
-</ul>
-</li>
+<li><strong>"gatewayReference"</strong> - transaction identifier in Wirecard payment gateway</li>
 </ul>
 </li>
 <li><strong>"externalId"</strong> - echoed from request</li>
-<li><strong>"merchantReceiptId"</strong> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as barcode</li>
+<li><strong>"merchantReceiptId"</strong> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode</li>
 <li><strong>"multitender"</strong> - echoed from request</li>
 </ul>
 <div class="admonition important">
@@ -1349,13 +1350,13 @@
           </a>
         
         
-          <a href="../wechat/" title="WeChat Pay" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../wechat/" title="WeChat" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                WeChat Pay
+                WeChat
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

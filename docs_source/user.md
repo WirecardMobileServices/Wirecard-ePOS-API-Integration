@@ -2,6 +2,8 @@ Purpose of this chapter is to describe how can merchant manage its own users. Us
 
 ## Create a new user
 
+### Request
+
     POST https://switch.wirecard.com/mswitch-server/v1/users
     
         {
@@ -27,11 +29,19 @@ User role defines permissions available to a particular user account. Wirecard e
 - Merchant Advanced User - see all merchant sales
 - Merchant User - see only own sales
 
-## List all user accounts
+### Response
+
+
+
+## List all users
 
     GET https://switch.wirecard.com/mswitch-server/v1/users
 
-## Get a specific user account
+## Get a specific user
 
     GET https://switch.wirecard.com/mswitch-server/v1/users/{userId}
+
+## Update a specific user
+
+    PUT https://switch.wirecard.com/mswitch-server/v1/users/{userId}
 

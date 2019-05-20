@@ -20,7 +20,7 @@ In the following chapters you will find API requests and responses based on paym
 - [Cash](cash.md)
 - [Card](card.md)
 - [Alipay](alipay.md)
-- [WeChat](wechat.md)
+- [WeChat Pay](wechat.md)
 
 If you look for integration of multiple payments in one _Sale-Purchase_, then see the [Multi-tender model](multi-tender.md) chapter which includes detailed API examples.
 

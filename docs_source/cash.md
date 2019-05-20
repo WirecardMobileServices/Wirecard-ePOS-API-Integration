@@ -298,7 +298,7 @@ In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETU
     
 ## GET a Sale Call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ objects which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
 
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/19267cf3a3cb4e2d8131917b5c092a0d?excludeField=merchant&excludeField=user
     

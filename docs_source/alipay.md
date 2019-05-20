@@ -1,16 +1,20 @@
-Alipay barcode payment is one-step payment method what means that only one request to Wirecard ePOS API is needed.
+Wirecard makes it easy for you to accept Alipay, one of the most popular payment platforms in China. Grow your sales revenues by letting Chinese tourists use their preferred payment method.
 
 !!! Tip
 
-    For more details regarding Alipay, visit [Wirecard China Payment](https://www.wirecard.com/chinapayment/en/) website.
+    Visit [Wirecard](https://www.wirecard.com/payment-base/alipay) website to find out all benefits of Alipay barcode payment.
 
-!!! Important
+From retailer perspective, Alipay payment is very straightforward. Only one request is needed to successfully complete Alipay payment.
+
+!!! Note
     
     Sale requests are serviced at https://switch.wirecard.com/mswitch-server/v1/sales URL.
     
+## Workflow
+
 ## Purchase Operation
 
-In context of Wirecard ePOS, every payment transaction (alias payment) is part of a _Sale_. In order to process Alipay payment, call Wirecard ePOS with _Sale-PURCHASE_ request defined below:
+In context of Wirecard ePOS, every payment transaction is part of a _Sale_. In order to process Alipay payment, call Wirecard ePOS with _Sale-PURCHASE_ request defined below:
 
 ### Request
     
@@ -127,9 +131,9 @@ Code **1000** indicates that Alipay purchase transaction is completed successful
 
 _REVERSE_ operation is typically used in case _Sale-Purchase_ was created accidentally. _REVERSE_ operation serves for reversing particular _purchase_ transaction.
 
-_CANCEL_ operation is used to change state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only as long as the purchase transaction is reversed. 
+_REVERSE_ operation moves _Sale-Purchase_ to UNCONFIRMED (OPEN) state, which is interim state. After successful reversal, it is advised to send _CANCEL_ operation, which moves _Sale-Purchase_ to CANCELED state. CANCELED state is final state.
 
-In order to reverse alipay purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
+In order to reverse Alipay purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
 
 ### Reverse Request
 
@@ -292,7 +296,7 @@ In order to refund alipay purchase transaction, call Wirecard ePOS with _Sale-RE
     
 ## GET a Sale Call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ objects which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
 
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/6434f3ee5f404fec89d95c7f8538ac68?excludeField=merchant&excludeField=user
     

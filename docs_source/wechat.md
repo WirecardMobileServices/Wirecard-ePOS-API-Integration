@@ -1,10 +1,12 @@
-WeChat is one-step payment method in case end-consumer is not required to authorize payment on his device.
-
-In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then WeChat payment has to be confirmed by follow-up CONFIRM request.
+WeChat Pay is one of China‘s leading payment methods. Since its start as a chat app, WeChat has grown to become a market-leading platform by connecting people, services, and businesses in China and around the world.
 
 !!! Tip
     
-    For more details regarding WeChat Pay, visit [Wirecard China Payment](https://www.wirecard.com/chinapayment/en/) website.
+    Visit [Wirecard](https://www.wirecard.com/payment-base/wechat-pay) website to find out all benefits of WeChat barcode payment.
+
+From retailer perspective, WeChat can be either one-step or two-step payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.
+
+In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then initial PURCHASE request has to be confirmed by follow-up CONFIRM request. 
 
 !!! Note
     
@@ -261,12 +263,161 @@ Code **1000** indicates that WeChat purchase transaction is completed successful
     - **"wechatTimeEnd"** - date-time in WeChat system
     - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
 
+## Reverse & Cancel Operation
+
+_REVERSE_ operation is typically used in case _Sale-Purchase_ was created accidentally. _REVERSE_ operation serves for reversing particular _purchase_ transaction.
+
+_CANCEL_ operation changes state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only as long as the purchase transaction is reversed. 
+
+In order to reverse alipay purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
+
+### Reverse Request
+
+    {
+        "operation": "REVERSE",
+        "originalSaleId": "a0a09836df08426b92d4805294bdae42",
+        "payments": [
+            { 
+                "paymentMethod": "WECHAT",
+                "transactionType": "REVERSAL",
+                "originalTransactionId" : "809364e83e3043c7a15182140d55268e"
+            }
+        ]
+    }
+
+- **"operation"** - defines type of Sale request
+- **"originalSaleId"** - identifier of original Sale-Purchase
+- **"payments"** - payment-specific information; one payment transaction per request is supported
+    - **"paymentMethod"** - defines payment method; it must be same as original payment transaction
+    - **"transactionType"** - defines type of this transaction; REVERSE operation must include REVERSAL transaction type
+    - **"originalTransactionId"** - identifier of original purchase transaction
+    
+### Reverse Response
+
+    {
+        "operation": "REVERSE",
+        "timeStamp": "2019-05-16T13:08:24.657Z",
+        "status": {
+            "code": "1000",
+            "result": "SUCCESS"
+        },
+        "id": "a0a09836df08426b92d4805294bdae42",
+        "externalCashierId": null,
+        "payments": [
+            {
+                "paymentMethod": "WECHAT",
+                "transactionType": "REVERSAL",
+                "id": "c254b80758574ce387d3852e1d69c3ec",
+                "timeStamp": "2019-05-16T13:08:24.553Z",
+                "statuses": [
+                    {
+                        "result": "SUCCESS",
+                        "code": "1000",
+                        "message": "Transaction OK."
+                    }
+                ],
+                "wechatProviderTransactionId": "adfc24a6c25343ce86f5cb180a5cc528",
+                "wechatRate": "691870000",
+                "wechatSubMchId": "067227",
+                "wechatDeviceInfo": "dell",
+                "wechatCashFee": "6919.00",
+                "wechatTimeEnd": "20190516210824",
+                "gatewayReference": "8ba7937e-ea22-4b9f-855a-dce11e4a29b7"
+            }
+        ]
+    }
+
+In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard ePOS with _Sale-CANCEL_ request defined below:
+
+### Cancel Request
+
+    {
+        "operation": "CANCEL",
+        "originalSaleId": "a0a09836df08426b92d4805294bdae42"
+    }
+    
+- **"operation"** - defines type of Sale request
+- **"originalSaleId"** - identifier of original Sale-Purchase
+
+### Cancel Response
+
+    {
+        "operation": "CANCEL",
+        "timeStamp": "2019-05-17T10:36:33.374Z",
+        "status": {
+            "code": "1000",
+            "result": "SUCCESS"
+        },
+        "id": "a0a09836df08426b92d4805294bdae42",
+        "externalCashierId": null
+    }
+    
+## Return Operation
+
+_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full returns.
+
+In order to refund WeChat purchase transaction, call Wirecard ePOS with _Sale-RETURN_ request defined below:
+
+### Request
+
+    {
+        "operation" : "RETURN",
+        "totalAmount" : 10,
+        "currencyCode" : "EUR",
+        "originalSaleId" : "1025a74c86564982988f66a46489d87a",
+        "payments" : [ 
+            {
+                "paymentMethod" : "WECHAT",
+                "transactionType" : "REFERENCE_REFUND",
+                "amount" : 10,
+                "originalTransactionId" : "f4c16e2ee76d44d2adfc42b97ac3e5a0"
+            }
+        ]
+    }
+
+### Response
+
+    {
+        "operation": "RETURN",
+        "timeStamp": "2019-05-17T10:40:48.648Z",
+        "status": {
+            "code": "1000",
+            "result": "SUCCESS"
+        },
+        "id": "ba313afaf21e445abc802ab63bb69c5a",
+        "externalCashierId": null,
+        "payments": [
+            {
+                "paymentMethod": "WECHAT",
+                "transactionType": "REFERENCE_REFUND",
+                "id": "1baf69229f584858ad524585db27115a",
+                "timeStamp": "2019-05-17T10:40:48.533Z",
+                "statuses": [
+                    {
+                        "result": "SUCCESS",
+                        "code": "1000",
+                        "message": "Transaction OK."
+                    }
+                ],
+                "wechatProviderTransactionId": "f5fd9c49306a4322a9e613d741c71de3",
+                "wechatRate": "691870000",
+                "wechatSubMchId": "785721",
+                "wechatDeviceInfo": "dell",
+                "wechatCashFee": "6919.00",
+                "wechatTimeEnd": "20190517184048",
+                "gatewayReference": "4fb9f8a2-7fb9-4fd7-a88c-154f58fb7ab8"
+            }
+        ],
+        "externalId": null,
+        "merchantReceiptId": 270
+    }
+
 !!! Tip
     See also complete list of Wirecard ePOS Sale [request & response examples](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
 ## GET a Sale Call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ objects which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
     
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&excludeField=user
     

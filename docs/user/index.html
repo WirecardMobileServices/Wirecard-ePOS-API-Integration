@@ -77,7 +77,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#user-management" tabindex="1" class="md-skip">
+      <a href="#create-a-new-user" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -349,8 +349,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../wechat/" title="WeChat" class="md-nav__link">
-      WeChat
+    <a href="../wechat/" title="WeChat Pay" class="md-nav__link">
+      WeChat Pay
     </a>
   </li>
 
@@ -388,8 +388,6 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-      
-    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         User Management
@@ -403,29 +401,27 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-new-user" title="1. Create a new user" class="md-nav__link">
-    1. Create a new user
+  <a href="#create-a-new-user" title="Create a new user" class="md-nav__link">
+    Create a new user
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-list-all-user-accounts" title="2. List all user accounts" class="md-nav__link">
-    2. List all user accounts
+  <a href="#list-all-user-accounts" title="List all user accounts" class="md-nav__link">
+    List all user accounts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-get-a-specific-user-account" title="3. Get a specific user account" class="md-nav__link">
-    3. Get a specific user account
+  <a href="#get-a-specific-user-account" title="Get a specific user account" class="md-nav__link">
+    Get a specific user account
   </a>
   
 </li>
@@ -736,29 +732,27 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-new-user" title="1. Create a new user" class="md-nav__link">
-    1. Create a new user
+  <a href="#create-a-new-user" title="Create a new user" class="md-nav__link">
+    Create a new user
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-list-all-user-accounts" title="2. List all user accounts" class="md-nav__link">
-    2. List all user accounts
+  <a href="#list-all-user-accounts" title="List all user accounts" class="md-nav__link">
+    List all user accounts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-get-a-specific-user-account" title="3. Get a specific user account" class="md-nav__link">
-    3. Get a specific user account
+  <a href="#get-a-specific-user-account" title="Get a specific user account" class="md-nav__link">
+    Get a specific user account
   </a>
   
 </li>
@@ -780,36 +774,44 @@
               
                 
                 
-                <h1 id="user-management">User management</h1>
-<p>Purpose of this chapter is to describe how can merchant manage its own users. User account is required as the whole communication with ePOS system is done via particular user account.</p>
-<p>ePOS backend API calls used for managing user accounts are described below:</p>
-<h5 id="1-create-a-new-user">1. Create a new user</h5>
-<p>POST /v1/users</p>
-<p>with the example body: 
-<div class="codehilite"><pre><span></span>{
-   &quot;username&quot;: &quot;john.doe&quot;,
-   &quot;email&quot;: &quot;john.doe@example.com&quot;,
-   &quot;firstName&quot;: &quot;John&quot;,
-   &quot;lastName&quot;: &quot;Doe&quot;,
-   &quot;merchant&quot;: {
-     &quot;id&quot;: &quot;e5869bc0303b4dabbf1e593d619146dc&quot;
-   },
-   &quot;password&quot;: &quot;Password123!&quot;,
-   &quot;roles&quot;: [
-     &quot;MERCHANT_ADMIN&quot;
-   ],
-   &quot;status&quot;: &quot;ENABLED&quot;,
-   &quot;timeZone&quot;: &quot;Europe/Berlin&quot;
-}
-</pre></div></p>
-<p>User role defines what operations (API calls) are available to a particular user account. Wirecard ePOS backend provides following user roles:
-- Merchant Admin - see all merchant sales and can create new user accounts 
-- Merchant Advanced User - see all merchant sales
-- Merchant User - see only own sales</p>
-<h5 id="2-list-all-user-accounts">2. List all user accounts</h5>
-<p>GET /v1/users</p>
-<h5 id="3-get-a-specific-user-account">3. Get a specific user account</h5>
-<p>GET /v1/users/{userId}</p>
+                  <h1>User Management</h1>
+                
+                <p>Purpose of this chapter is to describe how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.</p>
+<h2 id="create-a-new-user">Create a new user</h2>
+<div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/users
+
+    {
+       &quot;username&quot;: &quot;john.doe&quot;,
+       &quot;email&quot;: &quot;john.doe@example.com&quot;,
+       &quot;firstName&quot;: &quot;John&quot;,
+       &quot;lastName&quot;: &quot;Doe&quot;,
+       &quot;merchant&quot;: {
+         &quot;id&quot;: &quot;e5869bc0303b4dabbf1e593d619146dc&quot;
+       },
+       &quot;password&quot;: &quot;Password123!&quot;,
+       &quot;roles&quot;: [
+         &quot;MERCHANT_ADMIN&quot;
+       ],
+       &quot;status&quot;: &quot;ENABLED&quot;,
+       &quot;timeZone&quot;: &quot;Europe/Berlin&quot;
+    }
+</pre></div>
+
+
+<p>User role defines permissions available to a particular user account. Wirecard ePOS provides following merchant-related roles:</p>
+<ul>
+<li>Merchant Admin - see all merchant sales and can create new user accounts </li>
+<li>Merchant Advanced User - see all merchant sales</li>
+<li>Merchant User - see only own sales</li>
+</ul>
+<h2 id="list-all-user-accounts">List all user accounts</h2>
+<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users
+</pre></div>
+
+
+<h2 id="get-a-specific-user-account">Get a specific user account</h2>
+<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users/{userId}
+</pre></div>
                 
                   
                 

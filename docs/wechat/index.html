@@ -36,7 +36,7 @@
     
     
       
-        <title>WeChat - Wirecard ePOS API</title>
+        <title>WeChat Pay - Wirecard ePOS API</title>
       
     
     
@@ -102,7 +102,7 @@
               Wirecard ePOS API
             </span>
             <span class="md-header-nav__topic">
-              WeChat
+              WeChat Pay
             </span>
           
         </div>
@@ -360,11 +360,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        WeChat
+        WeChat Pay
       </label>
     
-    <a href="./" title="WeChat" class="md-nav__link md-nav__link--active">
-      WeChat
+    <a href="./" title="WeChat Pay" class="md-nav__link md-nav__link--active">
+      WeChat Pay
     </a>
     
       
@@ -426,6 +426,74 @@
         
           <li class="md-nav__item">
   <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse-cancel-operation" title="Reverse &amp; Cancel Operation" class="md-nav__link">
+    Reverse &amp; Cancel Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reverse-request" title="Reverse Request" class="md-nav__link">
+    Reverse Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reverse-response" title="Reverse Response" class="md-nav__link">
+    Reverse Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-request" title="Cancel Request" class="md-nav__link">
+    Cancel Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-response" title="Cancel Response" class="md-nav__link">
+    Cancel Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-operation" title="Return Operation" class="md-nav__link">
+    Return Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_2" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
     Response
   </a>
   
@@ -849,6 +917,74 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reverse-cancel-operation" title="Reverse &amp; Cancel Operation" class="md-nav__link">
+    Reverse &amp; Cancel Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reverse-request" title="Reverse Request" class="md-nav__link">
+    Reverse Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reverse-response" title="Reverse Response" class="md-nav__link">
+    Reverse Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-request" title="Cancel Request" class="md-nav__link">
+    Cancel Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-response" title="Cancel Response" class="md-nav__link">
+    Cancel Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-operation" title="Return Operation" class="md-nav__link">
+    Return Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_2" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#get-a-sale-call" title="GET a Sale Call" class="md-nav__link">
     GET a Sale Call
   </a>
@@ -872,14 +1008,15 @@
               
                 
                 
-                  <h1>WeChat</h1>
+                  <h1>WeChat Pay</h1>
                 
-                <p>WeChat is one-step payment method in case end-consumer is not required to authorize payment on his device.</p>
-<p>In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then WeChat payment has to be confirmed by follow-up CONFIRM request.</p>
+                <p>WeChat Pay is one of China‘s leading payment methods. Since its start as a chat app, WeChat has grown to become a market-leading platform by connecting people, services, and businesses in China and around the world.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>For more details regarding WeChat Pay, visit <a href="https://www.wirecard.com/chinapayment/en/">Wirecard China Payment</a> website.</p>
+<p>Visit <a href="https://www.wirecard.com/payment-base/wechat-pay">Wirecard</a> website to find out all benefits of WeChat barcode payment.</p>
 </div>
+<p>From retailer perspective, WeChat can be either one-step or two-step payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.</p>
+<p>In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then initial PURCHASE request has to be confirmed by follow-up CONFIRM request. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Sale requests are serviced at <a href="https://switch.wirecard.com/mswitch-server/v1/sales">https://switch.wirecard.com/mswitch-server/v1/sales</a> URL.</p>
@@ -1162,12 +1299,163 @@
 </ul>
 </li>
 </ul>
+<h2 id="reverse-cancel-operation">Reverse &amp; Cancel Operation</h2>
+<p><em>REVERSE</em> operation is typically used in case <em>Sale-Purchase</em> was created accidentally. <em>REVERSE</em> operation serves for reversing particular <em>purchase</em> transaction.</p>
+<p><em>CANCEL</em> operation changes state of Sale-Purchase to CANCELED. <em>CANCEL</em> operation can be sent only as long as the purchase transaction is reversed. </p>
+<p>In order to reverse alipay purchase transaction, call Wirecard ePOS with <em>Sale-REVERSE</em> request defined below:</p>
+<h3 id="reverse-request">Reverse Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;REVERSE&quot;,
+    &quot;originalSaleId&quot;: &quot;a0a09836df08426b92d4805294bdae42&quot;,
+    &quot;payments&quot;: [
+        { 
+            &quot;paymentMethod&quot;: &quot;WECHAT&quot;,
+            &quot;transactionType&quot;: &quot;REVERSAL&quot;,
+            &quot;originalTransactionId&quot; : &quot;809364e83e3043c7a15182140d55268e&quot;
+        }
+    ]
+}
+</pre></div>
+
+
+<ul>
+<li><strong>"operation"</strong> - defines type of Sale request</li>
+<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
+<li><strong>"payments"</strong> - payment-specific information; one payment transaction per request is supported<ul>
+<li><strong>"paymentMethod"</strong> - defines payment method; it must be same as original payment transaction</li>
+<li><strong>"transactionType"</strong> - defines type of this transaction; REVERSE operation must include REVERSAL transaction type</li>
+<li><strong>"originalTransactionId"</strong> - identifier of original purchase transaction</li>
+</ul>
+</li>
+</ul>
+<h3 id="reverse-response">Reverse Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;REVERSE&quot;,
+    &quot;timeStamp&quot;: &quot;2019-05-16T13:08:24.657Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1000&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;a0a09836df08426b92d4805294bdae42&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;WECHAT&quot;,
+            &quot;transactionType&quot;: &quot;REVERSAL&quot;,
+            &quot;id&quot;: &quot;c254b80758574ce387d3852e1d69c3ec&quot;,
+            &quot;timeStamp&quot;: &quot;2019-05-16T13:08:24.553Z&quot;,
+            &quot;statuses&quot;: [
+                {
+                    &quot;result&quot;: &quot;SUCCESS&quot;,
+                    &quot;code&quot;: &quot;1000&quot;,
+                    &quot;message&quot;: &quot;Transaction OK.&quot;
+                }
+            ],
+            &quot;wechatProviderTransactionId&quot;: &quot;adfc24a6c25343ce86f5cb180a5cc528&quot;,
+            &quot;wechatRate&quot;: &quot;691870000&quot;,
+            &quot;wechatSubMchId&quot;: &quot;067227&quot;,
+            &quot;wechatDeviceInfo&quot;: &quot;dell&quot;,
+            &quot;wechatCashFee&quot;: &quot;6919.00&quot;,
+            &quot;wechatTimeEnd&quot;: &quot;20190516210824&quot;,
+            &quot;gatewayReference&quot;: &quot;8ba7937e-ea22-4b9f-855a-dce11e4a29b7&quot;
+        }
+    ]
+}
+</pre></div>
+
+
+<p>In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard ePOS with <em>Sale-CANCEL</em> request defined below:</p>
+<h3 id="cancel-request">Cancel Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;CANCEL&quot;,
+    &quot;originalSaleId&quot;: &quot;a0a09836df08426b92d4805294bdae42&quot;
+}
+</pre></div>
+
+
+<ul>
+<li><strong>"operation"</strong> - defines type of Sale request</li>
+<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
+</ul>
+<h3 id="cancel-response">Cancel Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;CANCEL&quot;,
+    &quot;timeStamp&quot;: &quot;2019-05-17T10:36:33.374Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1000&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;a0a09836df08426b92d4805294bdae42&quot;,
+    &quot;externalCashierId&quot;: null
+}
+</pre></div>
+
+
+<h2 id="return-operation">Return Operation</h2>
+<p><em>RETURN</em> operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full returns.</p>
+<p>In order to refund WeChat purchase transaction, call Wirecard ePOS with <em>Sale-RETURN</em> request defined below:</p>
+<h3 id="request_2">Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot; : &quot;RETURN&quot;,
+    &quot;totalAmount&quot; : 10,
+    &quot;currencyCode&quot; : &quot;EUR&quot;,
+    &quot;originalSaleId&quot; : &quot;1025a74c86564982988f66a46489d87a&quot;,
+    &quot;payments&quot; : [ 
+        {
+            &quot;paymentMethod&quot; : &quot;WECHAT&quot;,
+            &quot;transactionType&quot; : &quot;REFERENCE_REFUND&quot;,
+            &quot;amount&quot; : 10,
+            &quot;originalTransactionId&quot; : &quot;f4c16e2ee76d44d2adfc42b97ac3e5a0&quot;
+        }
+    ]
+}
+</pre></div>
+
+
+<h3 id="response_1">Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;RETURN&quot;,
+    &quot;timeStamp&quot;: &quot;2019-05-17T10:40:48.648Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1000&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;ba313afaf21e445abc802ab63bb69c5a&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;WECHAT&quot;,
+            &quot;transactionType&quot;: &quot;REFERENCE_REFUND&quot;,
+            &quot;id&quot;: &quot;1baf69229f584858ad524585db27115a&quot;,
+            &quot;timeStamp&quot;: &quot;2019-05-17T10:40:48.533Z&quot;,
+            &quot;statuses&quot;: [
+                {
+                    &quot;result&quot;: &quot;SUCCESS&quot;,
+                    &quot;code&quot;: &quot;1000&quot;,
+                    &quot;message&quot;: &quot;Transaction OK.&quot;
+                }
+            ],
+            &quot;wechatProviderTransactionId&quot;: &quot;f5fd9c49306a4322a9e613d741c71de3&quot;,
+            &quot;wechatRate&quot;: &quot;691870000&quot;,
+            &quot;wechatSubMchId&quot;: &quot;785721&quot;,
+            &quot;wechatDeviceInfo&quot;: &quot;dell&quot;,
+            &quot;wechatCashFee&quot;: &quot;6919.00&quot;,
+            &quot;wechatTimeEnd&quot;: &quot;20190517184048&quot;,
+            &quot;gatewayReference&quot;: &quot;4fb9f8a2-7fb9-4fd7-a88c-154f58fb7ab8&quot;
+        }
+    ],
+    &quot;externalId&quot;: null,
+    &quot;merchantReceiptId&quot;: 270
+}
+</pre></div>
+
+
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>See also complete list of Wirecard ePOS Sale <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">request &amp; response examples</a>.</p>
 </div>
 <h2 id="get-a-sale-call">GET a Sale Call</h2>
-<p>You can see below an example of GET a Sale call with excluded <em>merchant</em> and <em>user</em> objects which are going to be described in <a href="../merchant-management/">Merchant Management</a> and <a href="../user/">User Management</a> respectively.</p>
+<p>You can see below an example of GET a Sale call with excluded <em>merchant</em> and <em>user</em> fields which are going to be described in <a href="../merchant-management/">Merchant Management</a> and <a href="../user/">User Management</a> respectively.</p>
 <div class="codehilite"><pre><span></span>GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&amp;excludeField=user
 
 {

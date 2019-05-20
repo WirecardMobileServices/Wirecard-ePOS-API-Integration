@@ -366,8 +366,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../multi-tender/" title="Multi-tender Model" class="md-nav__link">
-      Multi-tender Model
+    <a href="../multi-tender/" title="Multi-tender Sale" class="md-nav__link">
+      Multi-tender Sale
     </a>
   </li>
 
@@ -410,18 +410,45 @@
     Create a new user
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-all-user-accounts" title="List all user accounts" class="md-nav__link">
-    List all user accounts
+  <a href="#list-all-users" title="List all users" class="md-nav__link">
+    List all users
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user-account" title="Get a specific user account" class="md-nav__link">
-    Get a specific user account
+  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
+    Get a specific user
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-a-specific-user" title="Update a specific user" class="md-nav__link">
+    Update a specific user
   </a>
   
 </li>
@@ -741,18 +768,45 @@
     Create a new user
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-all-user-accounts" title="List all user accounts" class="md-nav__link">
-    List all user accounts
+  <a href="#list-all-users" title="List all users" class="md-nav__link">
+    List all users
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user-account" title="Get a specific user account" class="md-nav__link">
-    Get a specific user account
+  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
+    Get a specific user
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-a-specific-user" title="Update a specific user" class="md-nav__link">
+    Update a specific user
   </a>
   
 </li>
@@ -778,6 +832,7 @@
                 
                 <p>Purpose of this chapter is to describe how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.</p>
 <h2 id="create-a-new-user">Create a new user</h2>
+<h3 id="request">Request</h3>
 <div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/users
 
     {
@@ -804,13 +859,19 @@
 <li>Merchant Advanced User - see all merchant sales</li>
 <li>Merchant User - see only own sales</li>
 </ul>
-<h2 id="list-all-user-accounts">List all user accounts</h2>
+<h3 id="response">Response</h3>
+<h2 id="list-all-users">List all users</h2>
 <div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users
 </pre></div>
 
 
-<h2 id="get-a-specific-user-account">Get a specific user account</h2>
+<h2 id="get-a-specific-user">Get a specific user</h2>
 <div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users/{userId}
+</pre></div>
+
+
+<h2 id="update-a-specific-user">Update a specific user</h2>
+<div class="codehilite"><pre><span></span>PUT https://switch.wirecard.com/mswitch-server/v1/users/{userId}
 </pre></div>
                 
                   
@@ -832,7 +893,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../multi-tender/" title="Multi-tender Model" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../multi-tender/" title="Multi-tender Sale" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -841,7 +902,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Multi-tender Model
+                Multi-tender Sale
               </span>
             </div>
           </a>

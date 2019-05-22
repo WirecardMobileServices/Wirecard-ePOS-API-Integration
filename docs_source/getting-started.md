@@ -1,12 +1,27 @@
-This chapter provides all information you need to know in order to start your integration right away. 
- 
-## Authentication and Security
+This chapter provides all information you need to know in order to start your integration straight away. 
 
-First of all, you need to have Wirecard ePOS API credentials (username & password) in order to successfully authenticate with Wirecard ePOS API. At the moment, only **basic access authentication** is supported.
+## Production Environment
+
+**Wirecard ePOS PROD environment** is available on the following URL:
+
+    https://switch.wirecard.com/mswitch-server/
+    
+## Testing Environment
+
+**Wirecard ePOS TEST environment** is provided to API integrators for their development purposes. It is available on the following URL:
+       
+    https://switch-test.wirecard.com/mswitch-server/
+ 
+## Authentication
+
+aWirecard ePOS credentials (username & password) are required in order to successfully authenticate with Wirecard ePOS API. At the moment, only **basic access authentication** is supported.
 
 !!! Tip
     
-    Please contact your Wirecard representative to obtain your personal credentials. If you don't know your Wirecard representative, please contact us at retail.mpos@wirecard.com
+    If you have user account on TEST environment, you can check your credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: 
+    
+        curl -X GET "https://switch-test.wirecard.com/mswitch-server/v1/info/version" -H "accept: text/plain" -u {YourUsername}:{YourPassword}
+    Upon successful authentication, response includes current system version.
 
 !!! Note
     
@@ -26,24 +41,3 @@ First of all, you need to have Wirecard ePOS API credentials (username & passwor
     For example, if the browser uses Aladdin as the username and OpenSesame as the password, then the field's value is the base64-encoding of Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization header will appear as: “Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l”
     
     See [Wikipedia](https://en.wikipedia.org/wiki/Basic_access_authentication) for more details.
-
-## Testing Environment
-
-**Wirecard ePOS TEST environment** is provided to API integrators for their development purposes. In case your credentials are valid for ePOS TEST environment, please refer to the following URL:
-       
-    https://switch-test.wirecard.com/mswitch-server/
-
-!!! Tip
-    
-    - You have received user account credentials to TEST environment.
-    - You can check the received credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: 
-        
-        >curl -X GET "https://switch-test.wirecard.com/mswitch-server/v1/info/version" -H "accept: text/plain" -u {YourUsername}:{YourPassword}
-    
-        Upon successful authentication, system responds with its version.
-        
-## Production Environment
-
-**Wirecard ePOS PROD environment** is available on the following URL:
-
-    https://switch.wirecard.com/mswitch-server/

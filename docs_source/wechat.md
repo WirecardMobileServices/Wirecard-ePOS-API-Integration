@@ -2,25 +2,41 @@ WeChat Pay is one of China‘s leading payment methods. Since its start as a cha
 
 !!! Tip
     
-    Visit [Wirecard](https://www.wirecard.com/payment-base/wechat-pay) website to find out all benefits of WeChat barcode payment.
+    Visit [Wirecard website](https://www.wirecard.com/payment-base/wechat-pay) to find out all benefits of WeChat payment.
 
-From retailer perspective, WeChat can be either one-step or two-step payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.
+From merchant perspective, WeChat can be either [one-step](#1-step-wechat-payment) or [two-step](#2-step-wechat-payment) payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.
 
 In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then initial PURCHASE request has to be confirmed by follow-up CONFIRM request. 
+    
+## Workflow
+
+### 1-step WeChat payment
+![WeChat](images/wechat.png)
+
+### 2-step WeChat payment
+![WeChat](images/wechat2.png)
 
 !!! Note
     
-    Sale requests are serviced at https://switch.wirecard.com/mswitch-server/v1/sales URL.
+    Purchase requests are serviced at following URL:
+    
+        https://switch.wirecard.com/mswitch-server/v1/sales
+
+    In context of Wirecard ePOS, term **Purchase** is used for both:
+    
+    - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
+    - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
     
 ## Purchase Operation
 
-In context of Wirecard ePOS, every payment transaction is part of a _Sale_. In order to process WeChat payment, call Wirecard ePOS API with _Sale-PURCHASE_ request defined below:
+In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
 ### Request
 
     {
         "multitender": "true",
         "operation" : "PURCHASE",
+        "externalId": "123456789",
         "totalAmount" : 10,
         "currencyCode" : "EUR",
         "payments" : [
@@ -34,30 +50,23 @@ In context of Wirecard ePOS, every payment transaction is part of a _Sale_. In o
     }
     
 - **"multitender"** - boolean flag
-    - "TRUE" - required; compliant with newest Sale Model, which is described in this integration guide
-    - "FALSE" - deprecated; old Sale Model is not addressed in this integration guide
-- **"operation"** - defines type of Sale request; "PURCHASE" operation creates new Sale-Purchase record
-- **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
+    - "TRUE" - required
+    - "FALSE" - deprecated
+- **"operation"** - defines type of Sale request; PURCHASE operation creates Sale-Purchase record
+- **_"externalId"_** - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway
 - **"totalAmount"** - defines amount of Sale-Purchase 
 - **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - payment-specific information; one payment transaction per one request is supported
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of this transaction; "PURCHASE" transaction type moves funds from end-consumer to merchant
+    - **"transactionType"** - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant
     - **"amount"** - defines transaction amount
     - **"consumerId"** - value of scanned barcode (QR code)
 
-!!! Note
-
-    In context of Wirecard ePOS, term **Purchase** is used for both:
-    
-    - type of Sale - defined more specifically as _Sale-Purchase_
-    - transaction type - e.g. alipay _purchase_ transaction, cash _purchase_ transaction, etc.
-
 ### Response indicating 1-step WeChat payment
 
-In order to identify whether the follow-up _CONFIRM_ request is required, status code has to be parsed.
+In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be parsed.
 
-Code **1000 indicates** that WeChat purchase transactions is completed and **no follow-up request is required**.
+**Status Code 1000 indicates** that WeChat purchase transactions is completed and **no follow-up request is required**.
 
     {
         "operation": "PURCHASE",
@@ -122,13 +131,13 @@ Code **1000 indicates** that WeChat purchase transactions is completed and **no 
 
 !!! Important
     
-    After successful PURCHASE operation, [GET a Sale call](#get-a-sale-call) is advised, as it provides complete Sale information.
+    After successful response, making [`GET /v1/sales/{id}`](#get-a-sale-call) call is advised, as it provides all information.
 
 ### Response indicating 2-step WeChat payment
 
-In order to identify whether the follow-up _CONFIRM_ request is required, status code has to be parsed.
+In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be parsed.
 
-Code **1001 indicates** that WeChat purchase transactions is not completed and **follow-up _CONFIRM_ request is required**.
+**Status Code 1001 indicates** that WeChat purchase transactions is not completed and **follow-up _CONFIRM_ request is required**.
 
     {
         "operation": "PURCHASE",
@@ -206,7 +215,7 @@ Code **1001 indicates** that WeChat purchase transactions is not completed and *
     
 ### Response
 
-Code **1000** indicates that WeChat purchase transaction is completed successfully.
+**Status Code 1000** indicates that WeChat purchase transaction is completed successfully.
 
     {
         "operation": "CONFIRM",
@@ -262,14 +271,16 @@ Code **1000** indicates that WeChat purchase transaction is completed successful
     - **"wechatCashFee"** - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY
     - **"wechatTimeEnd"** - date-time in WeChat system
     - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
+    
+!!! Important
+    
+    After successful response, making [`GET /v1/sales/{id}`](#get-a-sale-call) call is advised, as it provides all information.
 
-## Reverse & Cancel Operation
+## Reverse Operation
 
-_REVERSE_ operation is typically used in case _Sale-Purchase_ was created accidentally. _REVERSE_ operation serves for reversing particular _purchase_ transaction.
+_REVERSE_ operation is typically used in case purchase transaction was created accidentally and hence needs to be reversed.
 
-_CANCEL_ operation changes state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only as long as the purchase transaction is reversed. 
-
-In order to reverse alipay purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
+In order to reverse WeChat purchase transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
 ### Reverse Request
 
@@ -327,36 +338,13 @@ In order to reverse alipay purchase transaction, call Wirecard ePOS with _Sale-R
         ]
     }
 
-In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard ePOS with _Sale-CANCEL_ request defined below:
-
-### Cancel Request
-
-    {
-        "operation": "CANCEL",
-        "originalSaleId": "a0a09836df08426b92d4805294bdae42"
-    }
-    
-- **"operation"** - defines type of Sale request
-- **"originalSaleId"** - identifier of original Sale-Purchase
-
-### Cancel Response
-
-    {
-        "operation": "CANCEL",
-        "timeStamp": "2019-05-17T10:36:33.374Z",
-        "status": {
-            "code": "1000",
-            "result": "SUCCESS"
-        },
-        "id": "a0a09836df08426b92d4805294bdae42",
-        "externalCashierId": null
-    }
+In order to explicitly [change state of Sale-Purchase to CANCELED](multi-tender.md#what-is-sale-lifecycle-model), make a  `POST /v1/sales` call with [_CANCEL_ operation](multi-tender.md#what-is-cancel-operation).
     
 ## Return Operation
 
-_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full returns.
+_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full return.
 
-In order to refund WeChat purchase transaction, call Wirecard ePOS with _Sale-RETURN_ request defined below:
+In order to process WeChat refund transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call defined below:
 
 ### Request
 
@@ -413,7 +401,7 @@ In order to refund WeChat purchase transaction, call Wirecard ePOS with _Sale-RE
     }
 
 !!! Tip
-    See also complete list of Wirecard ePOS Sale [request & response examples](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
 ## GET a Sale Call
 

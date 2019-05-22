@@ -4,22 +4,30 @@ Cash is the most straightforward payment method to integrate.
 
     Visit [Wirecard](https://www.wirecard.com/payment-base/pos) website to find out all benefits of Wirecard ePOS solution.
 
+## Workflow
+
+![Cash](images/cash.png)
+
 !!! Note
     
-    Sale requests are serviced at https://switch.wirecard.com/mswitch-server/v1/sales URL.
+    Purchase requests are serviced at following URL:
+    
+        https://switch.wirecard.com/mswitch-server/v1/sales
 
+    In context of Wirecard ePOS, term **Purchase** is used for both:
+    
+    - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
+    - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
+    
 ## Purchase Operation
 
-In context of Wirecard ePOS, every payment transaction (alias payment) is part of a _Sale_. In order to process cash payment, call Wirecard ePOS with _Sale-PURCHASE_ request defined below:
+In order to process cash payment, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
 ### Request
     
     {
         "multitender": "true",
         "operation" : "PURCHASE",
-        "externalId": "123456789",
-        "note": "My First Sale",
-        "externalId": "123456789",
         "totalAmount" : 10.0,
         "currencyCode" : "EUR",
         "payments" : [
@@ -32,24 +40,15 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
     }
 
 - **"multitender"** - boolean flag
-    - "TRUE" - required; compliant with newest Sale Model, which is described in this integration guide
-    - "FALSE" - deprecated; old Sale Model is not addressed in this integration guide
-- **"operation"** - defines type of Sale request; "PURCHASE" operation creates new Sale-Purchase record
-- **_"note"_** - _optional_ - note is forwarded to payment gateway
-- **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
-- **"totalAmount"** - defines amount of Sale-Purchase 
+    - "TRUE" - required
+    - "FALSE" - deprecated
+- **"operation"** - defines type of operation; PURCHASE operation creates new Sale-Purchase record
+- **"totalAmount"** - total amount of Sale-Purchase
 - **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - payment-specific information; one payment transaction per request is supported
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of this transaction; "PURCHASE" transaction type moves funds from end-consumer to merchant
+    - **"transactionType"** - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant
     - **"amount"** - defines transaction amount
-
-!!! Note
-
-    In context of Wirecard ePOS, term **Purchase** is used for both:
-    
-    - type of Sale - defined more specifically as _Sale-Purchase_
-    - transaction type - e.g. cash _purchase_ transaction, card _purchase_ transaction, etc.
 
 ### Response
 
@@ -89,32 +88,30 @@ In context of Wirecard ePOS, every payment transaction (alias payment) is part o
     - **"result"** - "SUCCESS" means operation is successful
 - **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - echoed from request
     - **"transactionType"** - echoed from request
-    - **"id"** - identifier of purchase transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
+    - **"id"** - identifier of transaction assigned by Wirecard ePOS system
+    - **"timeStamp"** - date-time when transaction was processed
     - **"statuses"**
         - **"result"** - "SUCCESS" means transaction is successful
         - **"code"** - code "1000" means transaction is successful
         - **"message"** - message provided by payment gateway
 - **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as barcode
+- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
 - **"multitender"** - echoed from request
 
 !!! Important
     
-    After successful PURCHASE operation, [GET a Sale call](#get-a-sale-call) is advised, as it provides complete Sale information.
+    After successful response, making [`GET /v1/sales/{id}`](#get-a-sale-call) call is advised, as it provides all information.
 
-## Reverse & Cancel Operation
+## Reverse Operation
 
-_REVERSE_ operation is typically used in case _Sale-Purchase_ was created accidentally. _REVERSE_ operation serves for reversing particular _purchase_ transaction.
+_REVERSE_ operation is typically used in case purchase transaction was created accidentally and hence needs to be reversed.
 
-_CANCEL_ operation is used to change state of Sale-Purchase to CANCELED. _CANCEL_ operation can be sent only as long as the purchase transaction is reversed. 
+In order to reverse cash purchase transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
-In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REVERSE_ request defined below:
-
-### Reverse Request
+### Request
 
     {
         "operation": "REVERSE",
@@ -128,14 +125,14 @@ In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REV
         ]
     }
 
-- **"operation"** - defines type of Sale request
+- **"operation"** - defines type of operation
 - **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - payment-specific information; one payment transaction per request is supported
-    - **"paymentMethod"** - defines payment method; it must be same as original payment transaction
-    - **"transactionType"** - defines type of this transaction; REVERSE operation must include REVERSAL transaction type
+- **"payments"** - includes payment-specific information
+    - **"paymentMethod"** - defines payment method; must be same as original payment method
+    - **"transactionType"** - defines type of transaction; REVERSE operation must include REVERSAL transaction type
     - **"originalTransactionId"** - identifier of original purchase transaction
 
-### Reverse Response
+### Response
 
     {
         "operation": "REVERSE",
@@ -168,63 +165,30 @@ In order to reverse cash purchase transaction, call Wirecard ePOS with _Sale-REV
 - **"status"**
     - **"code"** - code "1000" means operation is successful
     - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - echoed from request; Sale-Purchase identifier
+- **"id"** - echoed from request
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - echoed from request
     - **"transactionType"** - echoed from request
     - **"id"** - identifier of reversal transaction
-    - **"timeStamp"** - date-time when reversal transaction was processed by payment gateway
+    - **"timeStamp"** - date-time when reversal transaction was processed
     - **"statuses"**
         - **"result"** - "SUCCESS" means transaction is successful
         - **"code"** - code "1000" means transaction is successful
         - **"message"** - message provided by payment gateway
         
-In order to explicitly change state of Sale-Purchase to CANCELED, call Wirecard ePOS with _Sale-CANCEL_ request defined below:
-
-### Cancel Request
-
-    {
-        "operation": "CANCEL",
-        "originalSaleId": "bdb7dd5566f043ab9b91108863a6e833"
-    }
-    
-- **"operation"** - defines type of Sale request
-- **"originalSaleId"** - identifier of original Sale-Purchase
-
-### Cancel Response
-
-    {
-        "operation": "CANCEL",
-        "timeStamp": "2019-04-11T13:30:05.187Z",
-        "status": {
-            "code": "1000",
-            "result": "SUCCESS"
-        },
-        "id": "bdb7dd5566f043ab9b91108863a6e833",
-        "externalCashierId": null
-    }
-    
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - echoed from request; Sale-Purchase identifier
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+In order to explicitly [change state of Sale-Purchase to CANCELED](multi-tender.md#what-is-sale-lifecycle-model), make a  `POST /v1/sales` call with [_CANCEL_ operation](multi-tender.md#what-is-cancel-operation).
 
 ## Return Operation
 
-_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full returns.
+_RETURN_ operation is used in case end-consumer returns merchandise and asks for a refund. Wirecard ePOS support partial as well as full return.
 
-In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETURN_ request defined below:
+In order to process cash refund transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call defined below:
 
 ### Request
 
     {
         "operation" : "RETURN",
-        "note" : "My First Return",
-        "externalId" : "20190411001",
         "totalAmount" : 10,
         "currencyCode" : "EUR",
         "originalSaleId" : "344009e1f53a4dd0af9751f0b7d7d99d",
@@ -237,15 +201,13 @@ In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETU
         ]
     }
 
-- **"operation"** - defines type of Sale request
-- **_"note"_** - _optional_ - note is forwarded to payment gateway
-- **_"externalId"_** - _optional_ - meant to be used for integrator tracking purpose; it is forwarded to payment gateway
+- **"operation"** - defines type of operation; RETURN operation creates new Sale-Return record
 - **"totalAmount"** - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase
 - **"currencyCode"** - must be same as for original Sale-Purchase
 - **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - payment-specific information; one payment transaction per request is supported
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of this transaction; must be "REFUND" when payment method is CASH
+    - **"transactionType"** - defines type of transaction; must be REFUND when payment method is CASH
     - **"amount"** - defines amount to be refunded
 
 ### Response
@@ -283,26 +245,26 @@ In order to refund cash purchase transaction, call Wirecard ePOS with _Sale-RETU
 - **"status"**
     - **"code"** - code "1000" means operation is successful
     - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Return identifier assigned by Wirecard ePOS
+- **"id"** - Sale-Return identifier assigned by Wirecard ePOS system
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
+- **"payments"** - includes payment-specific information
     - **"paymentMethod"** - echoed from request
     - **"transactionType"** - echoed from request
     - **"id"** - identifier of refund transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
+    - **"timeStamp"** - date-time when transaction was processed
     - **"statuses"**
         - **"result"** - "SUCCESS" means transaction is successful
         - **"code"** - code "1000" means transaction is successful
         - **"message"** - message provided by payment gateway
 - **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as barcode
+- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
 
 !!! Tip
-    See also complete list of Wirecard ePOS Sale [request & response examples](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
-## GET a Sale Call
+## Get a Sale call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
     
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/19267cf3a3cb4e2d8131917b5c092a0d?excludeField=merchant&excludeField=user
     
@@ -311,7 +273,7 @@ You can see below an example of GET a Sale call with excluded _merchant_ and _us
           "type": "PURCHASE",
           "status": "COMPLETED",
           "totalAmount": 10,
-          "note": "My First Sale",
+          "note": null,
           "externalId": null,
           "externalCashierId": null,
           "customerId": null,

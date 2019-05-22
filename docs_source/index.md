@@ -1,12 +1,10 @@
 # Welcome to Wirecard ePOS
 
-**Wirecard ePOS** is a unique cashier system developed by the team of 33 developers, 
-testers and business analysts. Wirecard ePOS combines smart cash-register, 
-product catalogue and payment acceptance into one solution.
+**Wirecard ePOS** is a unique cashier system which combines payment processing, smart cash-register and product catalogue functionality.
 
 Wirecard ePOS solution can be utilized in following ways:
 
-- Wirecard ePOS API - for retailers who prefer direct API (backend-to-backend) integration
+- Wirecard ePOS API - for retailers who prefer direct API integration
 - Wirecard ePOS SDK - for retailers who want to develop their own iOS or Android application
 - Wirecard ePOS App - for retailers who prefer easy to use iOS or Android application
 
@@ -29,4 +27,4 @@ or [Google Play Store](https://play.google.com/store/apps/details?id=de.wirecard
     Wirecard ePOS belongs to Wirecard portfolio of point of sale (POS) solutions. 
     For complete information about all Wirecard products and solutions, please contact your Wirecard representative.
     
-    If you don't know your Wirecard representative, please contact us at retail.mpos@wirecard.com
+    If you don't know your Wirecard representative, please [contact us now](https://www.wirecard.com/contact).

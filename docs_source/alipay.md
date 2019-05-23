@@ -16,7 +16,7 @@ From merchant perspective, Alipay payment is very straightforward. Only one requ
     
         https://switch.wirecard.com/mswitch-server/v1/sales
 
-    In context of Wirecard ePOS, term **Purchase** is used for both:
+    In context of Wirecard ePOS, term `Purchase` is used for both:
     
     - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
     - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
@@ -30,6 +30,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
     {
         "multitender": "true",
         "operation" : "PURCHASE",
+        "note" : "Example Note",
         "externalId": "123456789",
         "totalAmount" : 10,
         "currencyCode" : "EUR",
@@ -43,18 +44,19 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
         ]
     }
     
-- **"multitender"** - boolean flag
-    - "TRUE" - required
-    - "FALSE" - deprecated
-- **"operation"** - defines type of Sale request; PURCHASE operation creates Sale-Purchase record
-- **_"externalId"_** - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway
-- **"totalAmount"** - defines amount of Sale-Purchase 
-- **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant
-    - **"amount"** - defines transaction amount
-    - **"consumerId"** - value of scanned barcode (QR code)
+- `"multitender"` - boolean flag
+    - `"TRUE"` - required
+    - `"FALSE"` - deprecated
+- `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
+- `"note"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-detail>` field
+- `"externalId"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-number>` field
+- `"totalAmount"` - defines amount of Sale-Purchase 
+- `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method
+    - `"transactionType"` - defines type of transaction; `"PURCHASE"` transaction moves funds from end-consumer to merchant
+    - `"amount"` - defines transaction amount
+    - `"consumerId"` - value of scanned barcode (QR code)
     
 ### Response
 
@@ -97,33 +99,33 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
         "multitender": true
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-    - **"alipayPayTime"** - date-time in Alipay system
-    - **"alipayTransId"** - identifier of transaction assigned by Alipay System
-    - **"alipayBuyerLoginId"** - identifier of end-consumer (buyer) in Alipay system
-    - **"exchangeRate"** - exchange rate between processing currency and CNY (Chinese Yuan)
-    - **"transAmountCny"** - amount in CNY (Chinese Yuan)
-    - **"merchantName"** - merchant name in Alipay system
-    - **"terminalId"** - terminal identifier
-    - **"gatewayReference"** - identifier of transaction assigned by Wirecard payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
-- **"multitender"** - echoed from request
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"alipayPayTime"` - date-time in Alipay system
+    - `"alipayTransId"` - identifier of transaction assigned by Alipay System
+    - `"alipayBuyerLoginId"` - identifier of end-consumer (buyer) in Alipay system
+    - `"exchangeRate"` - exchange rate between processing currency and CNY (Chinese Yuan)
+    - `"transAmountCny"` - amount in CNY (Chinese Yuan)
+    - `"merchantName"` - merchant name in Alipay system
+    - `"terminalId"` - terminal identifier
+    - `"gatewayReference"` - identifier of transaction assigned by Wirecard payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
+- `"multitender"` - echoed from request
 
 !!! Important
     
@@ -149,12 +151,12 @@ In order to reverse Alipay purchase transaction, make a [`POST /v1/sales`](https
         ]
     }
 
-- **"operation"** - defines type of Sale request
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method; must be same as original payment method
-    - **"transactionType"** - defines type of transaction; REVERSE operation must include REVERSAL transaction type
-    - **"originalTransactionId"** - identifier of original purchase transaction
+- `"operation"` - defines type of Sale request
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method; must be same as original payment method
+    - `"transactionType"` - defines type of transaction; `"REVERSE"` operation must include `"REVERSAL"` transaction type
+    - `"originalTransactionId"` - identifier of original purchase transaction
     
 ### Response
 
@@ -193,31 +195,31 @@ In order to reverse Alipay purchase transaction, make a [`POST /v1/sales`](https
         ]
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of reversal transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-    - **"alipayPayTime"** - date-time in Alipay system
-    - **"alipayTransId"** - identifier of transaction assigned by Alipay System
-    - **"alipayBuyerLoginId"** - identifier of end-consumer (buyer) in Alipay system
-    - **"exchangeRate"** - exchange rate between processing currency and CNY (Chinese Yuan)
-    - **"transAmountCny"** - amount in CNY (Chinese Yuan)
-    - **"merchantName"** - merchant name in Alipay system
-    - **"terminalId"** - terminal identifier
-    - **"alipayCancelTime"** - reversal date-time in Alipay system
-    - **"gatewayReference"** - identifier of transaction assigned by Wirecard payment gateway
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of reversal transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` -  `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"alipayPayTime"` - date-time in Alipay system
+    - `"alipayTransId"` - identifier of transaction assigned by Alipay System
+    - `"alipayBuyerLoginId"` - identifier of end-consumer (buyer) in Alipay system
+    - `"exchangeRate"` - exchange rate between processing currency and CNY (Chinese Yuan)
+    - `"transAmountCny"` - amount in CNY (Chinese Yuan)
+    - `"merchantName"` - merchant name in Alipay system
+    - `"terminalId"` - terminal identifier
+    - `"alipayCancelTime"` - reversal date-time in Alipay system
+    - `"gatewayReference"` - identifier of transaction assigned by Wirecard payment gateway
 
 In order to explicitly [change state of Sale-Purchase to CANCELED](multi-tender.md#what-is-sale-lifecycle-model), make a  `POST /v1/sales` call with [_CANCEL_ operation](multi-tender.md#what-is-cancel-operation).
 
@@ -244,15 +246,15 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
         ]
     }
 
-- **"operation"** - defines type of Sale request; RETURN operation creates new Sale-Return record
-- **"totalAmount"** - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase
-- **"currencyCode"** - must be same as for original Sale-Purchase
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of transaction; must be REFERENCE_REFUND when payment method is ALIPAY
-    - **"amount"** - defines amount to be refunded
-    - **"originalTransactionId"** - identifier of original Alipay purchase transaction which will be refunded
+- `"operation"` - defines type of Sale request; `"RETURN"` operation creates new Sale-Return record
+- `"totalAmount"` - defines amount to be refunded; it can be equal (full return) or less (partial return) than total amount in original Sale-Purchase
+- `"currencyCode"` - must be same as for original Sale-Purchase
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method
+    - `"transactionType"` - defines type of transaction; must be `"REFERENCE_REFUND"` when payment method is `"ALIPAY"`
+    - `"amount"` - defines amount to be refunded
+    - `"originalTransactionId"` - identifier of original Alipay purchase transaction which will be refunded
 
 ### Response
 
@@ -294,39 +296,39 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
         "merchantReceiptId": 252
     }
 
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Return identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of refund transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-    - **"alipayPayTime"** - date-time in Alipay system
-    - **"alipayTransId"** - identifier of transaction assigned by Alipay System
-    - **"alipayBuyerLoginId"** - identifier of end-consumer (buyer) in Alipay system
-    - **"exchangeRate"** - exchange rate between processing currency and CNY (Chinese Yuan)
-    - **"transAmountCny"** - amount in CNY (Chinese Yuan)
-    - **"merchantName"** - merchant name in Alipay system
-    - **"terminalId"** - terminal identifier
-    - **"gatewayReference"** - identifier of transaction assigned by Wirecard payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Return identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of refund transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"alipayPayTime"` - date-time in Alipay system
+    - `"alipayTransId"` - identifier of transaction assigned by Alipay System
+    - `"alipayBuyerLoginId"` - identifier of end-consumer (buyer) in Alipay system
+    - `"exchangeRate"` - exchange rate between processing currency and CNY (Chinese Yuan)
+    - `"transAmountCny"` - amount in CNY (Chinese Yuan)
+    - `"merchantName"` - merchant name in Alipay system
+    - `"terminalId"` - terminal identifier
+    - `"gatewayReference"` - identifier of transaction assigned by Wirecard payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
 
 !!! Tip
     To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
-## GET a Sale Call
+## Get a Sale Call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
 
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/6434f3ee5f404fec89d95c7f8538ac68?excludeField=merchant&excludeField=user
     
@@ -389,3 +391,7 @@ You can see below an example of GET a Sale call with excluded _merchant_ and _us
         "emailForReceiptProvided": false,
         "multitender": true
     }
+    
+## Purchase Transaction Lifecycle
+
+![Alipay Purchase Lifecycle](images/alipay_purchase_lifecycle.png)

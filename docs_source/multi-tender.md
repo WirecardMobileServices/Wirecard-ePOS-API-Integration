@@ -16,13 +16,13 @@ End-consumers may want to combine multiple debit and/or credit cards, especially
 
 ## How to integrate multi-tender?
 
-As long as the **"multitender"** flag in the PURCHASE request is **"true"**, you are integrated.
+As long as you send `"PURCHASE"` with `"multitender"` field set to `"true"`, you are integrated.
 
 !!! Warning
 
-    It is strongly advised to send **"multitender": "true"** in all Sale PURCHASE requests. Otherwise you are not compliant with the latest [Sale lifecycle model](#what-is-sale-lifecycle-model), which is described in this guide.
+    It is strongly advised to send `"multitender": "true"` in all Sale PURCHASE requests. Otherwise you are not compliant with the latest [Sale lifecycle model](#what-is-sale-lifecycle-model), which is described in this guide.
 
-## How to make multi-tender Sale?
+## How to divide total amount into multiple payments?
 
 Let's see real-live example below.
 
@@ -30,8 +30,13 @@ Let's see real-live example below.
 
     Purchase of merchandise in value of 1000 EUR is paid by combining two payment methods, Alipay and cash.
 
-    **Initial Sale PURCHASE request:**
+    **1. step -  Purchase operation:**
     
+    Purchase operation includes standard fields.
+    However, in this case, total amount is 1000 and Alipay purchase transaction amount is 700.
+    
+        POST https://switch.wirecard.com/mswitch-server/v1/sales
+        
         {
             "multitender": "true",
             "operation" : "PURCHASE",
@@ -47,8 +52,12 @@ Let's see real-live example below.
             ]
         }
     
-    **Sale REFERENCE_PURCHASE request:**
+    **2. step - Reference Purchase operation:**
     
+    Reference Purchase operation includes only reference to original Sale-Purchase and payment-specific information. In this case, cash purchase transaction covers all unpaid amount, exactly 300.
+    
+        POST https://switch.wirecard.com/mswitch-server/v1/sales
+        
         {
             "operation" : "REFERENCE_PURCHASE",
             "originalSaleId": "5d01cf38548f4007962e7d68004fcc76",
@@ -65,15 +74,15 @@ Let's see real-live example below.
 
 ![Sale Model](images/SalePurchase.png)
 
-Every Sale PURCHASE request, which passes validation, creates Sale-Purchase record in system. Sale-Purchase record get one of the following states:
+Every PURCHASE operation, which passes validation, creates new Sale-Purchase record in Wirecard ePOS system. Sale-Purchase record gets one of the following states:
 
 - **IN_PROGRESS** - internal state
-- **UNCONFIRMED** - purchase transaction is processed regardless SUCCESS or FAILED result and Sale total amount is not fully paid
+- **UNCONFIRMED** - purchase transaction is processed and Sale total amount is not fully paid
 - **COMPLETED** - sum of completed purchase transactions cover Sale total amount
 - **RETURNED** - all purchased goods have been returned by customer and Sale total amount is refunded
 - **PARTIALLY_RETURNED** - only some of purchased goods have been returned by customer and part Sale total amount is refunded
-- **CANCELED** - all purchase transactions are reversed and CANCEL operation was successful
-- **FAILED** - all purchase transaction are either failed or reversed and FAIL operation was successful
+- **CANCELED** - all purchase transactions are reversed and [CANCEL](#what-is-cancel-operation) operation was successful
+- **FAILED** - all purchase transaction are either in FAILED or REVERSED state and [FAIL](#what-is-fail-operation) operation was successful
 
 !!! Tip
     Use [GET /v1/sales/{id} call](cash.md#get-a-sale-call) to get Sale record with all details.
@@ -91,8 +100,8 @@ In order to move Sale-Purchase to CANCELED state, make a POST /v1/sales call:
         "originalSaleId": "bdb7dd5566f043ab9b91108863a6e833"
     }
     
-- **"operation"** - defines type of Sale request
-- **"originalSaleId"** - identifier of original Sale-Purchase
+- `"operation"` - defines type of Sale request
+- `"originalSaleId"` - identifier of original Sale-Purchase
 
 ### Response
 
@@ -107,12 +116,12 @@ In order to move Sale-Purchase to CANCELED state, make a POST /v1/sales call:
         "externalCashierId": null
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - echoed from request; Sale-Purchase identifier
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"** - echoed from request; Sale-Purchase identifier
 - **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 
 ## What is Fail operation?

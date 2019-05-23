@@ -4,9 +4,9 @@ WeChat Pay is one of China‘s leading payment methods. Since its start as a cha
     
     Visit [Wirecard website](https://www.wirecard.com/payment-base/wechat-pay) to find out all benefits of WeChat payment.
 
-From merchant perspective, WeChat can be either [one-step](#1-step-wechat-payment) or [two-step](#2-step-wechat-payment) payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.
+From merchant perspective, WeChat can be either [one-step](#1-step-wechat-payment) or [two-step](#2-step-wechat-payment) payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is [one request](#purchase-operation).
 
-In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then initial PURCHASE request has to be confirmed by follow-up CONFIRM request. 
+In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then [initial request](#purchase-operation) has to be confirmed by [follow-up request](#confirm-operation). 
     
 ## Workflow
 
@@ -36,6 +36,7 @@ In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wir
     {
         "multitender": "true",
         "operation" : "PURCHASE",
+        "note" : "Example Note",
         "externalId": "123456789",
         "totalAmount" : 10,
         "currencyCode" : "EUR",
@@ -49,22 +50,23 @@ In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wir
         ]
     }
     
-- **"multitender"** - boolean flag
-    - "TRUE" - required
-    - "FALSE" - deprecated
-- **"operation"** - defines type of Sale request; PURCHASE operation creates Sale-Purchase record
-- **_"externalId"_** - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway
-- **"totalAmount"** - defines amount of Sale-Purchase 
-- **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant
-    - **"amount"** - defines transaction amount
-    - **"consumerId"** - value of scanned barcode (QR code)
+- `"multitender"` - boolean flag
+    - `"TRUE"` - required
+    - `"FALSE"` - deprecated
+- `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
+- `"note"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-detail>` field
+- `"externalId"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-number>` field
+- `"totalAmount"` - defines amount of Sale-Purchase 
+- `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method
+    - `"transactionType"` - defines type of transaction; `"PURCHASE"` transaction moves funds from end-consumer to merchant
+    - `"amount"` - defines transaction amount
+    - `"consumerId"` - value of scanned barcode (QR code)
 
 ### Response indicating 1-step WeChat payment
 
-In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be parsed.
+In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be interpreted.
 
 **Status Code 1000 indicates** that WeChat purchase transactions is completed and **no follow-up request is required**.
 
@@ -103,31 +105,31 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
         "multitender": true
     }
 
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is completed successfully
-    - **"result"** - "SUCCESS" means operation is completed successfully
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of purchase transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is completed successfully
-        - **"code"** - code "1000" means transaction is completed successfully
-        - **"message"** - message provided by payment gateway
-    - **"wechatProviderTransactionId"** - transaction identifier in WeChat System
-    - **"wechatRate"** - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918
-    - **"wechatSubMchId"** - merchant identifier in WeChat System
-    - **"wechatCashFee"** - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY
-    - **"wechatTimeEnd"** - date-time in WeChat system
-    - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode
-- **"multitender"** - echoed from request
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is completed successfully
+    - `"result"` - `"SUCCESS"` means operation is completed successfully
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - specific information for every payment method
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of purchase transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed by payment gateway
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is completed successfully
+        - `"code"` - `"1000"` means transaction is completed successfully
+        - `"message"` - message provided by payment gateway
+    - `"wechatProviderTransactionId"` - transaction identifier in WeChat System
+    - `"wechatRate"` - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918
+    - `"wechatSubMchId"` - merchant identifier in WeChat System
+    - `"wechatCashFee"` - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY
+    - `"wechatTimeEnd"` - date-time in WeChat system
+    - `"gatewayReference"` - transaction identifier in Wirecard payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode
+- `"multitender"` - echoed from request
 
 !!! Important
     
@@ -135,7 +137,7 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
 
 ### Response indicating 2-step WeChat payment
 
-In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be parsed.
+In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be interpreted.
 
 **Status Code 1001 indicates** that WeChat purchase transactions is not completed and **follow-up _CONFIRM_ request is required**.
 
@@ -170,27 +172,27 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
         "multitender": true
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1001" means operation is successful, however follow-up _CONFIRM_ request is required to complete WeChat purchase transaction
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of purchase transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1001" means transaction is successful
-        - **"message"** - message provided by payment gateway
-    - **"wechatSubMchId"** - merchant identifier in WeChat System
-    - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode
-- **"multitender"** - echoed from request
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1001"` means operation is successful, however follow-up `"CONFIRM"` request is required to complete WeChat purchase transaction
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - specific information for every payment method
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of purchase transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed by payment gateway
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1001"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"wechatSubMchId"` - merchant identifier in WeChat System
+    - `"gatewayReference"` - transaction identifier in Wirecard payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode
+- `"multitender"` - echoed from request
 
 ## Confirm Operation
 
@@ -207,11 +209,11 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
         ]
     }
     
-- **"operation"** - defines type of Sale request; "CONFIRM" operation does finish the WeChat Purchase transaction
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - payment-specific information; one payment transaction per request is supported
-    - **"paymentMethod"** - defines payment method; it must be same as original payment transaction
-    - **"transactionType"** - defines type of this transaction; CONFIRM operation must include CONFIRM transaction type
+- `"operation"` - defines type of Sale request; `"CONFIRM"` operation does finish the WeChat Purchase transaction
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method; it must be same as original payment transaction
+    - `"transactionType"` - defines type of transaction; `"CONFIRM"` operation must include `"CONFIRM"` transaction type
     
 ### Response
 
@@ -249,28 +251,28 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
         ]
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - specific information for every payment method
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of purchase transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed by payment gateway
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-    - **"wechatProviderTransactionId"** - transaction identifier in WeChat System
-    - **"wechatRate"** - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918
-    - **"wechatSubMchId"** - merchant identifier in WeChat System
-    - **"wechatCashFee"** - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY
-    - **"wechatTimeEnd"** - date-time in WeChat system
-    - **"gatewayReference"** - transaction identifier in Wirecard payment gateway
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - specific information for every payment method
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of purchase transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed by payment gateway
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"wechatProviderTransactionId"` - transaction identifier in WeChat System
+    - `"wechatRate"` - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918
+    - `"wechatSubMchId"` - merchant identifier in WeChat System
+    - `"wechatCashFee"` - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY
+    - `"wechatTimeEnd"` - date-time in WeChat system
+    - `"gatewayReference"` - transaction identifier in Wirecard payment gateway
     
 !!! Important
     
@@ -296,12 +298,12 @@ In order to reverse WeChat purchase transaction, make a [`POST /v1/sales`](https
         ]
     }
 
-- **"operation"** - defines type of Sale request
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - payment-specific information; one payment transaction per request is supported
-    - **"paymentMethod"** - defines payment method; it must be same as original payment transaction
-    - **"transactionType"** - defines type of this transaction; REVERSE operation must include REVERSAL transaction type
-    - **"originalTransactionId"** - identifier of original purchase transaction
+- `"operation"` - defines type of Sale request
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method; it must be same as original payment transaction
+    - `"transactionType"` - defines type of this transaction; `"REVERSE"` operation must include `"REVERSAL"` transaction type
+    - `"originalTransactionId"` - identifier of original purchase transaction
     
 ### Reverse Response
 
@@ -403,9 +405,9 @@ In order to process WeChat refund transaction, make a [`POST /v1/sales`](https:/
 !!! Tip
     To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
-## GET a Sale Call
+## Get a Sale Call
 
-You can see below an example of GET a Sale call with excluded _merchant_ and _user_ fields which are going to be described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively.
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
     
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&excludeField=user
     
@@ -468,3 +470,7 @@ You can see below an example of GET a Sale call with excluded _merchant_ and _us
         "emailForReceiptProvided": false,
         "multitender": true
     }
+    
+## Purchase Transaction Lifecycle
+
+![WeChat Purchase Lifecycle](images/wechat_purchase_lifecycle.png)

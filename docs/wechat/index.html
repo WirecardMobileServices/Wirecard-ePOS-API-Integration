@@ -485,8 +485,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-sale-call" title="GET a Sale Call" class="md-nav__link">
-    GET a Sale Call
+  <a href="#get-a-sale-call" title="Get a Sale Call" class="md-nav__link">
+    Get a Sale Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#purchase-transaction-lifecycle" title="Purchase Transaction Lifecycle" class="md-nav__link">
+    Purchase Transaction Lifecycle
   </a>
   
 </li>
@@ -973,8 +980,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-sale-call" title="GET a Sale Call" class="md-nav__link">
-    GET a Sale Call
+  <a href="#get-a-sale-call" title="Get a Sale Call" class="md-nav__link">
+    Get a Sale Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#purchase-transaction-lifecycle" title="Purchase Transaction Lifecycle" class="md-nav__link">
+    Purchase Transaction Lifecycle
   </a>
   
 </li>
@@ -1003,8 +1017,8 @@
 <p class="admonition-title">Tip</p>
 <p>Visit <a href="https://www.wirecard.com/payment-base/wechat-pay">Wirecard website</a> to find out all benefits of WeChat payment.</p>
 </div>
-<p>From merchant perspective, WeChat can be either <a href="#1-step-wechat-payment">one-step</a> or <a href="#2-step-wechat-payment">two-step</a> payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is one PURCHASE request.</p>
-<p>In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then initial PURCHASE request has to be confirmed by follow-up CONFIRM request. </p>
+<p>From merchant perspective, WeChat can be either <a href="#1-step-wechat-payment">one-step</a> or <a href="#2-step-wechat-payment">two-step</a> payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is <a href="#purchase-operation">one request</a>.</p>
+<p>In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then <a href="#purchase-operation">initial request</a> has to be confirmed by <a href="#confirm-operation">follow-up request</a>. </p>
 <h2 id="workflow">Workflow</h2>
 <h3 id="1-step-wechat-payment">1-step WeChat payment</h3>
 <p><img alt="WeChat" src="../images/wechat.png" /></p>
@@ -1029,6 +1043,7 @@
 <div class="codehilite"><pre><span></span>{
     &quot;multitender&quot;: &quot;true&quot;,
     &quot;operation&quot; : &quot;PURCHASE&quot;,
+    &quot;note&quot; : &quot;Example Note&quot;,
     &quot;externalId&quot;: &quot;123456789&quot;,
     &quot;totalAmount&quot; : 10,
     &quot;currencyCode&quot; : &quot;EUR&quot;,
@@ -1045,25 +1060,26 @@
 
 
 <ul>
-<li><strong>"multitender"</strong> - boolean flag<ul>
-<li>"TRUE" - required</li>
-<li>"FALSE" - deprecated</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - boolean flag<ul>
+<li><code class="codehilite">&quot;TRUE&quot;</code> - required</li>
+<li><code class="codehilite">&quot;FALSE&quot;</code> - deprecated</li>
 </ul>
 </li>
-<li><strong>"operation"</strong> - defines type of Sale request; PURCHASE operation creates Sale-Purchase record</li>
-<li><strong><em>"externalId"</em></strong> - <em>optional field</em> - used for merchant tracking purposes; it is forwarded to payment gateway</li>
-<li><strong>"totalAmount"</strong> - defines amount of Sale-Purchase </li>
-<li><strong>"currencyCode"</strong> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method</li>
-<li><strong>"transactionType"</strong> - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant</li>
-<li><strong>"amount"</strong> - defines transaction amount</li>
-<li><strong>"consumerId"</strong> - value of scanned barcode (QR code)</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">&quot;PURCHASE&quot;</code> operation creates Sale-Purchase record</li>
+<li><code class="codehilite">&quot;note&quot;</code> - <em>optional field</em> - used for merchant tracking purposes; it is forwarded to payment gateway in <code class="codehilite">&lt;order-detail&gt;</code> field</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - <em>optional field</em> - used for merchant tracking purposes; it is forwarded to payment gateway in <code class="codehilite">&lt;order-number&gt;</code> field</li>
+<li><code class="codehilite">&quot;totalAmount&quot;</code> - defines amount of Sale-Purchase </li>
+<li><code class="codehilite">&quot;currencyCode&quot;</code> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;PURCHASE&quot;</code> transaction moves funds from end-consumer to merchant</li>
+<li><code class="codehilite">&quot;amount&quot;</code> - defines transaction amount</li>
+<li><code class="codehilite">&quot;consumerId&quot;</code> - value of scanned barcode (QR code)</li>
 </ul>
 </li>
 </ul>
 <h3 id="response-indicating-1-step-wechat-payment">Response indicating 1-step WeChat payment</h3>
-<p>In order to identify whether the follow-up <em>CONFIRM</em> operation is required, status code has to be parsed.</p>
+<p>In order to identify whether the follow-up <em>CONFIRM</em> operation is required, status code has to be interpreted.</p>
 <p><strong>Status Code 1000 indicates</strong> that WeChat purchase transactions is completed and <strong>no follow-up request is required</strong>.</p>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot;: &quot;PURCHASE&quot;,
@@ -1103,44 +1119,44 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is completed successfully</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is completed successfully</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is completed successfully</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is completed successfully</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - specific information for every payment method<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
-<li><strong>"timeStamp"</strong> - date-time when transaction was processed by payment gateway</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is completed successfully</li>
-<li><strong>"code"</strong> - code "1000" means transaction is completed successfully</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - specific information for every payment method<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed by payment gateway</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is completed successfully</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is completed successfully</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
-<li><strong>"wechatProviderTransactionId"</strong> - transaction identifier in WeChat System</li>
-<li><strong>"wechatRate"</strong> - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918</li>
-<li><strong>"wechatSubMchId"</strong> - merchant identifier in WeChat System</li>
-<li><strong>"wechatCashFee"</strong> - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY</li>
-<li><strong>"wechatTimeEnd"</strong> - date-time in WeChat system</li>
-<li><strong>"gatewayReference"</strong> - transaction identifier in Wirecard payment gateway</li>
+<li><code class="codehilite">&quot;wechatProviderTransactionId&quot;</code> - transaction identifier in WeChat System</li>
+<li><code class="codehilite">&quot;wechatRate&quot;</code> - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918</li>
+<li><code class="codehilite">&quot;wechatSubMchId&quot;</code> - merchant identifier in WeChat System</li>
+<li><code class="codehilite">&quot;wechatCashFee&quot;</code> - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY</li>
+<li><code class="codehilite">&quot;wechatTimeEnd&quot;</code> - date-time in WeChat system</li>
+<li><code class="codehilite">&quot;gatewayReference&quot;</code> - transaction identifier in Wirecard payment gateway</li>
 </ul>
 </li>
-<li><strong>"externalId"</strong> - echoed from request</li>
-<li><strong>"merchantReceiptId"</strong> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode</li>
-<li><strong>"multitender"</strong> - echoed from request</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;merchantReceiptId&quot;</code> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - echoed from request</li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>After successful response, making <a href="#get-a-sale-call"><code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code></a> call is advised, as it provides all information.</p>
 </div>
 <h3 id="response-indicating-2-step-wechat-payment">Response indicating 2-step WeChat payment</h3>
-<p>In order to identify whether the follow-up <em>CONFIRM</em> operation is required, status code has to be parsed.</p>
+<p>In order to identify whether the follow-up <em>CONFIRM</em> operation is required, status code has to be interpreted.</p>
 <p><strong>Status Code 1001 indicates</strong> that WeChat purchase transactions is not completed and <strong>follow-up <em>CONFIRM</em> request is required</strong>.</p>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot;: &quot;PURCHASE&quot;,
@@ -1176,33 +1192,33 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1001" means operation is successful, however follow-up <em>CONFIRM</em> request is required to complete WeChat purchase transaction</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means operation is successful, however follow-up <code class="codehilite">&quot;CONFIRM&quot;</code> request is required to complete WeChat purchase transaction</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - specific information for every payment method<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
-<li><strong>"timeStamp"</strong> - date-time when transaction was processed by payment gateway</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
-<li><strong>"code"</strong> - code "1001" means transaction is successful</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - specific information for every payment method<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed by payment gateway</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
-<li><strong>"wechatSubMchId"</strong> - merchant identifier in WeChat System</li>
-<li><strong>"gatewayReference"</strong> - transaction identifier in Wirecard payment gateway</li>
+<li><code class="codehilite">&quot;wechatSubMchId&quot;</code> - merchant identifier in WeChat System</li>
+<li><code class="codehilite">&quot;gatewayReference&quot;</code> - transaction identifier in Wirecard payment gateway</li>
 </ul>
 </li>
-<li><strong>"externalId"</strong> - echoed from request</li>
-<li><strong>"merchantReceiptId"</strong> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode</li>
-<li><strong>"multitender"</strong> - echoed from request</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;merchantReceiptId&quot;</code> - unique identifier per merchant; it is incremented with every Sale-Purchase and Sale-Return; advised to be printed on receipt as a barcode</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - echoed from request</li>
 </ul>
 <h2 id="confirm-operation">Confirm Operation</h2>
 <h3 id="request_1">Request</h3>
@@ -1220,11 +1236,11 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - defines type of Sale request; "CONFIRM" operation does finish the WeChat Purchase transaction</li>
-<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
-<li><strong>"payments"</strong> - payment-specific information; one payment transaction per request is supported<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method; it must be same as original payment transaction</li>
-<li><strong>"transactionType"</strong> - defines type of this transaction; CONFIRM operation must include CONFIRM transaction type</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">&quot;CONFIRM&quot;</code> operation does finish the WeChat Purchase transaction</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;CONFIRM&quot;</code> operation must include <code class="codehilite">&quot;CONFIRM&quot;</code> transaction type</li>
 </ul>
 </li>
 </ul>
@@ -1265,32 +1281,32 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is successful</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - specific information for every payment method<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
-<li><strong>"timeStamp"</strong> - date-time when transaction was processed by payment gateway</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
-<li><strong>"code"</strong> - code "1000" means transaction is successful</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - specific information for every payment method<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of purchase transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed by payment gateway</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
-<li><strong>"wechatProviderTransactionId"</strong> - transaction identifier in WeChat System</li>
-<li><strong>"wechatRate"</strong> - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918</li>
-<li><strong>"wechatSubMchId"</strong> - merchant identifier in WeChat System</li>
-<li><strong>"wechatCashFee"</strong> - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY</li>
-<li><strong>"wechatTimeEnd"</strong> - date-time in WeChat system</li>
-<li><strong>"gatewayReference"</strong> - transaction identifier in Wirecard payment gateway</li>
+<li><code class="codehilite">&quot;wechatProviderTransactionId&quot;</code> - transaction identifier in WeChat System</li>
+<li><code class="codehilite">&quot;wechatRate&quot;</code> - exchange rate between Sale currency and CNY in WeChat System; 691870000 means 6.918</li>
+<li><code class="codehilite">&quot;wechatSubMchId&quot;</code> - merchant identifier in WeChat System</li>
+<li><code class="codehilite">&quot;wechatCashFee&quot;</code> - amount in CNY (Chinese Yuan); 6919 means 69.19 CNY</li>
+<li><code class="codehilite">&quot;wechatTimeEnd&quot;</code> - date-time in WeChat system</li>
+<li><code class="codehilite">&quot;gatewayReference&quot;</code> - transaction identifier in Wirecard payment gateway</li>
 </ul>
 </li>
 </ul>
@@ -1317,12 +1333,12 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - defines type of Sale request</li>
-<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
-<li><strong>"payments"</strong> - payment-specific information; one payment transaction per request is supported<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method; it must be same as original payment transaction</li>
-<li><strong>"transactionType"</strong> - defines type of this transaction; REVERSE operation must include REVERSAL transaction type</li>
-<li><strong>"originalTransactionId"</strong> - identifier of original purchase transaction</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of this transaction; <code class="codehilite">&quot;REVERSE&quot;</code> operation must include <code class="codehilite">&quot;REVERSAL&quot;</code> transaction type</li>
+<li><code class="codehilite">&quot;originalTransactionId&quot;</code> - identifier of original purchase transaction</li>
 </ul>
 </li>
 </ul>
@@ -1426,8 +1442,8 @@
 <p class="admonition-title">Tip</p>
 <p>To see all <code class="codehilite">/v1/sales</code> request &amp; response examples, <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">click here</a>.</p>
 </div>
-<h2 id="get-a-sale-call">GET a Sale Call</h2>
-<p>You can see below an example of GET a Sale call with excluded <em>merchant</em> and <em>user</em> fields which are going to be described in <a href="../merchant-management/">Merchant Management</a> and <a href="../user/">User Management</a> respectively.</p>
+<h2 id="get-a-sale-call">Get a Sale Call</h2>
+<p>Example of <code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code> call with excluded <em>merchant</em> and <em>user</em> fields (described in <a href="../merchant-management/">Merchant Management</a> and <a href="../user/">User Management</a> respectively):</p>
 <div class="codehilite"><pre><span></span>GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&amp;excludeField=user
 
 {
@@ -1490,6 +1506,10 @@
     &quot;multitender&quot;: true
 }
 </pre></div>
+
+
+<h2 id="purchase-transaction-lifecycle">Purchase Transaction Lifecycle</h2>
+<p><img alt="WeChat Purchase Lifecycle" src="../images/wechat_purchase_lifecycle.png" /></p>
                 
                   
                 

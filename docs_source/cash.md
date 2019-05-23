@@ -39,16 +39,16 @@ In order to process cash payment, make a [`POST /v1/sales`](https://switch.wirec
         ]
     }
 
-- **"multitender"** - boolean flag
-    - "TRUE" - required
-    - "FALSE" - deprecated
-- **"operation"** - defines type of operation; PURCHASE operation creates new Sale-Purchase record
-- **"totalAmount"** - total amount of Sale-Purchase
-- **"currencyCode"** - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant
-    - **"amount"** - defines transaction amount
+- `"multitender"` - boolean flag
+    - `"TRUE"` - required
+    - `"FALSE"` - deprecated
+- `"operation"` - defines type of operation; `"PURCHASE"` operation creates new Sale-Purchase record
+- `"totalAmount"` - total amount of Sale-Purchase
+- `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method
+    - `"transactionType"` - defines type of transaction; `"PURCHASE"` transaction moves funds from end-consumer to merchant
+    - `"amount"` - defines transaction amount
 
 ### Response
 
@@ -81,25 +81,25 @@ In order to process cash payment, make a [`POST /v1/sales`](https://switch.wirec
         "multitender": true
     }
     
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Purchase identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
-- **"multitender"** - echoed from request
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
+- `"multitender"` - echoed from request
 
 !!! Important
     
@@ -125,12 +125,12 @@ In order to reverse cash purchase transaction, make a [`POST /v1/sales`](https:/
         ]
     }
 
-- **"operation"** - defines type of operation
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method; must be same as original payment method
-    - **"transactionType"** - defines type of transaction; REVERSE operation must include REVERSAL transaction type
-    - **"originalTransactionId"** - identifier of original purchase transaction
+- `"operation"` - defines type of operation
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method; must be same as original payment method
+    - `"transactionType"` - defines type of transaction; `"REVERSE"` operation must include `"REVERSAL"` transaction type
+    - `"originalTransactionId"` - identifier of original purchase transaction
 
 ### Response
 
@@ -160,22 +160,22 @@ In order to reverse cash purchase transaction, make a [`POST /v1/sales`](https:/
         ]
     }
 
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - echoed from request
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of reversal transaction
-    - **"timeStamp"** - date-time when reversal transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - echoed from request
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of reversal transaction
+    - `"timeStamp"` - date-time when reversal transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
         
 In order to explicitly [change state of Sale-Purchase to CANCELED](multi-tender.md#what-is-sale-lifecycle-model), make a  `POST /v1/sales` call with [_CANCEL_ operation](multi-tender.md#what-is-cancel-operation).
 
@@ -201,14 +201,14 @@ In order to process cash refund transaction, make a [`POST /v1/sales`](https://s
         ]
     }
 
-- **"operation"** - defines type of operation; RETURN operation creates new Sale-Return record
-- **"totalAmount"** - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase
-- **"currencyCode"** - must be same as for original Sale-Purchase
-- **"originalSaleId"** - identifier of original Sale-Purchase
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - defines payment method
-    - **"transactionType"** - defines type of transaction; must be REFUND when payment method is CASH
-    - **"amount"** - defines amount to be refunded
+- `"operation"` - defines type of operation; `"RETURN"` operation creates new Sale-Return record
+- `"totalAmount"` - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase
+- `"currencyCode"` - must be same as for original Sale-Purchase
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method
+    - `"transactionType"` - defines type of transaction; must be "`REFUND"` when payment method is `"CASH"`
+    - `"amount"` - defines amount to be refunded
 
 ### Response
 
@@ -240,24 +240,24 @@ In order to process cash refund transaction, make a [`POST /v1/sales`](https://s
         "merchantReceiptId": 467
     }
 
-- **"operation"** - echoed from request
-- **"timeStamp"** - date-time when response was constructed
-- **"status"**
-    - **"code"** - code "1000" means operation is successful
-    - **"result"** - "SUCCESS" means operation is successful
-- **"id"** - Sale-Return identifier assigned by Wirecard ePOS system
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
-- **"payments"** - includes payment-specific information
-    - **"paymentMethod"** - echoed from request
-    - **"transactionType"** - echoed from request
-    - **"id"** - identifier of refund transaction assigned by Wirecard ePOS system
-    - **"timeStamp"** - date-time when transaction was processed
-    - **"statuses"**
-        - **"result"** - "SUCCESS" means transaction is successful
-        - **"code"** - code "1000" means transaction is successful
-        - **"message"** - message provided by payment gateway
-- **"externalId"** - echoed from request
-- **"merchantReceiptId"** - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - Sale-Return identifier assigned by Wirecard ePOS system
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of refund transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` - `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+- `"externalId"` - echoed from request
+- `"merchantReceiptId"` - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
 
 !!! Tip
     To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
@@ -309,3 +309,7 @@ Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields 
           "emailForReceiptProvided": false,
           "multitender": true
     }
+
+## Purchase Transaction Lifecycle
+
+![Cash Purchase Lifecycle](images/cash_purchase_lifecycle.png)

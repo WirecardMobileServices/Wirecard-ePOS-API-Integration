@@ -401,6 +401,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#purchase-transaction-lifecycle" title="Purchase Transaction Lifecycle" class="md-nav__link">
+    Purchase Transaction Lifecycle
+  </a>
+  
+</li>
+      
       
       
       
@@ -871,6 +878,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#purchase-transaction-lifecycle" title="Purchase Transaction Lifecycle" class="md-nav__link">
+    Purchase Transaction Lifecycle
+  </a>
+  
+</li>
+      
       
       
       
@@ -930,18 +944,18 @@
 
 
 <ul>
-<li><strong>"multitender"</strong> - boolean flag<ul>
-<li>"TRUE" - required</li>
-<li>"FALSE" - deprecated</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - boolean flag<ul>
+<li><code class="codehilite">&quot;TRUE&quot;</code> - required</li>
+<li><code class="codehilite">&quot;FALSE&quot;</code> - deprecated</li>
 </ul>
 </li>
-<li><strong>"operation"</strong> - defines type of operation; PURCHASE operation creates new Sale-Purchase record</li>
-<li><strong>"totalAmount"</strong> - total amount of Sale-Purchase</li>
-<li><strong>"currencyCode"</strong> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method</li>
-<li><strong>"transactionType"</strong> - defines type of transaction; PURCHASE transaction moves funds from end-consumer to merchant</li>
-<li><strong>"amount"</strong> - defines transaction amount</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of operation; <code class="codehilite">&quot;PURCHASE&quot;</code> operation creates new Sale-Purchase record</li>
+<li><code class="codehilite">&quot;totalAmount&quot;</code> - total amount of Sale-Purchase</li>
+<li><code class="codehilite">&quot;currencyCode&quot;</code> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;PURCHASE&quot;</code> transaction moves funds from end-consumer to merchant</li>
+<li><code class="codehilite">&quot;amount&quot;</code> - defines transaction amount</li>
 </ul>
 </li>
 </ul>
@@ -978,31 +992,31 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is successful</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of transaction assigned by Wirecard ePOS system</li>
-<li><strong>"timeStamp"</strong> - date-time when transaction was processed</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
-<li><strong>"code"</strong> - code "1000" means transaction is successful</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>"externalId"</strong> - echoed from request</li>
-<li><strong>"merchantReceiptId"</strong> - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode</li>
-<li><strong>"multitender"</strong> - echoed from request</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;merchantReceiptId&quot;</code> - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - echoed from request</li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -1027,12 +1041,12 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - defines type of operation</li>
-<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method; must be same as original payment method</li>
-<li><strong>"transactionType"</strong> - defines type of transaction; REVERSE operation must include REVERSAL transaction type</li>
-<li><strong>"originalTransactionId"</strong> - identifier of original purchase transaction</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of operation</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; must be same as original payment method</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;REVERSE&quot;</code> operation must include <code class="codehilite">&quot;REVERSAL&quot;</code> transaction type</li>
+<li><code class="codehilite">&quot;originalTransactionId&quot;</code> - identifier of original purchase transaction</li>
 </ul>
 </li>
 </ul>
@@ -1066,24 +1080,24 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is successful</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - echoed from request</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of reversal transaction</li>
-<li><strong>"timeStamp"</strong> - date-time when reversal transaction was processed</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
-<li><strong>"code"</strong> - code "1000" means transaction is successful</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of reversal transaction</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when reversal transaction was processed</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
 </ul>
@@ -1111,14 +1125,14 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - defines type of operation; RETURN operation creates new Sale-Return record</li>
-<li><strong>"totalAmount"</strong> - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase</li>
-<li><strong>"currencyCode"</strong> - must be same as for original Sale-Purchase</li>
-<li><strong>"originalSaleId"</strong> - identifier of original Sale-Purchase</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - defines payment method</li>
-<li><strong>"transactionType"</strong> - defines type of transaction; must be REFUND when payment method is CASH</li>
-<li><strong>"amount"</strong> - defines amount to be refunded</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of operation; <code class="codehilite">&quot;RETURN&quot;</code> operation creates new Sale-Return record</li>
+<li><code class="codehilite">&quot;totalAmount&quot;</code> - defines amount to be refunded; it can be equal (full return) or less (partial return) than totalAmount in original Sale-Purchase</li>
+<li><code class="codehilite">&quot;currencyCode&quot;</code> - must be same as for original Sale-Purchase</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; must be "<code class="codehilite">REFUND&quot;</code> when payment method is <code class="codehilite">&quot;CASH&quot;</code></li>
+<li><code class="codehilite">&quot;amount&quot;</code> - defines amount to be refunded</li>
 </ul>
 </li>
 </ul>
@@ -1154,30 +1168,30 @@
 
 
 <ul>
-<li><strong>"operation"</strong> - echoed from request</li>
-<li><strong>"timeStamp"</strong> - date-time when response was constructed</li>
-<li><strong>"status"</strong><ul>
-<li><strong>"code"</strong> - code "1000" means operation is successful</li>
-<li><strong>"result"</strong> - "SUCCESS" means operation is successful</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li><strong>"id"</strong> - Sale-Return identifier assigned by Wirecard ePOS system</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
-<li><strong>"payments"</strong> - includes payment-specific information<ul>
-<li><strong>"paymentMethod"</strong> - echoed from request</li>
-<li><strong>"transactionType"</strong> - echoed from request</li>
-<li><strong>"id"</strong> - identifier of refund transaction assigned by Wirecard ePOS system</li>
-<li><strong>"timeStamp"</strong> - date-time when transaction was processed</li>
-<li><strong>"statuses"</strong><ul>
-<li><strong>"result"</strong> - "SUCCESS" means transaction is successful</li>
-<li><strong>"code"</strong> - code "1000" means transaction is successful</li>
-<li><strong>"message"</strong> - message provided by payment gateway</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Return identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of refund transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>"externalId"</strong> - echoed from request</li>
-<li><strong>"merchantReceiptId"</strong> - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;merchantReceiptId&quot;</code> - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1229,6 +1243,10 @@
       &quot;multitender&quot;: true
 }
 </pre></div>
+
+
+<h2 id="purchase-transaction-lifecycle">Purchase Transaction Lifecycle</h2>
+<p><img alt="Cash Purchase Lifecycle" src="../images/cash_purchase_lifecycle.png" /></p>
                 
                   
                 

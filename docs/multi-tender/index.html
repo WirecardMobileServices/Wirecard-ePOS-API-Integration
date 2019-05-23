@@ -875,10 +875,10 @@
 <p>Merchant is able to increase its revenue as the likelihood to reach more end-consumers is increasing with more payment options provided.</p>
 <p>End-consumers may want to combine multiple debit and/or credit cards, especially in case of purchases in value of thousands Euro which exceeds the limits on their cards.</p>
 <h2 id="how-to-integrate-multi-tender">How to integrate multi-tender?</h2>
-<p>As long as you send <code class="codehilite">&quot;PURCHASE&quot;</code> with <code class="codehilite">&quot;multitender&quot;</code> field set to <code class="codehilite">&quot;true&quot;</code>, you are integrated.</p>
+<p>As long as you send <code class="codehilite">&quot;multitender&quot;</code> field set to <code class="codehilite">&quot;true&quot;</code>, you are integrated.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>It is strongly advised to send <code class="codehilite">&quot;multitender&quot;: &quot;true&quot;</code> in all Sale PURCHASE requests. Otherwise you are not compliant with the latest <a href="#what-is-sale-lifecycle-model">Sale lifecycle model</a>, which is described in this guide.</p>
+<p>It is strongly advised to send <code class="codehilite">&quot;multitender&quot;: &quot;true&quot;</code> in all requests with <code class="codehilite">&quot;operation&quot; : &quot;PURCHASE&quot;</code>. Otherwise you are not compliant with the latest <a href="#what-is-sale-lifecycle-model">Sale lifecycle model</a>, which is described in this guide.</p>
 </div>
 <h2 id="how-to-divide-total-amount-into-multiple-payments">How to divide total amount into multiple payments?</h2>
 <p>Let's see real-live example below.</p>
@@ -886,7 +886,7 @@
 <p class="admonition-title">Example</p>
 <p>Purchase of merchandise in value of 1000 EUR is paid by combining two payment methods, Alipay and cash.</p>
 <p><strong>1. step -  Purchase operation:</strong></p>
-<p>Purchase operation includes standard fields.
+<p>Request includes mandatory fields for <code class="codehilite">&quot;PURCHASE&quot;</code> operation.
 However, in this case, total amount is 1000 and Alipay purchase transaction amount is 700.</p>
 <div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/sales
 
@@ -928,7 +928,7 @@ However, in this case, total amount is 1000 and Alipay purchase transaction amou
 </div>
 <h2 id="what-is-sale-lifecycle-model">What is Sale lifecycle model?</h2>
 <p><img alt="Sale Model" src="../images/SalePurchase.png" /></p>
-<p>Every PURCHASE operation, which passes validation, creates new Sale-Purchase record in Wirecard ePOS system. Sale-Purchase record gets one of the following states:</p>
+<p>Every <em>PURCHASE</em> operation, which passes validation, creates new Sale-Purchase record in Wirecard ePOS system. Sale-Purchase record gets one of the following states:</p>
 <ul>
 <li><strong>IN_PROGRESS</strong> - internal state</li>
 <li><strong>UNCONFIRMED</strong> - purchase transaction is processed and Sale total amount is not fully paid</li>
@@ -943,8 +943,8 @@ However, in this case, total amount is 1000 and Alipay purchase transaction amou
 <p>Use <a href="../cash/#get-a-sale-call">GET /v1/sales/{id} call</a> to get Sale record with all details.</p>
 </div>
 <h2 id="what-is-cancel-operation">What is Cancel operation?</h2>
-<p><em>CANCEL</em> operation is used to change Sale-Purchase to UNCONFIRMED state to CANCELED state. <em>CANCEL</em> operation is accepted by system as long as all purchase transactions are reversed.</p>
-<p>In order to move Sale-Purchase to CANCELED state, make a POST /v1/sales call:</p>
+<p><em>CANCEL</em> operation is used to change Sale-Purchase from UNCONFIRMED state to CANCELED state. <em>CANCEL</em> operation is accepted by system as long as all purchase transactions are in REVERSED state.</p>
+<p>In order to move Sale-Purchase to CANCELED state, make a <code class="codehilite"><span class="err">POST /v1/sales</span></code> call:</p>
 <h3 id="request">Request</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot;: &quot;CANCEL&quot;,
@@ -979,12 +979,12 @@ However, in this case, total amount is 1000 and Alipay purchase transaction amou
 <li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
-<li>`"id"** - echoed from request; Sale-Purchase identifier</li>
-<li><strong>"externalCashierId"</strong> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;id&quot;</code> - echoed from request; Sale-Purchase identifier</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
 </ul>
 <h2 id="what-is-fail-operation">What is Fail operation?</h2>
-<p><em>FAIL</em> operation is used to change Sale-Purchase from UNCONFIRMED state to FAILED state. <em>FAIL</em> operation is accepted by system as long as all purchase transactions are failed and/or reversed.</p>
-<p>In order to move Sale-Purchase to FAILED state, make a POST /v1/sales call:</p>
+<p><em>FAIL</em> operation is used to change Sale-Purchase from UNCONFIRMED state to FAILED state. <em>FAIL</em> operation is accepted by system as long as all purchase transactions are in FAILED or REVERSED state.</p>
+<p>In order to move Sale-Purchase to FAILED state, make a <code class="codehilite"><span class="err">POST /v1/sales</span></code> call:</p>
 <h3 id="request_1">Request</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot; : &quot;FAIL&quot;,
@@ -993,6 +993,10 @@ However, in this case, total amount is 1000 and Alipay purchase transaction amou
 </pre></div>
 
 
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+</ul>
 <h3 id="response_1">Response</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;operation&quot;: &quot;FAIL&quot;,
@@ -1005,6 +1009,19 @@ However, in this case, total amount is 1000 and Alipay purchase transaction amou
     &quot;externalCashierId&quot;: null
 }
 </pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;id&quot;</code> - echoed from request; Sale-Purchase identifier</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+</ul>
                 
                   
                 

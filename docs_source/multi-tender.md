@@ -16,11 +16,11 @@ End-consumers may want to combine multiple debit and/or credit cards, especially
 
 ## How to integrate multi-tender?
 
-As long as you send `"PURCHASE"` with `"multitender"` field set to `"true"`, you are integrated.
+As long as you send `"multitender"` field set to `"true"`, you are integrated.
 
 !!! Warning
 
-    It is strongly advised to send `"multitender": "true"` in all Sale PURCHASE requests. Otherwise you are not compliant with the latest [Sale lifecycle model](#what-is-sale-lifecycle-model), which is described in this guide.
+    It is strongly advised to send `"multitender": "true"` in all requests with `"operation" : "PURCHASE"`. Otherwise you are not compliant with the latest [Sale lifecycle model](#what-is-sale-lifecycle-model), which is described in this guide.
 
 ## How to divide total amount into multiple payments?
 
@@ -32,7 +32,7 @@ Let's see real-live example below.
 
     **1. step -  Purchase operation:**
     
-    Purchase operation includes standard fields.
+    Request includes mandatory fields for `"PURCHASE"` operation.
     However, in this case, total amount is 1000 and Alipay purchase transaction amount is 700.
     
         POST https://switch.wirecard.com/mswitch-server/v1/sales
@@ -74,7 +74,7 @@ Let's see real-live example below.
 
 ![Sale Model](images/SalePurchase.png)
 
-Every PURCHASE operation, which passes validation, creates new Sale-Purchase record in Wirecard ePOS system. Sale-Purchase record gets one of the following states:
+Every _PURCHASE_ operation, which passes validation, creates new Sale-Purchase record in Wirecard ePOS system. Sale-Purchase record gets one of the following states:
 
 - **IN_PROGRESS** - internal state
 - **UNCONFIRMED** - purchase transaction is processed and Sale total amount is not fully paid
@@ -89,9 +89,9 @@ Every PURCHASE operation, which passes validation, creates new Sale-Purchase rec
     
 ## What is Cancel operation?
 
-_CANCEL_ operation is used to change Sale-Purchase to UNCONFIRMED state to CANCELED state. _CANCEL_ operation is accepted by system as long as all purchase transactions are reversed.
+_CANCEL_ operation is used to change Sale-Purchase from UNCONFIRMED state to CANCELED state. _CANCEL_ operation is accepted by system as long as all purchase transactions are in REVERSED state.
 
-In order to move Sale-Purchase to CANCELED state, make a POST /v1/sales call:
+In order to move Sale-Purchase to CANCELED state, make a `POST /v1/sales` call:
 
 ### Request
 
@@ -121,14 +121,14 @@ In order to move Sale-Purchase to CANCELED state, make a POST /v1/sales call:
 - `"status"`
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
-- `"id"** - echoed from request; Sale-Purchase identifier
-- **"externalCashierId"** - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"id"` - echoed from request; Sale-Purchase identifier
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
 
 ## What is Fail operation?
 
-_FAIL_ operation is used to change Sale-Purchase from UNCONFIRMED state to FAILED state. _FAIL_ operation is accepted by system as long as all purchase transactions are failed and/or reversed.
+_FAIL_ operation is used to change Sale-Purchase from UNCONFIRMED state to FAILED state. _FAIL_ operation is accepted by system as long as all purchase transactions are in FAILED or REVERSED state.
 
-In order to move Sale-Purchase to FAILED state, make a POST /v1/sales call:
+In order to move Sale-Purchase to FAILED state, make a `POST /v1/sales` call:
 
 ### Request
 
@@ -136,6 +136,9 @@ In order to move Sale-Purchase to FAILED state, make a POST /v1/sales call:
         "operation" : "FAIL",
         "originalSaleId" : "56d72f5fa5454f3e9fc8364078f74fce"
     }
+
+- `"operation"` - defines type of Sale request
+- `"originalSaleId"` - identifier of original Sale-Purchase
 
 ### Response
 
@@ -149,3 +152,11 @@ In order to move Sale-Purchase to FAILED state, make a POST /v1/sales call:
         "id": "56d72f5fa5454f3e9fc8364078f74fce",
         "externalCashierId": null
     }
+
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - echoed from request; Sale-Purchase identifier
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null

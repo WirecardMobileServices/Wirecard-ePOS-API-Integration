@@ -1017,8 +1017,15 @@
 <p class="admonition-title">Tip</p>
 <p>Visit <a href="https://www.wirecard.com/payment-base/wechat-pay">Wirecard website</a> to find out all benefits of WeChat payment.</p>
 </div>
-<p>From merchant perspective, WeChat can be either <a href="#1-step-wechat-payment">one-step</a> or <a href="#2-step-wechat-payment">two-step</a> payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is <a href="#purchase-operation">one request</a>.</p>
-<p>In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then <a href="#purchase-operation">initial request</a> has to be confirmed by <a href="#confirm-operation">follow-up request</a>. </p>
+<p>From merchant perspective, WeChat can be either <a href="#1-step-wechat-payment">one-step</a> or <a href="#2-step-wechat-payment">two-step</a> payment:</p>
+<ul>
+<li>
+<p>In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is <a href="#purchase-operation">one request</a>.</p>
+</li>
+<li>
+<p>In case end-consumer (buyer) is prompted to authorize payment with password or other equivalent (pin code, fingerprint, etc.) then merchant has to query Wirecard ePOS system in order to get the final status of WeChat transaction. Technically-wise, it means that initial <a href="#purchase-operation">request</a> (<em>PURCHASE</em>) has to be followed by <a href="#confirm-operation">query request</a> (<em>CONFIRM</em>).</p>
+</li>
+</ul>
 <h2 id="workflow">Workflow</h2>
 <h3 id="1-step-wechat-payment">1-step WeChat payment</h3>
 <p><img alt="WeChat" src="../images/wechat.png" /></p>

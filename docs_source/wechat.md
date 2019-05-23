@@ -4,9 +4,11 @@ WeChat Pay is one of China‘s leading payment methods. Since its start as a cha
     
     Visit [Wirecard website](https://www.wirecard.com/payment-base/wechat-pay) to find out all benefits of WeChat payment.
 
-From merchant perspective, WeChat can be either [one-step](#1-step-wechat-payment) or [two-step](#2-step-wechat-payment) payment. In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is [one request](#purchase-operation).
+From merchant perspective, WeChat can be either [one-step](#1-step-wechat-payment) or [two-step](#2-step-wechat-payment) payment:
 
-In case end-consumer has to authorize the payment with password or other equivalent (pin code, fingerprint, etc.) then [initial request](#purchase-operation) has to be confirmed by [follow-up request](#confirm-operation). 
+- In case end-consumer (buyer) is not prompted to authorize payment on his device then all is needed is [one request](#purchase-operation).
+
+- In case end-consumer (buyer) is prompted to authorize payment with password or other equivalent (pin code, fingerprint, etc.) then merchant has to query Wirecard ePOS system in order to get the final status of WeChat transaction. Technically-wise, it means that initial [request](#purchase-operation) (_PURCHASE_) has to be followed by [query request](#confirm-operation) (_CONFIRM_).
     
 ## Workflow
 

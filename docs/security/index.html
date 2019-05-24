@@ -804,12 +804,12 @@
 
 <h2 id="manage-user-credentials">Manage user credentials</h2>
 <h3 id="change-password">Change password</h3>
-<div class="codehilite"><pre><span></span><span class="x">POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword</span>
+<div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword
 
-<span class="x">    {</span>
-<span class="x">        &quot;currentPassword&quot;: &quot;</span><span class="cp">{{</span><span class="nv">UserCurrentPassword</span><span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">        &quot;newPassword&quot;: &quot;</span><span class="cp">{{</span><span class="nv">UserNewPassword</span><span class="cp">}}</span><span class="x">&quot;</span>
-<span class="x">    }</span>
+    {
+        &quot;currentPassword&quot;: &quot;{userCurrentPassword}&quot;,
+        &quot;newPassword&quot;: &quot;{userNewPassword}&quot;
+    }
 </pre></div>
 
 
@@ -817,8 +817,7 @@
 <div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=requestPasswordReset
 
     {
-        &quot;password&quot;: &quot;string&quot;,
-        &quot;token&quot;: &quot;string&quot;
+        &quot;username&quot;: &quot;{username}&quot;
     }
 </pre></div>
                 

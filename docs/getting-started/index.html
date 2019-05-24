@@ -245,8 +245,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-environment" title="Testing Environment" class="md-nav__link">
-    Testing Environment
+  <a href="#test-environment" title="Test Environment" class="md-nav__link">
+    Test Environment
   </a>
   
 </li>
@@ -720,8 +720,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-environment" title="Testing Environment" class="md-nav__link">
-    Testing Environment
+  <a href="#test-environment" title="Test Environment" class="md-nav__link">
+    Test Environment
   </a>
   
 </li>
@@ -752,44 +752,30 @@
                 
                   <h1>Getting Started</h1>
                 
-                <p>This chapter provides all information you need to know in order to start your integration straight away. </p>
+                <p>This chapter provides information in order to start integration straight away.</p>
 <h2 id="production-environment">Production Environment</h2>
 <p><strong>Wirecard ePOS PROD environment</strong> is available on the following URL:</p>
 <div class="codehilite"><pre><span></span>https://switch.wirecard.com/mswitch-server/
 </pre></div>
 
 
-<h2 id="testing-environment">Testing Environment</h2>
-<p><strong>Wirecard ePOS TEST environment</strong> is provided to API integrators for their development purposes. It is available on the following URL:</p>
+<h2 id="test-environment">Test Environment</h2>
+<p><strong>Wirecard ePOS TEST environment</strong> is provided to integrators for their testing purposes. It is available on the following URL:</p>
 <div class="codehilite"><pre><span></span>https://switch-test.wirecard.com/mswitch-server/
 </pre></div>
 
 
 <h2 id="authentication">Authentication</h2>
-<p>Wirecard ePOS credentials (username &amp; password) are required in order to successfully authenticate with Wirecard ePOS API. At the moment, only <strong>basic access authentication</strong> is supported.</p>
+<p>At the moment, only <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic authentication</a> is supported.</p>
+<p>You will receive Wirecard ePOS credentials (username &amp; password) after <a href="https://www.wirecard.com/contact">contacting Wirecard</a>. </p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you have user account on TEST environment, you can check your credentials - type them instead of {YourUsername} and {YourPassword} - with following CURL request: </p>
-<div class="codehilite"><pre><span></span>curl <span class="err">-</span>X GET <span class="s2">&quot;https://switch-test.wirecard.com/mswitch-server/v1/info/version&quot;</span> <span class="err">-</span>H <span class="s2">&quot;accept: text/plain&quot;</span> <span class="err">-</span>u <span class="p">{</span>YourUsername<span class="p">}:{</span>YourPassword<span class="p">}</span>
+<p>You can check your credentials with the following CURL request:</p>
+<div class="codehilite"><pre><span></span>curl <span class="err">-</span>X GET <span class="s2">&quot;https://switch.wirecard.com/mswitch-server/v1/info/version&quot;</span> <span class="err">-</span>H <span class="s2">&quot;accept: text/plain&quot;</span> <span class="err">-</span>u <span class="p">{</span>YourUsername<span class="p">}:{</span>YourPassword<span class="p">}</span>
 </pre></div>
 
 
 <p>Upon successful authentication, response includes current system version.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the context of an HTTP transaction, <strong>basic access authentication</strong> is a method for an HTTP user agent (e.g. a web browser) to provide a username and password when making a request. In basic HTTP authentication, a request contains a header field of the form Authorization: Basic <credentials>, where credentials is the base64 encoding of id and password joined by a colon.</p>
-<p>HTTP Basic authentication (BA) implementation is the simplest technique for enforcing access controls to web resources because it does not require cookies, session identifiers, or login pages; rather, HTTP Basic authentication uses standard fields in the HTTP header, removing the need for handshakes.</p>
-<p>The BA mechanism provides no confidentiality protection for the transmitted credentials. They are merely encoded with Base64 in transit, but not encrypted or hashed in any way. Therefore, Basic Authentication is typically used in conjunction with HTTPS to provide confidentiality.</p>
-<p>When the user agent wants to send authentication credentials to the server, it may use the Authorization field. The Authorization field is constructed as follows:</p>
-<ul>
-<li>The username and password are combined with a single colon (:). This means that the username itself cannot contain a colon. </li>
-<li>The resulting string is encoded into an octet sequence. The character set to use for this encoding is by default unspecified, as long as it is compatible with US-ASCII, but the server may suggest use of UTF-8 by sending the charset parameter. </li>
-<li>The resulting string is encoded using a variant of Base64.</li>
-<li>The authorization method and a space (e.g. "Basic ") is then prepended to the encoded string. </li>
-</ul>
-<p>For example, if the browser uses Aladdin as the username and OpenSesame as the password, then the field's value is the base64-encoding of Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization header will appear as: “Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l”</p>
-<p>See <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Wikipedia</a> for more details.</p>
 </div>
                 
                   

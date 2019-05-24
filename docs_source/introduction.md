@@ -14,8 +14,8 @@ Partner team typically consists of a project manager and one or more developers.
 ## What do I need to know?
 Following skills are required:
 
-- understanding of REST API calls
-- understanding of JSON objects
+- understanding of [REST architectural style](https://en.wikipedia.org/wiki/Representational_state_transfer)
+- understanding of [JSON](https://en.wikipedia.org/wiki/JSON)
 
 !!! Tip
     If you are new to payment industry, there are a lot of terms to learn. [Glossary](glossary.md) helps you with this task.

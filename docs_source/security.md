@@ -13,8 +13,8 @@
     POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword
     
         {
-            "currentPassword": "{{UserCurrentPassword}}",
-            "newPassword": "{{UserNewPassword}}"
+            "currentPassword": "{userCurrentPassword}",
+            "newPassword": "{userNewPassword}"
         }
         
 ### Request password reset
@@ -22,6 +22,5 @@
     POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=requestPasswordReset
     
         {
-            "password": "string",
-            "token": "string"
+            "username": "{username}"
         }

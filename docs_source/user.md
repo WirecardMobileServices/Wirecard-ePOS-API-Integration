@@ -1,37 +1,38 @@
-Purpose of this chapter is to describe how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.
+This chapter describes how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.
 
 ## Create a new user
 
-### Request
-
     POST https://switch.wirecard.com/mswitch-server/v1/users
-    
+
         {
-           "username": "john.doe",
-           "email": "john.doe@example.com",
-           "firstName": "John",
-           "lastName": "Doe",
-           "merchant": {
-             "id": "e5869bc0303b4dabbf1e593d619146dc"
-           },
-           "password": "Password123!",
-           "roles": [
-             "MERCHANT_ADMIN"
-           ],
-           "status": "ENABLED",
-           "timeZone": "Europe/Berlin"
+            "username": "john.doe",
+            "email": "john.doe@example.com",
+            "firstName": "John",
+            "lastName": "Doe",
+            "merchant": {
+                "id": "{{YourMerchantId}}"
+                },
+            "password": "Password123!",
+            "roles": [
+                "MERCHANT_ADMIN"
+            ],
+            "status": "ENABLED",
+            "timeZone": "Europe/Berlin"
         }
 
-
-User role defines permissions available to a particular user account. Wirecard ePOS provides following merchant-related roles:
-
-- Merchant Admin - see all merchant sales and can create new user accounts 
-- Merchant Advanced User - see all merchant sales
-- Merchant User - see only own sales
-
-### Response
-
-
+- `"username"` - user's login name
+- `"email"` - _optional field_ - if not provided, it is not possible to send reset password link
+- `"firstName"` - user's first name
+- `"lastName"` - user's last name
+- `"merchant"`
+    - `"id"` - identifier of merchant assigned by Wirecard ePOS system
+- `"password"` - temporary password, it has to be changed upon first use; password is valid maximum 90 days; see also [Security](security.md) chapter
+- `"roles"` - role defines permissions provided to a particular user; following merchant-related roles are available:
+    - `"MERCHANT_ADMIN"` - see all merchant sales and can create new user accounts 
+    - `"MERCHANT_ADVANCED_USER"` - see all merchant sales
+    - `"MERCHANT_USER"` - see only own sales
+- `"status"` - either `"ENABLED"` or `"DISABLED"`
+- `"timeZone"` - user's time zone
 
 ## List all users
 
@@ -40,8 +41,3 @@ User role defines permissions available to a particular user account. Wirecard e
 ## Get a specific user
 
     GET https://switch.wirecard.com/mswitch-server/v1/users/{userId}
-
-## Update a specific user
-
-    PUT https://switch.wirecard.com/mswitch-server/v1/users/{userId}
-

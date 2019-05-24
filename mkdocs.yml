@@ -31,8 +31,6 @@ extra_javascript:
 extra:
   logo: 'images/logo.svg'
   social:
-    - type: 'github'
-      link: 'https://github.com/WirecardMobileServices/Wirecard-ePOS-iOS/issues'
     - type: 'apple'
       link: 'https://github.com/WirecardMobileServices/Wirecard-ePOS-iOS'
     - type: 'android'
@@ -56,21 +54,22 @@ nav:
       - WeChat Pay: wechat.md
     - Multi-tender Sale: multi-tender.md
     - User Management: user.md
+    - Security: security.md
   - Advanced Integration:
     - Overview: advanced_overview.md
     - Sale Items:
       - General: items.md
       - Discounts: discounts.md
-    - Product Catalogue:
+    - Product Catalogues:
       - General: terminal-management.md
-      - Categories: terminal-management.md
-      - Product stock: terminal-management.md
+      - Product Categories: terminal-management.md
+      - Stock Management: terminal-management.md
     - Merchant Management:
       - General: merchant-management.md
       - Shop Management: terminal-management.md
-    - Cash Register:
+    - Smart Cash-Register:
       - General: terminal-management.md
-      - Shift: terminal-management.md
-      - Shift Report: shift_reports.md
-    - Terminal management: terminal-management.md
+      - Shifts: terminal-management.md
+      - Shift Reports: shift_reports.md
+    - Terminal Management: terminal-management.md
   - Glossary: glossary.md

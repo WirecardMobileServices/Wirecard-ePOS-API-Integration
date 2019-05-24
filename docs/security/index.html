@@ -36,7 +36,7 @@
     
     
       
-        <title>User Management - Wirecard ePOS API</title>
+        <title>Security - Wirecard ePOS API</title>
       
     
     
@@ -77,7 +77,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#create-a-new-user" tabindex="1" class="md-skip">
+      <a href="#get-info-about-current-user" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -102,7 +102,7 @@
               Wirecard ePOS API
             </span>
             <span class="md-header-nav__topic">
-              User Management
+              Security
             </span>
           
         </div>
@@ -345,6 +345,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../user/" title="User Management" class="md-nav__link">
+      User Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -354,11 +366,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        User Management
+        Security
       </label>
     
-    <a href="./" title="User Management" class="md-nav__link md-nav__link--active">
-      User Management
+    <a href="./" title="Security" class="md-nav__link md-nav__link--active">
+      Security
     </a>
     
       
@@ -370,23 +382,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-a-new-user" title="Create a new user" class="md-nav__link">
-    Create a new user
+  <a href="#get-info-about-current-user" title="Get info about current user" class="md-nav__link">
+    Get info about current user
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-all-users" title="List all users" class="md-nav__link">
-    List all users
+  <a href="#get-password-policy" title="Get password policy" class="md-nav__link">
+    Get password policy
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
-    Get a specific user
+  <a href="#manage-user-credentials" title="Manage user credentials" class="md-nav__link">
+    Manage user credentials
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-password" title="Change password" class="md-nav__link">
+    Change password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-password-reset" title="Request password reset" class="md-nav__link">
+    Request password reset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -398,18 +430,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/" title="Security" class="md-nav__link">
-      Security
-    </a>
   </li>
 
         
@@ -713,23 +733,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-a-new-user" title="Create a new user" class="md-nav__link">
-    Create a new user
+  <a href="#get-info-about-current-user" title="Get info about current user" class="md-nav__link">
+    Get info about current user
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-all-users" title="List all users" class="md-nav__link">
-    List all users
+  <a href="#get-password-policy" title="Get password policy" class="md-nav__link">
+    Get password policy
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
-    Get a specific user
+  <a href="#manage-user-credentials" title="Manage user credentials" class="md-nav__link">
+    Manage user credentials
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-password" title="Change password" class="md-nav__link">
+    Change password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-password-reset" title="Request password reset" class="md-nav__link">
+    Request password reset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -750,56 +790,36 @@
               
                 
                 
-                  <h1>User Management</h1>
+                  <h1>Security</h1>
                 
-                <p>This chapter describes how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.</p>
-<h2 id="create-a-new-user">Create a new user</h2>
-<div class="codehilite"><pre><span></span><span class="x">POST https://switch.wirecard.com/mswitch-server/v1/users</span>
+                <h2 id="get-info-about-current-user">Get info about current user</h2>
+<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/security/currentUser
+</pre></div>
+
+
+<h2 id="get-password-policy">Get password policy</h2>
+<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/security/passwordPolicy
+</pre></div>
+
+
+<h2 id="manage-user-credentials">Manage user credentials</h2>
+<h3 id="change-password">Change password</h3>
+<div class="codehilite"><pre><span></span><span class="x">POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword</span>
 
 <span class="x">    {</span>
-<span class="x">        &quot;username&quot;: &quot;john.doe&quot;,</span>
-<span class="x">        &quot;email&quot;: &quot;john.doe@example.com&quot;,</span>
-<span class="x">        &quot;firstName&quot;: &quot;John&quot;,</span>
-<span class="x">        &quot;lastName&quot;: &quot;Doe&quot;,</span>
-<span class="x">        &quot;merchant&quot;: {</span>
-<span class="x">            &quot;id&quot;: &quot;</span><span class="cp">{{</span><span class="nv">YourMerchantId</span><span class="cp">}}</span><span class="x">&quot;</span>
-<span class="x">            },</span>
-<span class="x">        &quot;password&quot;: &quot;Password123!&quot;,</span>
-<span class="x">        &quot;roles&quot;: [</span>
-<span class="x">            &quot;MERCHANT_ADMIN&quot;</span>
-<span class="x">        ],</span>
-<span class="x">        &quot;status&quot;: &quot;ENABLED&quot;,</span>
-<span class="x">        &quot;timeZone&quot;: &quot;Europe/Berlin&quot;</span>
+<span class="x">        &quot;currentPassword&quot;: &quot;</span><span class="cp">{{</span><span class="nv">UserCurrentPassword</span><span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">        &quot;newPassword&quot;: &quot;</span><span class="cp">{{</span><span class="nv">UserNewPassword</span><span class="cp">}}</span><span class="x">&quot;</span>
 <span class="x">    }</span>
 </pre></div>
 
 
-<ul>
-<li><code class="codehilite">&quot;username&quot;</code> - user's login name</li>
-<li><code class="codehilite">&quot;email&quot;</code> - <em>optional field</em> - if not provided, it is not possible to send reset password link</li>
-<li><code class="codehilite">&quot;firstName&quot;</code> - user's first name</li>
-<li><code class="codehilite">&quot;lastName&quot;</code> - user's last name</li>
-<li><code class="codehilite">&quot;merchant&quot;</code><ul>
-<li><code class="codehilite">&quot;id&quot;</code> - identifier of merchant assigned by Wirecard ePOS system</li>
-</ul>
-</li>
-<li><code class="codehilite">&quot;password&quot;</code> - temporary password, it has to be changed upon first use; password is valid maximum 90 days; see also <a href="../security/">Security</a> chapter</li>
-<li><code class="codehilite">&quot;roles&quot;</code> - role defines permissions provided to a particular user; following merchant-related roles are available:<ul>
-<li><code class="codehilite">&quot;MERCHANT_ADMIN&quot;</code> - see all merchant sales and can create new user accounts </li>
-<li><code class="codehilite">&quot;MERCHANT_ADVANCED_USER&quot;</code> - see all merchant sales</li>
-<li><code class="codehilite">&quot;MERCHANT_USER&quot;</code> - see only own sales</li>
-</ul>
-</li>
-<li><code class="codehilite">&quot;status&quot;</code> - either <code class="codehilite">&quot;ENABLED&quot;</code> or <code class="codehilite">&quot;DISABLED&quot;</code></li>
-<li><code class="codehilite">&quot;timeZone&quot;</code> - user's time zone</li>
-</ul>
-<h2 id="list-all-users">List all users</h2>
-<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users
-</pre></div>
+<h3 id="request-password-reset">Request password reset</h3>
+<div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=requestPasswordReset
 
-
-<h2 id="get-a-specific-user">Get a specific user</h2>
-<div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/users/{userId}
+    {
+        &quot;password&quot;: &quot;string&quot;,
+        &quot;token&quot;: &quot;string&quot;
+    }
 </pre></div>
                 
                   
@@ -821,7 +841,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../multi-tender/" title="Multi-tender Sale" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../user/" title="User Management" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -830,19 +850,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Multi-tender Sale
+                User Management
               </span>
             </div>
           </a>
         
         
-          <a href="../security/" title="Security" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../advanced_overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Security
+                Overview
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

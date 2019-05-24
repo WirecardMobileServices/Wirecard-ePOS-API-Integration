@@ -14,7 +14,7 @@ This chapter provides all information you need to know in order to start your in
  
 ## Authentication
 
-aWirecard ePOS credentials (username & password) are required in order to successfully authenticate with Wirecard ePOS API. At the moment, only **basic access authentication** is supported.
+Wirecard ePOS credentials (username & password) are required in order to successfully authenticate with Wirecard ePOS API. At the moment, only **basic access authentication** is supported.
 
 !!! Tip
     

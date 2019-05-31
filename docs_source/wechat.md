@@ -52,7 +52,7 @@ In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wir
         ]
     }
     
-- `"multitender"` - boolean flag
+- `"multitender"` - boolean value
     - `"TRUE"` - required
     - `"FALSE"` - deprecated
 - `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
@@ -113,7 +113,7 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
     - `"code"` - `"1000"` means operation is completed successfully
     - `"result"` - `"SUCCESS"` means operation is completed successfully
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - specific information for every payment method
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -180,7 +180,7 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
     - `"code"` - `"1001"` means operation is successful, however follow-up `"CONFIRM"` request is required to complete WeChat purchase transaction
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - specific information for every payment method
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -259,7 +259,7 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - specific information for every payment method
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -409,7 +409,7 @@ In order to process WeChat refund transaction, make a [`POST /v1/sales`](https:/
     
 ## Get a Sale Call
 
-Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Details](merchant.md) and [User Management](user.md) respectively):
     
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&excludeField=user
     

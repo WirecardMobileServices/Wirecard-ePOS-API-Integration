@@ -12,7 +12,7 @@ Wirecard ePOS solution provides an option to divide Sale total amount to multipl
     
 Merchant is able to increase its revenue as the likelihood to reach more end-consumers is increasing with more payment options provided.
 
-End-consumers may want to combine multiple debit and/or credit cards, especially in case of purchases in value of thousands Euro which exceeds the limits on their cards.
+End-consumers may want to combine multiple debit and/or credit cards, especially in case of purchase in value of several thousand euros which exceeds limits on their cards.
 
 ## How to integrate multi-tender?
 
@@ -122,7 +122,7 @@ In order to move Sale-Purchase to CANCELED state, make a `POST /v1/sales` call:
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - echoed from request; Sale-Purchase identifier
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 
 ## What is Fail operation?
 
@@ -159,4 +159,4 @@ In order to move Sale-Purchase to FAILED state, make a `POST /v1/sales` call:
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - echoed from request; Sale-Purchase identifier
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null

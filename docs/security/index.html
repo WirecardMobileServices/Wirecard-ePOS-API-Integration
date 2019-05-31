@@ -251,7 +251,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../core_overview/" title="Overview" class="md-nav__link">
+    <a href="../core-overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -463,7 +463,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../advanced_overview/" title="Overview" class="md-nav__link">
+    <a href="../advanced-overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -522,16 +522,40 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../merchant/" title="Merchant Details" class="md-nav__link">
+      Merchant Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shop/" title="Shop Management" class="md-nav__link">
+      Shop Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
     
-    <label class="md-nav__link" for="nav-4-3">
-      Product Catalogues
+    <label class="md-nav__link" for="nav-4-5">
+      Product Catalogue
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-3">
-        Product Catalogues
+      <label class="md-nav__title" for="nav-4-5">
+        Product Catalogue
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -584,61 +608,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
     
-    <label class="md-nav__link" for="nav-4-4">
-      Merchant Management
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-4">
-        Merchant Management
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../merchant-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Shop Management" class="md-nav__link">
-      Shop Management
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
-    
-    <label class="md-nav__link" for="nav-4-5">
+    <label class="md-nav__link" for="nav-4-6">
       Smart Cash-Register
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
+      <label class="md-nav__title" for="nav-4-6">
         Smart Cash-Register
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -792,7 +768,8 @@
                 
                   <h1>Security</h1>
                 
-                <h2 id="get-info-about-current-user">Get info about current user</h2>
+                <p>This chapter describes calls related to security.</p>
+<h2 id="get-info-about-current-user">Get info about current user</h2>
 <div class="codehilite"><pre><span></span>GET https://switch.wirecard.com/mswitch-server/v1/security/currentUser
 </pre></div>
 
@@ -807,8 +784,8 @@
 <div class="codehilite"><pre><span></span>POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword
 
     {
-        &quot;currentPassword&quot;: &quot;{userCurrentPassword}&quot;,
-        &quot;newPassword&quot;: &quot;{userNewPassword}&quot;
+        &quot;currentPassword&quot;: &quot;{currentPassword}&quot;,
+        &quot;newPassword&quot;: &quot;{newPassword}&quot;
     }
 </pre></div>
 
@@ -855,7 +832,7 @@
           </a>
         
         
-          <a href="../advanced_overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../advanced-overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">

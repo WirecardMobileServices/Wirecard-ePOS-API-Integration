@@ -44,7 +44,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
         ]
     }
     
-- `"multitender"` - boolean flag
+- `"multitender"` - boolean value
     - `"TRUE"` - required
     - `"FALSE"` - deprecated
 - `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
@@ -105,7 +105,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -201,7 +201,7 @@ In order to reverse Alipay purchase transaction, make a [`POST /v1/sales`](https
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -302,7 +302,7 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Return identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -328,7 +328,7 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
     
 ## Get a Sale Call
 
-Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Details](merchant.md) and [User Management](user.md) respectively):
 
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/6434f3ee5f404fec89d95c7f8538ac68?excludeField=merchant&excludeField=user
     

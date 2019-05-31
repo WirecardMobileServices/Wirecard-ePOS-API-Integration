@@ -251,7 +251,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../core_overview/" title="Overview" class="md-nav__link">
+    <a href="../core-overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -526,7 +526,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../advanced_overview/" title="Overview" class="md-nav__link">
+    <a href="../advanced-overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -585,16 +585,40 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../merchant/" title="Merchant Details" class="md-nav__link">
+      Merchant Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shop/" title="Shop Management" class="md-nav__link">
+      Shop Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
     
-    <label class="md-nav__link" for="nav-4-3">
-      Product Catalogues
+    <label class="md-nav__link" for="nav-4-5">
+      Product Catalogue
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-3">
-        Product Catalogues
+      <label class="md-nav__title" for="nav-4-5">
+        Product Catalogue
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -647,61 +671,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
     
-    <label class="md-nav__link" for="nav-4-4">
-      Merchant Management
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-4">
-        Merchant Management
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../merchant-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Shop Management" class="md-nav__link">
-      Shop Management
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
-    
-    <label class="md-nav__link" for="nav-4-5">
+    <label class="md-nav__link" for="nav-4-6">
       Smart Cash-Register
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
+      <label class="md-nav__title" for="nav-4-6">
         Smart Cash-Register
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -956,7 +932,7 @@
 
 
 <ul>
-<li><code class="codehilite">&quot;multitender&quot;</code> - boolean flag<ul>
+<li><code class="codehilite">&quot;multitender&quot;</code> - boolean value<ul>
 <li><code class="codehilite">&quot;TRUE&quot;</code> - required</li>
 <li><code class="codehilite">&quot;FALSE&quot;</code> - deprecated</li>
 </ul>
@@ -1012,7 +988,7 @@
 </ul>
 </li>
 <li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
-<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
 <li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
@@ -1100,7 +1076,7 @@
 </ul>
 </li>
 <li><code class="codehilite">&quot;id&quot;</code> - echoed from request</li>
-<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
 <li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
@@ -1188,7 +1164,7 @@
 </ul>
 </li>
 <li><code class="codehilite">&quot;id&quot;</code> - Sale-Return identifier assigned by Wirecard ePOS system</li>
-<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced_overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
 <li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
@@ -1210,7 +1186,7 @@
 <p>To see all <code class="codehilite">/v1/sales</code> request &amp; response examples, <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">click here</a>.</p>
 </div>
 <h2 id="get-a-sale-call">Get a Sale call</h2>
-<p>Example of <code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code> call with excluded <em>merchant</em> and <em>user</em> fields (described in <a href="../merchant-management/">Merchant Management</a> and <a href="../user/">User Management</a> respectively):</p>
+<p>Example of <code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code> call with excluded <em>merchant</em> and <em>user</em> fields (described in <a href="../merchant/">Merchant Details</a> and <a href="../user/">User Management</a> respectively):</p>
 <div class="codehilite"><pre><span></span>GET https://switch-test.wirecard.com/mswitch-server/v1/sales/19267cf3a3cb4e2d8131917b5c092a0d?excludeField=merchant&amp;excludeField=user
 
 {
@@ -1279,7 +1255,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../core_overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../core-overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>

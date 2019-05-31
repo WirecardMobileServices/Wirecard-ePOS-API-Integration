@@ -39,7 +39,7 @@ In order to process cash payment, make a [`POST /v1/sales`](https://switch.wirec
         ]
     }
 
-- `"multitender"` - boolean flag
+- `"multitender"` - boolean value
     - `"TRUE"` - required
     - `"FALSE"` - deprecated
 - `"operation"` - defines type of operation; `"PURCHASE"` operation creates new Sale-Purchase record
@@ -87,7 +87,7 @@ In order to process cash payment, make a [`POST /v1/sales`](https://switch.wirec
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -166,7 +166,7 @@ In order to reverse cash purchase transaction, make a [`POST /v1/sales`](https:/
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - echoed from request
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -246,7 +246,7 @@ In order to process cash refund transaction, make a [`POST /v1/sales`](https://s
     - `"code"` - `"1000"` means operation is successful
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Return identifier assigned by Wirecard ePOS system
-- `"externalCashierId"` - relevant for [Advanced Integration](advanced_overview.md); otherwise null
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - echoed from request
     - `"transactionType"` - echoed from request
@@ -264,7 +264,7 @@ In order to process cash refund transaction, make a [`POST /v1/sales`](https://s
     
 ## Get a Sale call
 
-Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Management](merchant-management.md) and [User Management](user.md) respectively):
+Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields (described in [Merchant Details](merchant.md) and [User Management](user.md) respectively):
     
     GET https://switch-test.wirecard.com/mswitch-server/v1/sales/19267cf3a3cb4e2d8131917b5c092a0d?excludeField=merchant&excludeField=user
     

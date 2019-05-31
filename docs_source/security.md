@@ -1,3 +1,5 @@
+This chapter describes calls related to security.
+
 ## Get info about current user
     
     GET https://switch.wirecard.com/mswitch-server/v1/security/currentUser
@@ -13,8 +15,8 @@
     POST https://switch.wirecard.com/mswitch-server/v1/security/credentials?action=changePassword
     
         {
-            "currentPassword": "{userCurrentPassword}",
-            "newPassword": "{userNewPassword}"
+            "currentPassword": "{currentPassword}",
+            "newPassword": "{newPassword}"
         }
         
 ### Request password reset

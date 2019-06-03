@@ -36,7 +36,7 @@
     
     
       
-        <title>General - Wirecard ePOS API</title>
+        <title>Sale Items - Wirecard ePOS API</title>
       
     
     
@@ -98,7 +98,7 @@
               Wirecard ePOS API
             </span>
             <span class="md-header-nav__topic">
-              General
+              Sale Items
             </span>
           
         </div>
@@ -391,75 +391,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../advanced-overview/" title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" checked>
-    
-    <label class="md-nav__link" for="nav-4-2">
-      Sale Items
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-2">
-        Sale Items
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="General" class="md-nav__link md-nav__link--active">
-      General
-    </a>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../discounts/" title="Discounts" class="md-nav__link">
-      Discounts
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../merchant/" title="Merchant Details" class="md-nav__link">
       Merchant Details
     </a>
@@ -482,131 +413,18 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-    <label class="md-nav__link" for="nav-4-5">
-      Product Catalogue
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
-        Product Catalogue
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Product Categories" class="md-nav__link">
-      Product Categories
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Stock Management" class="md-nav__link">
-      Stock Management
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+    <a href="./" title="Sale Items" class="md-nav__link md-nav__link--active">
+      Sale Items
+    </a>
     
-    <label class="md-nav__link" for="nav-4-6">
-      Smart Cash-Register
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-6">
-        Smart Cash-Register
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Shifts" class="md-nav__link">
-      Shifts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shift_reports/" title="Shift Reports" class="md-nav__link">
-      Shift Reports
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Terminal Management" class="md-nav__link">
-      Terminal Management
-    </a>
   </li>
 
         
@@ -640,9 +458,64 @@
               
                 
                 
-                  <h1>General</h1>
+                  <h1>Sale Items</h1>
                 
-                <p>Documentation in-progress.</p>
+                <p>This chapter describes Sale items which can be considered as shopping basket. Items include information about the goods and services sold by merchant.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite"><span class="err">POST /v1/sales</span></code> call:</p>
+<div class="codehilite"><pre><span></span>&quot;operation&quot; : &quot;PURCHASE&quot;,
+...
+&quot;totalAmount&quot; : 18.8,
+&quot;items&quot;: [
+    {
+        &quot;type&quot;: &quot;PURCHASE&quot;,
+        &quot;description&quot;: &quot;Cofee cup&quot;,
+        &quot;itemTotal&quot;: 18.0,
+        &quot;quantity&quot;: 2.0,
+        &quot;unitPrice&quot;: 10.0,
+        &quot;unitPriceModified&quot;: 9.0,
+        &quot;unitTax&quot;: 20.0,
+        &quot;internalProductId&quot;: &quot;9135c64878d911e680a8ecf4bb60cfe0&quot;,
+        &quot;externalProductId&quot;: &quot;MC12345&quot;,
+        &quot;categoryName&quot;:&quot;Cups&quot;,
+        &quot;externalCategoryId&quot;:&quot;TS-02154&quot;
+    },
+    {
+        &quot;type&quot;: &quot;SERVICE_CHARGE&quot;,
+        &quot;description&quot;: &quot;SERVICE_CHARGE&quot;,
+        &quot;itemTotal&quot;: 0.8,
+        &quot;quantity&quot;: 1.0,
+        &quot;unitPrice&quot;: 0.8,
+        &quot;unitTax&quot;: 20.0
+    }
+],
+&quot;unitPricesIncludeTax&quot;: true
+...
+</pre></div>
+
+
+</div>
+<p>Item may include following fields:</p>
+<ul>
+<li><code class="codehilite">&quot;type&quot;</code> - type of the item, can be one of:<ul>
+<li><code class="codehilite">&quot;PURCHASE&quot;</code> - it is a standard type used when end-consumer purchase goods and/or services</li>
+<li><code class="codehilite">&quot;SERVICE_CHARGE&quot;</code> - it is an additional "fee" added to end-consumer bill for the service of providing goods and/or services; service charge base is calculated from Sale Items Net Totals and then taxed by configured merchant’s tax value</li>
+<li><code class="codehilite">&quot;TIP&quot;</code> - it is a gratuity paid by end-consumer; tip amount is always considered as an amount with tax, regardless of <code class="codehilite">unitPricesIncludeTax</code> parameter setting</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;description&quot;</code> - item description</li>
+<li><code class="codehilite">&quot;itemTotal&quot;</code> - total price; sum of all <code class="codehilite">itemTotal</code> has to be equal to <code class="codehilite">totalAmount</code>, <code class="codehilite">itemTotal</code> has to be equal to <code class="codehilite">unitPrice</code> * <code class="codehilite">quantity</code></li>
+<li><code class="codehilite">&quot;quantity&quot;</code> - ordered quantity</li>
+<li><code class="codehilite">&quot;unitPrice&quot;</code> - unit price</li>
+<li><code class="codehilite">&quot;unitPriceModified&quot;</code> - <em>optional field</em> - discounted price; when it is present, then system considers this price instead of <code class="codehilite">unitPrice</code></li>
+<li><code class="codehilite">&quot;unitTax&quot;</code> - tax applied</li>
+<li><code class="codehilite">&quot;internalProductId&quot;</code> - identifier of the product in Wirecard ePOS system; <em>mandatory field</em> in case i) Authorize or Capture transaction types are used, or ii) merchant wants to utilise Product Stock tracking</li>
+<li><code class="codehilite">&quot;externalProductId&quot;</code> - <em>optional field</em> - identifier of the product in external system</li>
+<li><code class="codehilite">&quot;categoryName&quot;</code> - <em>optional field</em> - category name that the item was selected from</li>
+<li><code class="codehilite">&quot;externalCategoryId&quot;</code> - <em>optional field</em> - external category ID that the item was selected from</li>
+</ul>
+<p>Together with item, parameter <code class="codehilite">&quot;unitPricesIncludeTax&quot;</code> (boolean) indicates whether unit prices already includes tax.</p>
                 
                   
                 
@@ -663,7 +536,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../advanced-overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shop/" title="Shop Management" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -672,19 +545,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Overview
+                Shop Management
               </span>
             </div>
           </a>
         
         
-          <a href="../discounts/" title="Discounts" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../glossary/" title="Glossary" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Discounts
+                Glossary
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

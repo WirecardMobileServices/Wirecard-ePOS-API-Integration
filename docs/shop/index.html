@@ -395,66 +395,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../advanced-overview/" title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
-    
-    <label class="md-nav__link" for="nav-4-2">
-      Sale Items
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-2">
-        Sale Items
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../items/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../discounts/" title="Discounts" class="md-nav__link">
-      Discounts
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../merchant/" title="Merchant Details" class="md-nav__link">
       Merchant Details
     </a>
@@ -524,8 +464,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-shop" title="Get a specific shop" class="md-nav__link">
-    Get a specific shop
+  <a href="#get-a-shop" title="Get a shop" class="md-nav__link">
+    Get a shop
   </a>
   
 </li>
@@ -546,129 +486,9 @@
           
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
-    
-    <label class="md-nav__link" for="nav-4-5">
-      Product Catalogue
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
-        Product Catalogue
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
   <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Product Categories" class="md-nav__link">
-      Product Categories
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Stock Management" class="md-nav__link">
-      Stock Management
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
-    
-    <label class="md-nav__link" for="nav-4-6">
-      Smart Cash-Register
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-6">
-        Smart Cash-Register
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Shifts" class="md-nav__link">
-      Shifts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shift_reports/" title="Shift Reports" class="md-nav__link">
-      Shift Reports
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Terminal Management" class="md-nav__link">
-      Terminal Management
+    <a href="../items/" title="Sale Items" class="md-nav__link">
+      Sale Items
     </a>
   </li>
 
@@ -743,8 +563,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-shop" title="Get a specific shop" class="md-nav__link">
-    Get a specific shop
+  <a href="#get-a-shop" title="Get a shop" class="md-nav__link">
+    Get a shop
   </a>
   
 </li>
@@ -777,7 +597,7 @@
     &quot;address&quot;: {
         &quot;city&quot;: &quot;{city}&quot;,
         &quot;country&quot;: {
-        &quot;alpha2code&quot;: &quot;DE&quot;
+            &quot;alpha2code&quot;: &quot;DE&quot;
         },
         &quot;postalCode&quot;: &quot;{postalCode}&quot;,
         &quot;stateOrProvince&quot;: &quot;{stateOrProvince}&quot;,
@@ -791,6 +611,21 @@
 </pre></div>
 
 
+<ul>
+<li><code class="codehilite">&quot;name&quot;</code> - <em>optional field</em> - shop name</li>
+<li><code class="codehilite">&quot;address&quot;</code> - shop address<ul>
+<li><code class="codehilite">&quot;city&quot;</code></li>
+<li><code class="codehilite">&quot;country&quot;</code> - defined by <code class="codehilite">alpha2code</code> which is two-letter country code; see <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a></li>
+<li><code class="codehilite">&quot;postalCode&quot;</code></li>
+<li><code class="codehilite">&quot;stateOrProvince&quot;</code> - <em>optional field</em></li>
+<li><code class="codehilite">&quot;street1&quot;</code></li>
+<li><code class="codehilite">&quot;street2&quot;</code> - <em>optional field</em></li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - <em>optional field</em> - needed for ERP integration</li>
+<li><code class="codehilite">&quot;siteId&quot;</code> - <em>optional field</em> - needed for ERP integration</li>
+<li><code class="codehilite">&quot;status&quot;</code> - either <code class="codehilite">ENABLED</code> or <code class="codehilite">DISABLED</code></li>
+</ul>
 <h3 id="response">Response</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;id&quot;: &quot;8397fa0dea7546f2986105bd3681a6b7&quot;,
@@ -819,7 +654,7 @@
 
 <h2 id="list-all-shops">List all shops</h2>
 <p>In order to list all shops, make a <code class="codehilite"><span class="err">GET /v1/merchants/{merchantId}/shops</span></code> call.</p>
-<h2 id="get-a-specific-shop">Get a specific shop</h2>
+<h2 id="get-a-shop">Get a shop</h2>
 <p>In order to list a specific shop, make a <code class="codehilite"><span class="err">GET /v1/merchants/{merchantId}/shops/{shopId}</span></code> call.</p>
                 
                   
@@ -856,13 +691,13 @@
           </a>
         
         
-          <a href="../terminal-management/" title="General" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../items/" title="Sale Items" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                General
+                Sale Items
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

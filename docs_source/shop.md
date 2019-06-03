@@ -11,7 +11,7 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
         "address": {
             "city": "{city}",
             "country": {
-            "alpha2code": "DE"
+                "alpha2code": "DE"
             },
             "postalCode": "{postalCode}",
             "stateOrProvince": "{stateOrProvince}",
@@ -22,6 +22,18 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
         "siteId": "{siteId}",
         "status": "ENABLED"
     }
+    
+- `"name"` - _optional field_ - shop name
+- `"address"` - shop address
+    - `"city"`
+    - `"country"` - defined by `alpha2code` which is two-letter country code; see [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+    - `"postalCode"`
+    - `"stateOrProvince"` - _optional field_
+    - `"street1"`
+    - `"street2"` - _optional field_
+- `"externalId"` - _optional field_ - needed for ERP integration
+- `"siteId"` - _optional field_ - needed for ERP integration
+- `"status"` - either `ENABLED` or `DISABLED`
 
 ### Response
 
@@ -46,13 +58,13 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
         "externalId": "{externalId}",
         "siteId": "{siteId}",
         "status": "ENABLED"
-    } 
+    }
 
 ## List all shops
 
 In order to list all shops, make a `GET /v1/merchants/{merchantId}/shops` call.
 
-## Get a specific shop
+## Get a shop
 
 In order to list a specific shop, make a `GET /v1/merchants/{merchantId}/shops/{shopId}` call.
 

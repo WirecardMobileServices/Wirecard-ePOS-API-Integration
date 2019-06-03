@@ -404,8 +404,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
-    Get a specific user
+  <a href="#get-a-user" title="Get a user" class="md-nav__link">
+    Get a user
   </a>
   
 </li>
@@ -463,66 +463,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../advanced-overview/" title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
-    
-    <label class="md-nav__link" for="nav-4-2">
-      Sale Items
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-2">
-        Sale Items
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../items/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../discounts/" title="Discounts" class="md-nav__link">
-      Discounts
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../merchant/" title="Merchant Details" class="md-nav__link">
       Merchant Details
     </a>
@@ -546,129 +486,9 @@
           
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
-    
-    <label class="md-nav__link" for="nav-4-5">
-      Product Catalogue
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
-        Product Catalogue
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
   <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Product Categories" class="md-nav__link">
-      Product Categories
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Stock Management" class="md-nav__link">
-      Stock Management
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
-    
-    <label class="md-nav__link" for="nav-4-6">
-      Smart Cash-Register
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-6">
-        Smart Cash-Register
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="General" class="md-nav__link">
-      General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Shifts" class="md-nav__link">
-      Shifts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shift_reports/" title="Shift Reports" class="md-nav__link">
-      Shift Reports
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../terminal-management/" title="Terminal Management" class="md-nav__link">
-      Terminal Management
+    <a href="../items/" title="Sale Items" class="md-nav__link">
+      Sale Items
     </a>
   </li>
 
@@ -743,8 +563,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-specific-user" title="Get a specific user" class="md-nav__link">
-    Get a specific user
+  <a href="#get-a-user" title="Get a user" class="md-nav__link">
+    Get a user
   </a>
   
 </li>
@@ -770,7 +590,7 @@
                 
                 <p>This chapter describes how can merchant manage its own users. User account is required for any interaction with Wirecard ePOS API.</p>
 <h2 id="create-new-user">Create new user</h2>
-<p>In order to create new user, make a <a href="https://switch.wirecard.com/mswitch-server/v1/users"><code class="codehilite">POST [/v1/users</code></a> call:</p>
+<p>In order to create new user, make a <a href="https://switch.wirecard.com/mswitch-server/v1/users"><code class="codehilite"><span class="err">POST /v1/users</span></code></a> call:</p>
 <h3 id="request">Request</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;username&quot;: &quot;john.doe&quot;,
@@ -841,7 +661,7 @@
 </ul>
 <h2 id="list-all-users">List all users</h2>
 <p>In order to list all users, make a <code class="codehilite"><span class="err">GET /v1/users</span></code> call.</p>
-<h2 id="get-a-specific-user">Get a specific user</h2>
+<h2 id="get-a-user">Get a user</h2>
 <p>In order to get a specific user, make a <code class="codehilite"><span class="err">GET /v1/users/{id}</span></code> call.</p>
                 
                   

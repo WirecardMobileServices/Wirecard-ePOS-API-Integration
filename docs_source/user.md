@@ -2,7 +2,7 @@ This chapter describes how can merchant manage its own users. User account is re
 
 ## Create new user
 
-In order to create new user, make a [`POST [/v1/users`](https://switch.wirecard.com/mswitch-server/v1/users) call:
+In order to create new user, make a [`POST /v1/users`](https://switch.wirecard.com/mswitch-server/v1/users) call:
 
 ### Request
         
@@ -67,6 +67,6 @@ In addition to fields echoed from request, response includes following fields:
 
 In order to list all users, make a `GET /v1/users` call.
 
-## Get a specific user
+## Get a user
 
 In order to get a specific user, make a `GET /v1/users/{id}` call.

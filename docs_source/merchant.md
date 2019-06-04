@@ -1,7 +1,5 @@
 This chapter describes merchant-relevant information.
 
-## Get a merchant call
-
 In order to get a merchant details, make a `GET /v1/merchants/{id}` call:
 
     GET ttps://switch-test.wirecard.com/mswitch-server/v1/merchants/e5869bc0303b4dabbf1e593d619146dc

@@ -8,8 +8,8 @@ _Core Integration_ chapter provides basic information in order to successfully p
     
 In context of Wirecard ePOS, every Payment Transaction is part of **Sale**:
 
-- **Purchase** record (also called Sale-Purchase) is created when end-consumer purchases goods.
-- **Return** record (also called Sale-Return) is created when end-consumer returns purchased goods back to merchant.
+- **Purchase** record (also called Sale-Purchase) is created when consumer purchases goods and/or services.
+- **Return** record (also called Sale-Return) is created when consumer returns purchased goods back to merchant.
 
 !!! Important
 

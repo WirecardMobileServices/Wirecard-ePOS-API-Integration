@@ -604,28 +604,12 @@
         &quot;street1&quot;: &quot;{street1}&quot;,
         &quot;street2&quot;: &quot;{street2}&quot;
     },
-    &quot;externalId&quot;: &quot;{externalId}&quot;,
-    &quot;siteId&quot;: &quot;{siteId}&quot;,
     &quot;status&quot;: &quot;ENABLED&quot;
 }
 </pre></div>
 
 
-<ul>
-<li><code class="codehilite">&quot;name&quot;</code> - <em>optional field</em> - shop name</li>
-<li><code class="codehilite">&quot;address&quot;</code> - shop address<ul>
-<li><code class="codehilite">&quot;city&quot;</code></li>
-<li><code class="codehilite">&quot;country&quot;</code> - defined by <code class="codehilite">alpha2code</code> which is two-letter country code; see <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a></li>
-<li><code class="codehilite">&quot;postalCode&quot;</code></li>
-<li><code class="codehilite">&quot;stateOrProvince&quot;</code> - <em>optional field</em></li>
-<li><code class="codehilite">&quot;street1&quot;</code></li>
-<li><code class="codehilite">&quot;street2&quot;</code> - <em>optional field</em></li>
-</ul>
-</li>
-<li><code class="codehilite">&quot;externalId&quot;</code> - <em>optional field</em> - needed for ERP integration</li>
-<li><code class="codehilite">&quot;siteId&quot;</code> - <em>optional field</em> - needed for ERP integration</li>
-<li><code class="codehilite">&quot;status&quot;</code> - either <code class="codehilite">ENABLED</code> or <code class="codehilite">DISABLED</code></li>
-</ul>
+<p>Both <code class="codehilite">stateOrProvince</code> and <code class="codehilite">street2</code> are optional fields.</p>
 <h3 id="response">Response</h3>
 <div class="codehilite"><pre><span></span>{
     &quot;id&quot;: &quot;8397fa0dea7546f2986105bd3681a6b7&quot;,
@@ -645,8 +629,8 @@
     },
     &quot;merchant&quot;: { ...
     },
-    &quot;externalId&quot;: &quot;{externalId}&quot;,
-    &quot;siteId&quot;: &quot;{siteId}&quot;,
+    &quot;externalId&quot;: null,
+    &quot;siteId&quot;: null,
     &quot;status&quot;: &quot;ENABLED&quot;
 }
 </pre></div>

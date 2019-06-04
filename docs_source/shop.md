@@ -18,23 +18,11 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
             "street1": "{street1}",
             "street2": "{street2}"
         },
-        "externalId": "{externalId}",
-        "siteId": "{siteId}",
         "status": "ENABLED"
     }
     
-- `"name"` - _optional field_ - shop name
-- `"address"` - shop address
-    - `"city"`
-    - `"country"` - defined by `alpha2code` which is two-letter country code; see [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-    - `"postalCode"`
-    - `"stateOrProvince"` - _optional field_
-    - `"street1"`
-    - `"street2"` - _optional field_
-- `"externalId"` - _optional field_ - needed for ERP integration
-- `"siteId"` - _optional field_ - needed for ERP integration
-- `"status"` - either `ENABLED` or `DISABLED`
-
+Both `stateOrProvince` and `street2` are optional fields.
+    
 ### Response
 
     {
@@ -55,8 +43,8 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
         },
         "merchant": { ...
         },
-        "externalId": "{externalId}",
-        "siteId": "{siteId}",
+        "externalId": null,
+        "siteId": null,
         "status": "ENABLED"
     }
 

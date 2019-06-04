@@ -1,5 +1,7 @@
 This chapter describes Sale items which can be considered as shopping basket. Items include information about the goods and services sold by merchant.
 
+Items can to be sent only with `PURCHASE` and `RETURN` requests.
+
 !!! Example
 
     `POST /v1/sales` call:

@@ -1,61 +1,113 @@
+!!! Tip
+
+    Visit [Wirecard Payment Base](https://www.wirecard.com/payment-base) and learn more about services provided by Wirecard.
+
 ## Acronyms
 
-ISO - 
+**AMEX** - American Express
 
-mPOS - mobile Point of Sale
+**API** - application programming interface
 
-POS - Point of Sale
+**ERP** - enterprise resource planning
 
-WD - Wirecard
+**GuWID** - global unique Wirecard identifier
+
+**IIN** - issuer identification number
+
+**ISO** - International Organization for Standardization
+
+**JCB** - Japan Credit Bureau
+
+**JSON** - JavaScript Object Notation
+
+**MCC** - merchant category code
+
+**MID** - merchant identifier
+
+**mPOS** - mobile point of sale
+
+**PAN** - primary account number
+
+**POS** - point of sale
+
+**PSP** - payment service provider
+
+**REST** - representational state transfer
+
+**SDK** - software development kit
+
+**SN** - serial number
+
+**TID** - terminal identifier
+
+**URL** - uniform resource locator
+
+**UUID** - universally unique identifier
+
+**WD** - Wirecard
+
+**WEP** - Wirecard Enterprise Portal
 
 ## Terminology
 
 ### A
 
-Acquirer
+**Acquirer bank** - also known as a merchant bank; it enables retailers to accept various conventional and alternative payment methods
+
+**Alibaba Group** - Chinese company specializing in e-commerce, retail, Internet and technology
+
+**Alipay** - mobile and online payment platform established by Alibaba Group
 
 ### B
 
-Basic Access Authentication
+**Basic access authentication** - method for providing username and password when making an HTTP request
 
-Backend system
+### C
+
+**Consumer** - person who purchases goods and/or services from a merchant
+
+**Credentials** - username and password
 
 ### I
 
-Issuer
+**Issuer bank** - bank who provides funds to consumer
 
 ### M
 
-Merchant
+**Merchant** - legal entity which has an contract with acquirer bank
 
 ### P
 
-Partner
+**Payment** - see payment transaction
 
-Payment method
+**Payment transaction** - monetary transaction with specific amount, payment method and type
 
-Payment service provider
+### Q
 
-**Payment transaction** (alias payment) - monetary transaction with specific amount, payment method and type.
-
-### R
-
-Return
+**Query** - non-monetary transaction used by to check the status of a particular transaction
 
 ### S
 
-Sale
+**Sale** - central Wirecard ePOS object which contains amount to pay, sale items, sale metadata and at least one payment transaction
 
-Sale-Purchase
+**Sale-Purchase** - Wirecard ePOS object which is created when consumer purchases goods and/or services.
 
-Sale-Return
+**Sale-Return** -  Wirecard ePOS object which is created when consumer returns purchased goods back to merchant.
 
 ### T
 
-Transaction
+**Terminal** - device used for card acceptance
 
-Transaction type
+**Transaction** - smallest (atomic) process of money transfer
+
+**Transaction type** - in Wirecard ePOS context can be purchase, reversal, refund, auto-resolve
 
 ### U
 
-User
+**User account** - representation of cashier in Wirecard ePOS system
+
+### W
+
+**WeChat** - initially chat app, now a market-leading platform by connecting people, services, and businesses in China and around the world
+
+**Wirecard Enterprise Portal** - web-based administration and reporting application

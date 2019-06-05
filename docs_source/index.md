@@ -24,7 +24,4 @@ or [Google Play Store](https://play.google.com/store/apps/details?id=de.wirecard
 
 !!! Tip
     
-    Wirecard ePOS belongs to Wirecard portfolio of point of sale (POS) solutions. 
-    For complete information about all Wirecard products and solutions, please contact your Wirecard representative.
-    
-    If you don't know your Wirecard representative, please [contact us now](https://www.wirecard.com/contact).
+    Visit [Wirecard Payment Base](https://www.wirecard.com/payment-base) and learn more about services provided by Wirecard.

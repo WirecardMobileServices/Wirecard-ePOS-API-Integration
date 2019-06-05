@@ -108,6 +108,6 @@
 
 ### W
 
-**WeChat** - initially chat app, now a market-leading platform by connecting people, services, and businesses in China and around the world
+**WeChat** - market-leading platform for connecting people, services, and businesses in China and around the world
 
-**Wirecard Enterprise Portal** - web-based administration and reporting application
+**Wirecard Enterprise Portal** - web-based administration and reporting application for Wirecard customers

@@ -4,8 +4,6 @@
 
 ## Acronyms
 
-**AMEX** - American Express
-
 **API** - application programming interface
 
 **ERP** - enterprise resource planning
@@ -64,13 +62,15 @@
 
 ### C
 
+**Card association** - also known as card brand; network of issuing banks and acquiring banks, e.g. Visa, Mastercard, American Express and JCB
+
 **Consumer** - person who purchases goods and/or services from a merchant
 
 **Credentials** - username and password
 
 ### I
 
-**Issuer bank** - bank who provides funds to consumer
+**Issuing bank** - bank that offers card association branded cards to consumers
 
 ### M
 
@@ -84,7 +84,7 @@
 
 ### Q
 
-**Query** - non-monetary transaction used by to check the status of a particular transaction
+**Query** - non-monetary transaction used to check the status of a particular transaction
 
 ### S
 

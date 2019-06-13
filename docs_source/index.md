@@ -19,8 +19,8 @@ If you wish to integrate via Wirecard ePOS SDK, please follow the integration gu
 
 **Wirecard ePOS Application**
 
-If you wish to benefit from Wirecard ePOS App, please download it at [Apple App Store](https://itunes.apple.com/us/app/wirecard-epos-mobile-checkout/id1314403081) 
-or [Google Play Store](https://play.google.com/store/apps/details?id=de.wirecard.epos).
+If you wish to benefit from Wirecard ePOS App, it is available on [App Store](https://itunes.apple.com/us/app/wirecard-epos-mobile-checkout/id1314403081) 
+or [Google Play](https://play.google.com/store/apps/details?id=de.wirecard.epos).
 
 !!! Tip
     

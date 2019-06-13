@@ -4,6 +4,7 @@ site_dir: docs
 
 theme:
   name: 'material'
+  logo: 'images/favicon.ico'
 
 markdown_extensions:
   - codehilite

@@ -14,11 +14,11 @@ This chapter provides information in order to start integration straight away.
     
 !!! Tip
 
-    Wirecard ePOS API is available via [**Swagger UI**](https://swagger.io/tools/swagger-ui/) on the following URL:
+    Wirecard ePOS API is available via [**Swagger UI**](https://switch-test.wirecard.com/mswitch-server/swagger-ui.html) on the following URL:
 
         https://switch-test.wirecard.com/mswitch-server/swagger-ui.html
         
-    Wirecard ePOS credentials for Test environment are needed in order to access and interact with [Swagger UI](https://swagger.io/tools/swagger-ui/).
+    Wirecard ePOS credentials for Test environment are needed in order to access and interact with [Swagger UI](https://switch-test.wirecard.com/mswitch-server/swagger-ui.html).
        
 ## Authentication
 

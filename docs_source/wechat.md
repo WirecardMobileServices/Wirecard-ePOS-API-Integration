@@ -66,6 +66,10 @@ In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wir
     - `"amount"` - defines transaction amount
     - `"consumerId"` - value of scanned barcode (QR code)
 
+!!! Tip
+    
+    In order to simulate 1-step WeChat payment, use the following `"note" : "p_wch_oknc"` with _PURCHASE_ operation.
+
 ### Response indicating 1-step WeChat payment
 
 In order to identify whether the follow-up _CONFIRM_ operation is required, status code has to be interpreted.

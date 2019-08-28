@@ -10,7 +10,7 @@ From merchant perspective, WeChat can be either [one-step](#1-step-wechat-paymen
 
 - In case end-consumer (buyer) is prompted to authorize payment with password or other equivalent (pin code, fingerprint, etc.) then merchant has to query Wirecard ePOS system in order to get the final status of WeChat transaction. Technically-wise, it means that initial [request](#purchase-operation) (_PURCHASE_) has to be followed by [query request](#confirm-operation) (_CONFIRM_).
     
-## Workflow
+## Sequence Diagrams
 
 ### 1-step WeChat payment
 ![WeChat](images/wechat.png)
@@ -20,14 +20,14 @@ From merchant perspective, WeChat can be either [one-step](#1-step-wechat-paymen
 
 !!! Note
     
-    Purchase requests are serviced at following URL:
+    Sale requests are serviced at following URL:
     
         https://switch.wirecard.com/mswitch-server/v1/sales
 
-    In context of Wirecard ePOS, term **Purchase** is used for both:
+    In context of Wirecard ePOS, term `Purchase` is used for both:
     
     - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
-    - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
+    - transaction type - _Cash Purchase_ transaction, _Card Purchase_ transaction, _Alipay Purchase_ transaction and _WeChat Purchase_ transaction
     
 ## Purchase Operation
 

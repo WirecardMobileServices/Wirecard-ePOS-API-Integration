@@ -52,4 +52,4 @@ Item may include following fields:
 - `"categoryName"` - _optional field_ - category name that the item was selected from
 - `"externalCategoryId"` - _optional field_ - external category ID that the item was selected from
 
-Together with item, parameter `"unitPricesIncludeTax"` (boolean) indicates whether unit prices already includes tax.
+When `"items"` are provided, then parameter `"unitPricesIncludeTax"` (boolean) has to be specified. It indicates whether unit prices already include tax.

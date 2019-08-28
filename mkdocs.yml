@@ -50,7 +50,12 @@ nav:
     - Overview: core-overview.md
     - Payment Methods:
       - Cash: cash.md
-      - Card: card.md
+      - Card:
+        - Introduction: card.md
+        - Purchase Transaction Flow: card-purchase-flow.md
+        - Authorization & Capture Transaction Flow: card-auth-flow.md
+        - Reversal Transaction Flow: card-reversal-flow.md
+        - Reference Refund Transaction Flow: card-reference-refund-flow.md
       - Alipay: alipay.md
       - WeChat Pay: wechat.md
     - Multi-tender Sale: multi-tender.md

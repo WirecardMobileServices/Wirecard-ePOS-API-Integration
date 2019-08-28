@@ -1,4 +1,4 @@
-This chapter describes how can merchant manage its shops.
+This chapter describes how can merchant manage its shops. Merchant is then able to reference shop (via `shopId`) in the Sale requests.
 
 ## Create new shop
 
@@ -22,7 +22,7 @@ In order to create new shop, make a `POST /v1/merchants/{merchantId}/shops` call
     }
     
 Both `stateOrProvince` and `street2` are optional fields.
-    
+
 ### Response
 
     {

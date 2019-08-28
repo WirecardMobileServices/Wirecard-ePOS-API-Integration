@@ -80,7 +80,7 @@ Every _PURCHASE_ operation, which passes validation, creates new Sale-Purchase r
 - **UNCONFIRMED** - purchase transaction is processed and Sale total amount is not fully paid
 - **COMPLETED** - sum of completed purchase transactions cover Sale total amount
 - **RETURNED** - all purchased goods have been returned by customer and Sale total amount is refunded
-- **PARTIALLY_RETURNED** - only some of purchased goods have been returned by customer and part Sale total amount is refunded
+- **PARTIALLY_RETURNED** - only some of purchased goods have been returned by customer and part of the Sale total amount is refunded
 - **CANCELED** - all purchase transactions are reversed and [CANCEL](#what-is-cancel-operation) operation was successful
 - **FAILED** - all purchase transaction are either in FAILED or REVERSED state and [FAIL](#what-is-fail-operation) operation was successful
 

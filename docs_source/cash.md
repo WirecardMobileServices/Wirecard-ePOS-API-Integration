@@ -4,20 +4,20 @@ Cash is the most straightforward payment method to integrate.
 
     Visit [Wirecard](https://www.wirecard.com/payment-base/pos) website to find out all benefits of Wirecard ePOS solution.
 
-## Workflow
+## Sequence Diagram
 
 ![Cash](images/cash.png)
 
 !!! Note
     
-    Purchase requests are serviced at following URL:
+    Sale requests are serviced at following URL:
     
         https://switch.wirecard.com/mswitch-server/v1/sales
 
-    In context of Wirecard ePOS, term **Purchase** is used for both:
+    In context of Wirecard ePOS, term `Purchase` is used for both:
     
     - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
-    - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
+    - transaction type - _Cash Purchase_ transaction, _Card Purchase_ transaction, _Alipay Purchase_ transaction and _WeChat Purchase_ transaction
     
 ## Purchase Operation
 

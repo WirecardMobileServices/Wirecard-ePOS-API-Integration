@@ -6,20 +6,20 @@ Wirecard makes it easy to accept Alipay, one of the most popular payment platfor
 
 From merchant perspective, Alipay payment is very straightforward. Only one request is needed to successfully complete Alipay payment.
     
-## Workflow
+## Sequence Diagram
 
 ![Alipay](images/alipay.png)
 
 !!! Note
     
-    Purchase requests are serviced at following URL:
+    Sale requests are serviced at following URL:
     
         https://switch.wirecard.com/mswitch-server/v1/sales
 
     In context of Wirecard ePOS, term `Purchase` is used for both:
     
     - type of Sale - called _Sale-Purchase_ - created by request with PURCHASE operation
-    - transaction type - _cash purchase_ transaction, _card purchase_ transaction, _alipay purchase_ transaction and _wechat purchase_ transaction
+    - transaction type - _Cash Purchase_ transaction, _Card Purchase_ transaction, _Alipay Purchase_ transaction and _WeChat Purchase_ transaction
 
 ## Purchase Operation
 
@@ -32,6 +32,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
         "operation" : "PURCHASE",
         "note" : "Example Note",
         "externalId": "123456789",
+        "shopId": "be1f50a838bb415186cff21d30f6e9bb",
         "totalAmount" : 10,
         "currencyCode" : "EUR",
         "payments" : [
@@ -50,6 +51,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
 - `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
 - `"note"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-detail>` field
 - `"externalId"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-number>` field
+- `"shopId"` - _optional field_ - reference to merchant's shop registered in Wirecard ePOS system, see more details in [Shop Management](shop.md)
 - `"totalAmount"` - defines amount of Sale-Purchase 
 - `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
 - `"payments"` - includes payment-specific information

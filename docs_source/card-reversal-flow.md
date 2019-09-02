@@ -1,8 +1,8 @@
-Reverse operation is typically used in case Purchase, Terminal Authorization or Capture transaction was created accidentally and hence needs to be reversed.
+_REVERSE_ operation is typically used in case Purchase, Terminal Authorization or Capture transaction was created accidentally and hence needs to be reversed.
 
 ## Reverse Operation
 
-In order to reverse Purchase, Terminal Authorization or Capture transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
+In order to reverse Purchase, Terminal Authorization or Capture transaction, make a<br/>[`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
 ### Request
 
@@ -18,6 +18,13 @@ In order to reverse Purchase, Terminal Authorization or Capture transaction, mak
             }
         ]
     }
+
+- `"operation"` - defines type of Sale request
+- `"originalSaleId"` - identifier of original Sale-Purchase
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - defines payment method; must be same as original payment method
+    - `"transactionType"` - defines type of transaction; `REVERSE` operation must include `REVERSAL` transaction type
+    - `"originalTransactionId"` - identifier of original Card Purchase transaction which will be reversed
 
 ### Response
 
@@ -47,3 +54,26 @@ In order to reverse Purchase, Terminal Authorization or Capture transaction, mak
             }
         ]
     }
+
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - identifier of original Sale-Purchase, echoed from request
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of reversal transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` -  `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"authorizationCode"`- authorization code provided by scheme
+    
+In order to explicitly [change state of Sale-Purchase to CANCELED](multi-tender.md#what-is-sale-lifecycle-model), make a  `POST /v1/sales` call with [_CANCEL_ operation](multi-tender.md#what-is-cancel-operation).
+
+!!! Tip
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).

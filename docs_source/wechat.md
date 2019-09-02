@@ -55,14 +55,14 @@ In order to process WeChat payment, make a [`POST /v1/sales`](https://switch.wir
 - `"multitender"` - boolean value
     - `"TRUE"` - required
     - `"FALSE"` - deprecated
-- `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
+- `"operation"` - defines type of Sale request; `PURCHASE` operation creates Sale-Purchase record
 - `"note"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-detail>` field
 - `"externalId"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-number>` field
 - `"totalAmount"` - defines amount of Sale-Purchase 
 - `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method
-    - `"transactionType"` - defines type of transaction; `"PURCHASE"` transaction moves funds from end-consumer to merchant
+    - `"transactionType"` - defines type of transaction; `PURCHASE` transaction moves funds from end-consumer to merchant
     - `"amount"` - defines transaction amount
     - `"consumerId"` - value of scanned barcode (QR code)
 
@@ -181,7 +181,7 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
 - `"operation"` - echoed from request
 - `"timeStamp"` - date-time when response was constructed
 - `"status"`
-    - `"code"` - `"1001"` means operation is successful, however follow-up `"CONFIRM"` request is required to complete WeChat purchase transaction
+    - `"code"` - `"1001"` means operation is successful, however follow-up `CONFIRM` request is required to complete WeChat purchase transaction
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
 - `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
@@ -215,11 +215,11 @@ In order to identify whether the follow-up _CONFIRM_ operation is required, stat
         ]
     }
     
-- `"operation"` - defines type of Sale request; `"CONFIRM"` operation does finish the WeChat Purchase transaction
+- `"operation"` - defines type of Sale request; `CONFIRM` operation does finish the WeChat Purchase transaction
 - `"originalSaleId"` - identifier of original Sale-Purchase
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method; it must be same as original payment transaction
-    - `"transactionType"` - defines type of transaction; `"CONFIRM"` operation must include `"CONFIRM"` transaction type
+    - `"transactionType"` - defines type of transaction; `CONFIRM` operation must include `CONFIRM"` transaction type
     
 ### Response
 
@@ -308,8 +308,8 @@ In order to reverse WeChat purchase transaction, make a [`POST /v1/sales`](https
 - `"originalSaleId"` - identifier of original Sale-Purchase
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method; it must be same as original payment transaction
-    - `"transactionType"` - defines type of this transaction; `"REVERSE"` operation must include `"REVERSAL"` transaction type
-    - `"originalTransactionId"` - identifier of original purchase transaction
+    - `"transactionType"` - defines type of this transaction; `REVERSE` operation must include `REVERSAL` transaction type
+    - `"originalTransactionId"` - identifier of original WeChat purchase transaction which will be reversed
     
 ### Reverse Response
 
@@ -407,9 +407,6 @@ In order to process WeChat refund transaction, make a [`POST /v1/sales`](https:/
         "externalId": null,
         "merchantReceiptId": 270
     }
-
-!!! Tip
-    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
 ## Get a Sale Call
 
@@ -480,3 +477,6 @@ Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields 
 ## Purchase Transaction Lifecycle
 
 ![WeChat Purchase Lifecycle](images/wechat_purchase_lifecycle.png)
+
+!!! Tip
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).

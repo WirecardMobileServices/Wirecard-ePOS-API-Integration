@@ -1,5 +1,10 @@
 With **Terminal Authorization** transaction type merchant reserves funds on cardholder's account. It is used when an order is fulfilled later. Upon goods delivery, merchant is eligible to trigger **Capture** transaction type. Merchant has maximum 7 days to conduct Capture.
 
+Every Purchase operation with **Card Terminal Authorization** transaction (EMV or Magstripe) has to be confirmed or declined by follow-up Sale completion request, so 2 steps are needed:
+
+- Initial Purchase request
+- Completion (follow-up) request with `CONFIRM` or `DECLINE` operation
+
 ## Sequence Diagram
 
 For the sake of simplification, below diagram includes only interactions between merchant and Wirecard ePOS system.
@@ -8,7 +13,7 @@ For the sake of simplification, below diagram includes only interactions between
 
 ## Purchase Operation with Authorization Transaction
 
-In order to process Card Authorization transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
+In order to process Card Terminal Authorization transaction, make a [`POST /v1/sales`](https://switch.wirecard.com/mswitch-server/v1/sales) call:
 
 ### Request
 
@@ -128,7 +133,7 @@ In order to process Card Authorization transaction, make a [`POST /v1/sales`](ht
 - `"operation"` - echoed from request
 - `"timeStamp"` - date-time when response was constructed
 - `"status"`
-    - `"code"` - `"1001"` means operation is successful, however follow-up `CONFIRM` request is required to complete Card Authorization transaction  
+    - `"code"` - `"1001"` means operation is successful, however follow-up `CONFIRM` request is required to complete Card Terminal Authorization transaction  
     - `"result"` - `"SUCCESS"` means operation is successful
 - `"id"` - Sale-Purchase identifier assigned by Wirecard ePOS system
 - `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
@@ -253,13 +258,13 @@ In order to process Card Authorization transaction, make a [`POST /v1/sales`](ht
         ]
     }
 
-- `"operation"` - defines type of Sale request; `REFERENCE_PURCHASE` operation
+- `"operation"` - defines type of Sale request; `REFERENCE_PURCHASE` is used with `CAPTURE`
 - `"originalSaleId"` - identifier of original Sale-Purchase
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method; it must be same as original payment transaction
-    - `"transactionType"` - defines type of transaction; `CAPTURE` transaction type
-    - `"amount"` - defines type of transaction; `CAPTURE` transaction type
-    - `"originalTransactionId"` - defines type of transaction; `CAPTURE` transaction type
+    - `"transactionType"` - defines type of transaction
+    - `"amount"` - defines captured amount; it can be less or equal to referenced Card Terminal Authorization amount 
+    - `"originalTransactionId"` - identifier of original Card Terminal Authorization transaction which will be captured
 
 ### Response
     
@@ -290,6 +295,24 @@ In order to process Card Authorization transaction, make a [`POST /v1/sales`](ht
         ],
         "multitender": true
     }
+    
+- `"operation"` - echoed from request
+- `"timeStamp"` - date-time when response was constructed
+- `"status"`
+    - `"code"` - `"1000"` means operation is successful
+    - `"result"` - `"SUCCESS"` means operation is successful
+- `"id"` - identifier of original Sale-Purchase, echoed from request
+- `"externalCashierId"` - relevant for [Advanced Integration](advanced-overview.md); otherwise null
+- `"payments"` - includes payment-specific information
+    - `"paymentMethod"` - echoed from request
+    - `"transactionType"` - echoed from request
+    - `"id"` - identifier of capture transaction assigned by Wirecard ePOS system
+    - `"timeStamp"` - date-time when transaction was processed
+    - `"statuses"`
+        - `"result"` - `"SUCCESS"` means transaction is successful
+        - `"code"` -  `"1000"` means transaction is successful
+        - `"message"` - message provided by payment gateway
+    - `"authorizationCode"`- authorization code provided by scheme
     
 ## Get a Sale Call
 
@@ -548,3 +571,6 @@ Example of `GET /v1/sales/{id}` call with excluded _merchant_, _user_ and _shop_
 ## Card Capture Transaction Lifecycle
 
 ![Card Capture Lifecycle](images/card_capture_lifecycle.png)
+
+!!! Tip
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).

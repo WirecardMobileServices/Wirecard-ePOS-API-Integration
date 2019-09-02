@@ -1,0 +1,1499 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.0">
+    
+    
+      
+        <title>Authorization & Capture Transaction Flow - Wirecard ePOS API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.982221ab.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/minimal-epossdk.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#sequence-diagram" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Wirecard ePOS API" class="md-header-nav__button md-logo">
+          
+            <img src="../images/favicon.ico" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Wirecard ePOS API
+            </span>
+            <span class="md-header-nav__topic">
+              Authorization & Capture Transaction Flow
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Wirecard ePOS API" class="md-nav__button md-logo">
+      
+        <img src="../images/favicon.ico" width="48" height="48">
+      
+    </a>
+    Wirecard ePOS API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Start
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Start
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../introduction/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Core Integration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Core Integration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core-overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" checked>
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Payment Methods
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Payment Methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cash/" title="Cash" class="md-nav__link">
+      Cash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-2" type="checkbox" id="nav-3-2-2" checked>
+    
+    <label class="md-nav__link" for="nav-3-2-2">
+      Card
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-2-2">
+        Card
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-purchase-flow/" title="Purchase Transaction Flow" class="md-nav__link">
+      Purchase Transaction Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Authorization & Capture Transaction Flow
+      </label>
+    
+    <a href="./" title="Authorization & Capture Transaction Flow" class="md-nav__link md-nav__link--active">
+      Authorization & Capture Transaction Flow
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-diagram" title="Sequence Diagram" class="md-nav__link">
+    Sequence Diagram
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#purchase-operation-with-authorization-transaction" title="Purchase Operation with Authorization Transaction" class="md-nav__link">
+    Purchase Operation with Authorization Transaction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirm-operation" title="Confirm Operation" class="md-nav__link">
+    Confirm Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_1" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-purchase-operation-with-capture-transaction" title="Reference Purchase Operation with Capture Transaction" class="md-nav__link">
+    Reference Purchase Operation with Capture Transaction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_2" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-a-sale-call" title="Get a Sale Call" class="md-nav__link">
+    Get a Sale Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#card-authorization-transaction-lifecycle" title="Card Authorization Transaction Lifecycle" class="md-nav__link">
+    Card Authorization Transaction Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#card-capture-transaction-lifecycle" title="Card Capture Transaction Lifecycle" class="md-nav__link">
+    Card Capture Transaction Lifecycle
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-reversal-flow/" title="Reversal Transaction Flow" class="md-nav__link">
+      Reversal Transaction Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-reference-refund-flow/" title="Reference Refund Transaction Flow" class="md-nav__link">
+      Reference Refund Transaction Flow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../alipay/" title="Alipay" class="md-nav__link">
+      Alipay
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wechat/" title="WeChat Pay" class="md-nav__link">
+      WeChat Pay
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multi-tender/" title="Multi-tender Sale" class="md-nav__link">
+      Multi-tender Sale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../user/" title="User Management" class="md-nav__link">
+      User Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Advanced Integration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Advanced Integration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../merchant/" title="Merchant Details" class="md-nav__link">
+      Merchant Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shop/" title="Shop Management" class="md-nav__link">
+      Shop Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../items/" title="Sale Items" class="md-nav__link">
+      Sale Items
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-diagram" title="Sequence Diagram" class="md-nav__link">
+    Sequence Diagram
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#purchase-operation-with-authorization-transaction" title="Purchase Operation with Authorization Transaction" class="md-nav__link">
+    Purchase Operation with Authorization Transaction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirm-operation" title="Confirm Operation" class="md-nav__link">
+    Confirm Operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_1" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-purchase-operation-with-capture-transaction" title="Reference Purchase Operation with Capture Transaction" class="md-nav__link">
+    Reference Purchase Operation with Capture Transaction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_2" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-a-sale-call" title="Get a Sale Call" class="md-nav__link">
+    Get a Sale Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#card-authorization-transaction-lifecycle" title="Card Authorization Transaction Lifecycle" class="md-nav__link">
+    Card Authorization Transaction Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#card-capture-transaction-lifecycle" title="Card Capture Transaction Lifecycle" class="md-nav__link">
+    Card Capture Transaction Lifecycle
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Authorization & Capture Transaction Flow</h1>
+                
+                <p>With <strong>Terminal Authorization</strong> transaction type merchant reserves funds on cardholder's account. It is used when an order is fulfilled later. Upon goods delivery, merchant is eligible to trigger <strong>Capture</strong> transaction type. Merchant has maximum 7 days to conduct Capture.</p>
+<p>Every Purchase operation with <strong>Card Terminal Authorization</strong> transaction (EMV or Magstripe) has to be confirmed or declined by follow-up Sale completion request, so 2 steps are needed:</p>
+<ul>
+<li>Initial Purchase request</li>
+<li>Completion (follow-up) request with <code class="codehilite">CONFIRM</code> or <code class="codehilite">DECLINE</code> operation</li>
+</ul>
+<h2 id="sequence-diagram">Sequence Diagram</h2>
+<p>For the sake of simplification, below diagram includes only interactions between merchant and Wirecard ePOS system.</p>
+<p><img alt="CardAuthCapture" src="../images/card_auth_capture.png" /></p>
+<h2 id="purchase-operation-with-authorization-transaction">Purchase Operation with Authorization Transaction</h2>
+<p>In order to process Card Terminal Authorization transaction, make a <a href="https://switch.wirecard.com/mswitch-server/v1/sales"><code class="codehilite"><span class="err">POST /v1/sales</span></code></a> call:</p>
+<h3 id="request">Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;PURCHASE&quot;,
+    &quot;note&quot;: &quot;SaleNote&quot;,
+    &quot;externalId&quot;: &quot;123456789&quot;,
+    &quot;shopId&quot;: &quot;be1f50a838bb415186cff21d30f6e9bb&quot;,
+    &quot;totalAmount&quot;: 10,
+    &quot;currencyCode&quot;: &quot;EUR&quot;,
+    &quot;unitPricesIncludeTax&quot;: true,
+    &quot;items&quot;: [
+        {
+            &quot;type&quot;: &quot;PURCHASE&quot;,
+            &quot;description&quot;: &quot;Book&quot;,
+            &quot;unitPrice&quot;: 1,
+            &quot;quantity&quot;: 10,
+            &quot;unitTax&quot;: 0,
+            &quot;itemTotal&quot;: 10
+        }
+    ],
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;TERMINAL_AUTHORIZATION&quot;,
+            &quot;amount&quot;: 10,
+            &quot;posEntryMode&quot;: &quot;053&quot;,
+            &quot;cardData&quot;: {
+                &quot;pan&quot;: &quot;476173******0010&quot;,
+                &quot;emvData&quot;: &quot;5F201A5649534120414351554952455220544553542F434152442032309B02E800950502800080009F1C0861303030303832329F3901739F4005E000F0A001D7187E235938FE785AF367586D6833E954FC5C75B09D8B6500EE4F07A00000000320109F0607A00000000320109F02060000000006009F03060000000000009F2608EA8CB1420DD2C9659F360200639F0902008C82025C00500D5649534120454C454354524F4E8C159F02069F03069F1A0295055F2A029A039C019F37048D178A029F02069F03069F1A0295055F2A029A039C019F37049F2701808E0E00000000000000001E0302031F009F34031E03008407A00000000320109F1E0834303030313533379F100706010A03A000009F160F3130303132313131323030303336365F3401019701009F3303E0F8C89F1A0202769F3501225F2A0209789A031806209F410204159C01009F3704C2BA72719F150289999F21030939489F1101019F1210454C454354524F4E20444520564953415F30020221&quot;,
+                &quot;track2Data&quot;: &quot;7E235938FE785AF367586D6833E954FC5C75B09D8B6500EE&quot;,
+                &quot;dataEncryptionParams&quot;: {
+                    &quot;encoding&quot;: &quot;hex&quot;,
+                    &quot;format&quot;: &quot;thor-posmate-chip&quot;,
+                    &quot;ksn&quot;: &quot;FFFF9876543210E00187&quot;,
+                    &quot;name&quot;: &quot;paymentengine.thor-2&quot;,
+                    &quot;padding&quot;: &quot;pkcs&quot;,
+                    &quot;version&quot;: &quot;0&quot;
+                },
+                &quot;signatureImg&quot;: &quot;iVBORw0KGgoAAAANSUhEUgAAAMgAAABQAQMAAABmo6jzAAAABlBMVEUAAAD///+l2Z/dAAABtklEQVRIx+3UP24TQRTH8Y2QoPQFkHwMCkBzhBxhb4DLlCMk7rHHoAjKgFIjlxQEP0uRYkVWeEELjO3ZmS/F7B87ZPsoypS/T/GK9+ZXMPaKJ3ngkiZjcuvHxN8jmueMS+iDxhxK7CXIoSQADOB1VOqcVHfE4SNfEpayk0knq2TeRhyzTjyNocShLGJAkm9lEwjCMQ7hOnpWvfwNnCsnGIQ6KuH29bwXpykLsSI8P23lZ8Bq9K1Ymub7gYQsW0sT160sGqyGiKGCHaT6dydYq+cRg4MtNLo9znKBtepSlgA7SZMsP7BWHbbEwjO4klRmWeOsOtwssSlOQErKbqfOqWPxrsAzBzHp5dG+XN2AIiAmvY/tvblKHZs1CALikulF5w5WIFQgjmoQMaAgyYCAdCLqLFzm5FD8mYWvg2gv4QxYgIQs9SCfALGIBz6/4HKQ0z0h7MvHVjTLt/SfLIvCEHCDvGoFEAJ2kFkWBSpC0/9T2WkWD1hCGGQ7zxJgaYl+kF8mS4QJRO1l+oEsiQZI0klavmmF4ghg2kmUXSd3OmQz/QNwYe9plxrghjG5Hm2k+qmVH7v8A84wa2czimIhAAAAAElFTkSuQmCC&quot;
+            },
+            &quot;terminal&quot;: {
+                &quot;serialNo&quot;: &quot;40090041&quot;,
+                &quot;terminalType&quot;: {
+                    &quot;model&quot;: &quot;SPm2&quot;,
+                    &quot;vendor&quot;: &quot;Spire&quot;
+                }
+            }
+        }
+    ],
+    &quot;multitender&quot;: true
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">PURCHASE</code> operation creates Sale-Purchase record</li>
+<li><code class="codehilite">&quot;note&quot;</code> - <em>optional field</em> - used for merchant tracking purposes</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - <em>optional field</em> - used for merchant tracking purposes</li>
+<li><code class="codehilite">&quot;shopId&quot;</code> - <em>optional field</em> - reference to merchant's shop registered in Wirecard ePOS system, see more details in <a href="../shop/">Shop Management</a></li>
+<li><code class="codehilite">&quot;totalAmount&quot;</code> - defines amount of Sale-Purchase </li>
+<li><code class="codehilite">&quot;currencyCode&quot;</code> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
+<li><code class="codehilite">&quot;unitPricesIncludeTax&quot;</code> - <em>conditional field</em> - see mode details in <a href="../items/">Sale Items</a></li>
+<li><code class="codehilite">&quot;items&quot;</code> - <em>conditional field</em> - see mode details in <a href="../items/">Sale Items</a></li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">TERMINAL_AUTHORIZATION</code> transaction reserves funds from the cardholder's account</li>
+<li><code class="codehilite">&quot;amount&quot;</code> - defines transaction amount</li>
+<li><code class="codehilite">&quot;posEntryMode&quot;</code> - defines POS entry mode, see <a href="https://en.wikipedia.org/wiki/ISO_8583#Point_of_service_entry_modes">ISO 8583</a></li>
+<li><code class="codehilite">&quot;cardData&quot;</code> - includes card transaction data, see more details in <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale.html#_mpos_card_payment_methods">Notes to mPOS Card payment method</a></li>
+<li><code class="codehilite">&quot;terminal&quot;</code> - includes terminal-specific information<ul>
+<li><code class="codehilite">&quot;terminalType&quot;</code> - includes vendor and model</li>
+<li><code class="codehilite">&quot;serialNo&quot;</code> - defines terminal serial number</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - boolean value<ul>
+<li><code class="codehilite">&quot;TRUE&quot;</code> - required</li>
+<li><code class="codehilite">&quot;FALSE&quot;</code> - deprecated</li>
+</ul>
+</li>
+</ul>
+<h3 id="response">Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;PURCHASE&quot;,
+    &quot;timeStamp&quot;: &quot;2019-08-28T09:40:51.599Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1001&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;TERMINAL_AUTHORIZATION&quot;,
+            &quot;id&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;,
+            &quot;timeStamp&quot;: &quot;2019-08-28T09:40:51.563Z&quot;,
+            &quot;statuses&quot;: [
+                {
+                    &quot;result&quot;: &quot;SUCCESS&quot;,
+                    &quot;code&quot;: &quot;1001&quot;,
+                    &quot;message&quot;: &quot;Transaction OK.&quot;
+                }
+            ],
+            &quot;authorizationCode&quot;: &quot;629886&quot;,
+            &quot;terminalId&quot;: &quot;a1234567&quot;,
+            &quot;cardData&quot;: {
+                &quot;token&quot;: &quot;N/A&quot;,
+                &quot;maskedPAN&quot;: &quot;476173______0010&quot;,
+                &quot;cardBrand&quot;: &quot;VISA&quot;,
+                &quot;emvData&quot;: &quot;910A50FD39923A5C794F00128A023030&quot;,
+                &quot;aid&quot;: &quot;A0000000032010&quot;,
+                &quot;applicationLabel&quot;: &quot;VISA ELECTRON&quot;,
+                &quot;cardHolderName&quot;: &quot;VISA ACQUIRER TEST/CARD 20&quot;
+            }
+        }
+    ],
+    &quot;externalId&quot;: &quot;123456789&quot;,
+    &quot;merchantReceiptId&quot;: 340,
+    &quot;multitender&quot;: true
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means operation is successful, however follow-up <code class="codehilite">CONFIRM</code> request is required to complete Card Terminal Authorization transaction  </li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;authorizationCode&quot;</code> - authorization code provided by scheme</li>
+<li><code class="codehilite">&quot;terminalId&quot;</code> - TID used for this purchase transaction</li>
+<li><code class="codehilite">&quot;cardData&quot;</code> - includes card transaction data, see more details in <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale.html#_mpos_card_payment_methods">Notes to mPOS Card payment method</a></li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;externalId&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;merchantReceiptId&quot;</code> - unique identifier for merchant; it is incremented with Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode</li>
+<li><code class="codehilite">&quot;multitender&quot;</code> - echoed from request</li>
+</ul>
+<h2 id="confirm-operation">Confirm Operation</h2>
+<h3 id="request_1">Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;CONFIRM&quot;,
+    &quot;originalSaleId&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;CONFIRM&quot;,
+            &quot;terminal&quot;: {
+                &quot;terminalType&quot;: {
+                    &quot;model&quot;: &quot;SPm2&quot;,
+                    &quot;vendor&quot;: &quot;Spire&quot;
+                },
+                &quot;serialNo&quot;: &quot;40090041&quot;
+            },
+            &quot;cardData&quot;: {
+                &quot;emvData&quot;: &quot;9F26081206DDBC6D8008289F2701409F360200639F3704C2BA7271950502800080009B02F8009F34031E0300&quot;
+            }
+        }
+    ]
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">CONFIRM</code> operation does finish the Card Authorization transaction whereas <code class="codehilite">DECLINE</code> reverses the Card Authorization transaction</li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">CONFIRM</code> operation must include <code class="codehilite">CONFIRM</code> transaction type, <code class="codehilite">DECLINE</code> operation must include <code class="codehilite">DECLINE</code> transaction type</li>
+<li><code class="codehilite">&quot;terminal&quot;</code> - includes terminal-specific information<ul>
+<li><code class="codehilite">&quot;terminalType&quot;</code> - includes vendor and model</li>
+<li><code class="codehilite">&quot;serialNo&quot;</code> - defines terminal serial number</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;cardData&quot;</code> - includes additional card transaction data<ul>
+<li><code class="codehilite">&quot;emvData&quot;</code> - mandatory for EMV transaction</li>
+<li><code class="codehilite">&quot;signatureImg&quot;</code> - <em>optional field</em> - provided as PNG formatted to Base64 string</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="response_1">Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;CONFIRM&quot;,
+    &quot;timeStamp&quot;: &quot;2019-08-28T09:40:55.739Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1000&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;CONFIRM&quot;,
+            &quot;id&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;,
+            &quot;timeStamp&quot;: &quot;2019-08-28T09:40:55.717Z&quot;,
+            &quot;statuses&quot;: [
+                {
+                    &quot;result&quot;: &quot;SUCCESS&quot;,
+                    &quot;code&quot;: &quot;1000&quot;,
+                    &quot;message&quot;: &quot;Transaction OK.&quot;
+                }
+            ],
+            &quot;authorizationCode&quot;: &quot;&quot;
+        }
+    ]
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;id&quot;</code> - Sale-Purchase identifier assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - specific information for every payment method<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of purchase transaction assigned by Wirecard ePOS system; in case of <code class="codehilite">CONFIRM</code> it represents identifier of confirmed Card Purchase transaction (so it’s the same as returned in the response during the 1<sup>st</sup> step), in case of <code class="codehilite">DECLINE</code> it represents identifier of Card Reversal transaction (newly) created by system to execute <code class="codehilite">DECLINE</code> operation</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed by payment gateway</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;authorizationCode&quot;</code> - authorization code provided by scheme</li>
+</ul>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>After successful response, making <a href="#get-a-sale-call"><code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code></a> call is advised, as it provides all information.</p>
+</div>
+<h2 id="reference-purchase-operation-with-capture-transaction">Reference Purchase Operation with Capture Transaction</h2>
+<h3 id="request_2">Request</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;REFERENCE_PURCHASE&quot;,
+    &quot;originalSaleId&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;CAPTURE&quot;,
+            &quot;amount&quot;: 10,
+            &quot;originalTransactionId&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;
+        }
+    ]
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">REFERENCE_PURCHASE</code> is used with <code class="codehilite">CAPTURE</code></li>
+<li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction</li>
+<li><code class="codehilite">&quot;amount&quot;</code> - defines captured amount; it can be less or equal to referenced Card Terminal Authorization amount </li>
+<li><code class="codehilite">&quot;originalTransactionId&quot;</code> - identifier of original Card Terminal Authorization transaction which will be captured</li>
+</ul>
+</li>
+</ul>
+<h3 id="response_2">Response</h3>
+<div class="codehilite"><pre><span></span>{
+    &quot;operation&quot;: &quot;REFERENCE_PURCHASE&quot;,
+    &quot;timeStamp&quot;: &quot;2019-08-28T11:02:39.117Z&quot;,
+    &quot;status&quot;: {
+        &quot;code&quot;: &quot;1000&quot;,
+        &quot;result&quot;: &quot;SUCCESS&quot;
+    },
+    &quot;id&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;payments&quot;: [
+        {
+            &quot;paymentMethod&quot;: &quot;CARD&quot;,
+            &quot;transactionType&quot;: &quot;CAPTURE&quot;,
+            &quot;id&quot;: &quot;d608a177282e4d27b59f329594823271&quot;,
+            &quot;timeStamp&quot;: &quot;2019-08-28T11:02:38.957Z&quot;,
+            &quot;statuses&quot;: [
+                {
+                    &quot;result&quot;: &quot;SUCCESS&quot;,
+                    &quot;code&quot;: &quot;1000&quot;,
+                    &quot;message&quot;: &quot;Transaction OK.&quot;
+                }
+            ],
+            &quot;authorizationCode&quot;: &quot;629886&quot;
+        }
+    ],
+    &quot;multitender&quot;: true
+}
+</pre></div>
+
+
+<ul>
+<li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
+<li><code class="codehilite">&quot;status&quot;</code><ul>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1000&quot;</code> means operation is successful</li>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of original Sale-Purchase, echoed from request</li>
+<li><code class="codehilite">&quot;externalCashierId&quot;</code> - relevant for <a href="../advanced-overview/">Advanced Integration</a>; otherwise null</li>
+<li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
+<li><code class="codehilite">&quot;paymentMethod&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - echoed from request</li>
+<li><code class="codehilite">&quot;id&quot;</code> - identifier of capture transaction assigned by Wirecard ePOS system</li>
+<li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when transaction was processed</li>
+<li><code class="codehilite">&quot;statuses&quot;</code><ul>
+<li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;code&quot;</code> -  <code class="codehilite">&quot;1000&quot;</code> means transaction is successful</li>
+<li><code class="codehilite">&quot;message&quot;</code> - message provided by payment gateway</li>
+</ul>
+</li>
+<li><code class="codehilite">&quot;authorizationCode&quot;</code>- authorization code provided by scheme</li>
+</ul>
+</li>
+</ul>
+<h2 id="get-a-sale-call">Get a Sale Call</h2>
+<p>Example of <code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code> call with excluded <em>merchant</em>, <em>user</em> and <em>shop</em> fields (described in <a href="../merchant/">Merchant Details</a>, <a href="../user/">User Management</a> and <a href="../shop/">Shop Management</a> respectively):</p>
+<div class="codehilite"><pre><span></span>GET https://switch-test.wirecard.com/mswitch-server/v1/sales/f7a82ab377df401da1e301eccc4cc6e8?excludeField=merchant&amp;excludeField=user&amp;excludeField=shop
+
+{
+    &quot;id&quot;: &quot;f7a82ab377df401da1e301eccc4cc6e8&quot;,
+    &quot;type&quot;: &quot;PURCHASE&quot;,
+    &quot;status&quot;: &quot;COMPLETED&quot;,
+    &quot;totalAmount&quot;: 10,
+    &quot;note&quot;: &quot;SaleNote&quot;,
+    &quot;externalId&quot;: &quot;123456789&quot;,
+    &quot;externalCashierId&quot;: null,
+    &quot;customerId&quot;: null,
+    &quot;initialized&quot;: &quot;2019-08-28T09:40:51.404Z&quot;,
+    &quot;currency&quot;: {
+        &quot;number&quot;: 978,
+        &quot;code&quot;: &quot;EUR&quot;,
+        &quot;name&quot;: &quot;Euro&quot;,
+        &quot;minorUnit&quot;: 2
+    },
+    &quot;unitPricesIncludeTax&quot;: true,
+    &quot;items&quot;: [
+        {
+            &quot;type&quot;: &quot;PURCHASE&quot;,
+            &quot;description&quot;: &quot;Book&quot;,
+            &quot;categoryName&quot;: null,
+            &quot;externalCategoryId&quot;: null,
+            &quot;unitPrice&quot;: 1,
+            &quot;unitPriceModified&quot;: null,
+            &quot;quantity&quot;: 10,
+            &quot;unitTax&quot;: 0,
+            &quot;itemTotal&quot;: 10,
+            &quot;externalProductId&quot;: null,
+            &quot;internalProductId&quot;: null
+        }
+    ],
+    &quot;transactions&quot;: [
+        {
+            &quot;type&quot;: &quot;CARD_TERMINAL_AUTHORIZATION&quot;,
+            &quot;id&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;,
+            &quot;status&quot;: &quot;CAPTURED&quot;,
+            &quot;amount&quot;: 10,
+            &quot;lastUpdated&quot;: &quot;2019-08-28T11:02:38.976Z&quot;,
+            &quot;initialized&quot;: &quot;2019-08-28T09:40:51.405Z&quot;,
+            &quot;message&quot;: &quot;Transaction has been captured.\nWas: Authorization has been completed (approved by client). \nWas: Card Authorize has been approved (by the gateway).&quot;,
+            &quot;gateway&quot;: {
+                &quot;id&quot;: &quot;wdEeSimulated&quot;,
+                &quot;name&quot;: &quot;Wirecard EE Simulated&quot;,
+                &quot;type&quot;: &quot;WIRECARD_EE_SIMULATED&quot;,
+                &quot;url&quot;: &quot;http://dummy&quot;
+            },
+            &quot;gatewayReference&quot;: &quot;f37fb71d-0bf4-4952-86a7-7221bca0ac3a&quot;,
+            &quot;processedByGateway&quot;: &quot;2019-08-28T09:40:51.563Z&quot;,
+            &quot;authorizationCode&quot;: &quot;629886&quot;,
+            &quot;autoResolveTransactions&quot;: [],
+            &quot;reversalTransactions&quot;: [],
+            &quot;cardHolderName&quot;: &quot;VISA ACQUIRER TEST/CARD 20&quot;,
+            &quot;maskedCardNumber&quot;: &quot;476173******0010&quot;,
+            &quot;cardBrand&quot;: &quot;VISA&quot;,
+            &quot;captureTransactions&quot;: [
+                {
+                    &quot;type&quot;: &quot;CARD_CAPTURE&quot;,
+                    &quot;id&quot;: &quot;d608a177282e4d27b59f329594823271&quot;,
+                    &quot;status&quot;: &quot;COMPLETED&quot;,
+                    &quot;amount&quot;: 10,
+                    &quot;lastUpdated&quot;: &quot;2019-08-28T11:02:38.976Z&quot;,
+                    &quot;initialized&quot;: &quot;2019-08-28T11:02:38.871Z&quot;,
+                    &quot;message&quot;: &quot;Capture has been completed.&quot;,
+                    &quot;gateway&quot;: {
+                        &quot;id&quot;: &quot;wdEeSimulated&quot;,
+                        &quot;name&quot;: &quot;Wirecard EE Simulated&quot;,
+                        &quot;type&quot;: &quot;WIRECARD_EE_SIMULATED&quot;,
+                        &quot;url&quot;: &quot;http://dummy&quot;
+                    },
+                    &quot;gatewayReference&quot;: &quot;11a70aa3-f980-4568-ab5a-bc4efe2a6801&quot;,
+                    &quot;processedByGateway&quot;: &quot;2019-08-28T11:02:38.957Z&quot;,
+                    &quot;authorizationCode&quot;: &quot;629886&quot;,
+                    &quot;autoResolveTransactions&quot;: [],
+                    &quot;reversalTransactions&quot;: [],
+                    &quot;refundTransactions&quot;: [],
+                    &quot;authorizationTransaction&quot;: {
+                        &quot;type&quot;: &quot;TransactionRef&quot;,
+                        &quot;id&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;
+                    }
+                }
+            ],
+            &quot;terminal&quot;: {
+                &quot;id&quot;: &quot;78e6c01261ec4247835498398f96ae98&quot;,
+                &quot;serialNo&quot;: &quot;40090041&quot;,
+                &quot;location&quot;: &quot;Kosice&quot;,
+                &quot;description&quot;: null,
+                &quot;terminalType&quot;: {
+                    &quot;vendor&quot;: &quot;Spire&quot;,
+                    &quot;model&quot;: &quot;SPm2&quot;
+                },
+                &quot;merchant&quot;: null,
+                &quot;status&quot;: &quot;ENABLED&quot;,
+                &quot;lastTimeOnline&quot;: &quot;2019-08-28T09:40:51.364Z&quot;,
+                &quot;currentUpdateSet&quot;: {
+                    &quot;configuration&quot;: {
+                        &quot;id&quot;: &quot;717c604cdd1d4573ab219afc7e1e2bbd&quot;,
+                        &quot;resourceUpdateVersion&quot;: &quot;Spm2_MC&amp;VISA_BTT&quot;,
+                        &quot;priority&quot;: &quot;C&quot;
+                    },
+                    &quot;application&quot;: {
+                        &quot;id&quot;: &quot;48bdf3a76bf340408e880324fb38d4ea&quot;,
+                        &quot;resourceUpdateVersion&quot;: &quot;t2.30.66L&quot;,
+                        &quot;priority&quot;: &quot;A&quot;
+                    },
+                    &quot;firmware&quot;: null
+                },
+                &quot;assignedUpdateSet&quot;: null,
+                &quot;terminalCapabilitiesTemplate&quot;: {
+                    &quot;id&quot;: &quot;9e88df78439d4df5b93e2c7c94afcebf&quot;,
+                    &quot;name&quot;: &quot;Another posmate template&quot;,
+                    &quot;emvTerminalType&quot;: &quot;22&quot;,
+                    &quot;emvTransactionCategoryCode&quot;: &quot;R&quot;,
+                    &quot;capabilities&quot;: &quot;E0F8C8&quot;,
+                    &quot;additionalCapabilities&quot;: &quot;E000F0A001&quot;
+                },
+                &quot;aidConfigurations&quot;: null
+            },
+            &quot;posEntryMode&quot;: &quot;053&quot;,
+            &quot;tid&quot;: &quot;a1234567&quot;,
+            &quot;mid&quot;: &quot;87654321&quot;,
+            &quot;bdkId&quot;: &quot;FFFF&quot;,
+            &quot;signatureImage&quot;: &quot;iVBORw0KGgoAAAANSUhEUgAAAMgAAABQAQMAAABmo6jzAAAABlBMVEUAAAD///+l2Z/dAAABtklEQVRIx+3UP24TQRTH8Y2QoPQFkHwMCkBzhBxhb4DLlCMk7rHHoAjKgFIjlxQEP0uRYkVWeEELjO3ZmS/F7B87ZPsoypS/T/GK9+ZXMPaKJ3ngkiZjcuvHxN8jmueMS+iDxhxK7CXIoSQADOB1VOqcVHfE4SNfEpayk0knq2TeRhyzTjyNocShLGJAkm9lEwjCMQ7hOnpWvfwNnCsnGIQ6KuH29bwXpykLsSI8P23lZ8Bq9K1Ymub7gYQsW0sT160sGqyGiKGCHaT6dydYq+cRg4MtNLo9znKBtepSlgA7SZMsP7BWHbbEwjO4klRmWeOsOtwssSlOQErKbqfOqWPxrsAzBzHp5dG+XN2AIiAmvY/tvblKHZs1CALikulF5w5WIFQgjmoQMaAgyYCAdCLqLFzm5FD8mYWvg2gv4QxYgIQs9SCfALGIBz6/4HKQ0z0h7MvHVjTLt/SfLIvCEHCDvGoFEAJ2kFkWBSpC0/9T2WkWD1hCGGQ7zxJgaYl+kF8mS4QJRO1l+oEsiQZI0klavmmF4ghg2kmUXSd3OmQz/QNwYe9plxrghjG5Hm2k+qmVH7v8A84wa2czimIhAAAAAElFTkSuQmCC&quot;,
+            &quot;approvedOffline&quot;: false,
+            &quot;declinedOffline&quot;: false,
+            &quot;pinVerified&quot;: null,
+            &quot;pinVerificationMethod&quot;: null,
+            &quot;aid&quot;: &quot;A0000000032010&quot;,
+            &quot;emvData&quot;: &quot;5f201a5649534120414351554952455220544553542f434152442032309b02e800950502800080009f1c0861303030303832329f3901739f4005e000f0a001d7187e235938fe785af367586d6833e954fc5c75b09d8b6500ee4f07a00000000320109f0607a00000000320109f02060000000006009f03060000000000009f2608ea8cb1420dd2c9659f360200639f0902008c82025c00500d5649534120454c454354524f4e8c159f02069f03069f1a0295055f2a029a039c019f37048d178a029f02069f03069f1a0295055f2a029a039c019f37049f2701808e0e00000000000000001e0302031f009f34031e03008407a00000000320109f1e0834303030313533379f100706010a03a000009f160f3130303132313131323030303336365f3401019701009f3303e0f8c89f1a0202769f3501225f2a0209789a031806209f410204159c01009f3704c2ba72719f150289999f21030939489f1101019f1210454c454354524f4e20444520564953415f30020221&quot;,
+            &quot;emvUpdateData&quot;: &quot;9f26081206ddbc6d8008289f2701409f360200639f3704c2ba7271950502800080009b02f8009f34031e0300&quot;,
+            &quot;applicationLabel&quot;: &quot;VISA ELECTRON&quot;
+        },
+        {
+            &quot;type&quot;: &quot;CARD_CAPTURE&quot;,
+            &quot;id&quot;: &quot;d608a177282e4d27b59f329594823271&quot;,
+            &quot;status&quot;: &quot;COMPLETED&quot;,
+            &quot;amount&quot;: 10,
+            &quot;lastUpdated&quot;: &quot;2019-08-28T11:02:38.976Z&quot;,
+            &quot;initialized&quot;: &quot;2019-08-28T11:02:38.871Z&quot;,
+            &quot;message&quot;: &quot;Capture has been completed.&quot;,
+            &quot;gateway&quot;: {
+                &quot;id&quot;: &quot;wdEeSimulated&quot;,
+                &quot;name&quot;: &quot;Wirecard EE Simulated&quot;,
+                &quot;type&quot;: &quot;WIRECARD_EE_SIMULATED&quot;,
+                &quot;url&quot;: &quot;http://dummy&quot;
+            },
+            &quot;gatewayReference&quot;: &quot;11a70aa3-f980-4568-ab5a-bc4efe2a6801&quot;,
+            &quot;processedByGateway&quot;: &quot;2019-08-28T11:02:38.957Z&quot;,
+            &quot;authorizationCode&quot;: &quot;629886&quot;,
+            &quot;autoResolveTransactions&quot;: [],
+            &quot;reversalTransactions&quot;: [],
+            &quot;refundTransactions&quot;: [],
+            &quot;authorizationTransaction&quot;: {
+                &quot;type&quot;: &quot;CARD_TERMINAL_AUTHORIZATION&quot;,
+                &quot;id&quot;: &quot;9c88eb4426494917909cbe574f5b8d00&quot;,
+                &quot;status&quot;: &quot;CAPTURED&quot;,
+                &quot;amount&quot;: 10,
+                &quot;lastUpdated&quot;: &quot;2019-08-28T11:02:38.976Z&quot;,
+                &quot;initialized&quot;: &quot;2019-08-28T09:40:51.405Z&quot;,
+                &quot;message&quot;: &quot;Transaction has been captured.\nWas: Authorization has been completed (approved by client). \nWas: Card Authorize has been approved (by the gateway).&quot;,
+                &quot;gateway&quot;: {
+                    &quot;id&quot;: &quot;wdEeSimulated&quot;,
+                    &quot;name&quot;: &quot;Wirecard EE Simulated&quot;,
+                    &quot;type&quot;: &quot;WIRECARD_EE_SIMULATED&quot;,
+                    &quot;url&quot;: &quot;http://dummy&quot;
+                },
+                &quot;gatewayReference&quot;: &quot;f37fb71d-0bf4-4952-86a7-7221bca0ac3a&quot;,
+                &quot;processedByGateway&quot;: &quot;2019-08-28T09:40:51.563Z&quot;,
+                &quot;authorizationCode&quot;: &quot;629886&quot;,
+                &quot;autoResolveTransactions&quot;: [],
+                &quot;reversalTransactions&quot;: [],
+                &quot;cardHolderName&quot;: &quot;VISA ACQUIRER TEST/CARD 20&quot;,
+                &quot;maskedCardNumber&quot;: &quot;476173******0010&quot;,
+                &quot;cardBrand&quot;: &quot;VISA&quot;,
+                &quot;captureTransactions&quot;: [
+                    {
+                        &quot;type&quot;: &quot;TransactionRef&quot;,
+                        &quot;id&quot;: &quot;d608a177282e4d27b59f329594823271&quot;
+                    }
+                ],
+                &quot;terminal&quot;: {
+                    &quot;id&quot;: &quot;78e6c01261ec4247835498398f96ae98&quot;,
+                    &quot;serialNo&quot;: &quot;40090041&quot;,
+                    &quot;location&quot;: &quot;Kosice&quot;,
+                    &quot;description&quot;: null,
+                    &quot;terminalType&quot;: {
+                        &quot;vendor&quot;: &quot;Spire&quot;,
+                        &quot;model&quot;: &quot;SPm2&quot;
+                    },
+                    &quot;merchant&quot;: null,
+                    &quot;status&quot;: &quot;ENABLED&quot;,
+                    &quot;lastTimeOnline&quot;: &quot;2019-08-28T09:40:51.364Z&quot;,
+                    &quot;currentUpdateSet&quot;: {
+                        &quot;configuration&quot;: {
+                            &quot;id&quot;: &quot;717c604cdd1d4573ab219afc7e1e2bbd&quot;,
+                            &quot;resourceUpdateVersion&quot;: &quot;Spm2_MC&amp;VISA_BTT&quot;,
+                            &quot;priority&quot;: &quot;C&quot;
+                        },
+                        &quot;application&quot;: {
+                            &quot;id&quot;: &quot;48bdf3a76bf340408e880324fb38d4ea&quot;,
+                            &quot;resourceUpdateVersion&quot;: &quot;t2.30.66L&quot;,
+                            &quot;priority&quot;: &quot;A&quot;
+                        },
+                        &quot;firmware&quot;: null
+                    },
+                    &quot;assignedUpdateSet&quot;: null,
+                    &quot;terminalCapabilitiesTemplate&quot;: {
+                        &quot;id&quot;: &quot;9e88df78439d4df5b93e2c7c94afcebf&quot;,
+                        &quot;name&quot;: &quot;Another posmate template&quot;,
+                        &quot;emvTerminalType&quot;: &quot;22&quot;,
+                        &quot;emvTransactionCategoryCode&quot;: &quot;R&quot;,
+                        &quot;capabilities&quot;: &quot;E0F8C8&quot;,
+                        &quot;additionalCapabilities&quot;: &quot;E000F0A001&quot;
+                    },
+                    &quot;aidConfigurations&quot;: null
+                },
+                &quot;posEntryMode&quot;: &quot;053&quot;,
+                &quot;tid&quot;: &quot;a1234567&quot;,
+                &quot;mid&quot;: &quot;87654321&quot;,
+                &quot;bdkId&quot;: &quot;FFFF&quot;,
+                &quot;signatureImage&quot;: &quot;iVBORw0KGgoAAAANSUhEUgAAAMgAAABQAQMAAABmo6jzAAAABlBMVEUAAAD///+l2Z/dAAABtklEQVRIx+3UP24TQRTH8Y2QoPQFkHwMCkBzhBxhb4DLlCMk7rHHoAjKgFIjlxQEP0uRYkVWeEELjO3ZmS/F7B87ZPsoypS/T/GK9+ZXMPaKJ3ngkiZjcuvHxN8jmueMS+iDxhxK7CXIoSQADOB1VOqcVHfE4SNfEpayk0knq2TeRhyzTjyNocShLGJAkm9lEwjCMQ7hOnpWvfwNnCsnGIQ6KuH29bwXpykLsSI8P23lZ8Bq9K1Ymub7gYQsW0sT160sGqyGiKGCHaT6dydYq+cRg4MtNLo9znKBtepSlgA7SZMsP7BWHbbEwjO4klRmWeOsOtwssSlOQErKbqfOqWPxrsAzBzHp5dG+XN2AIiAmvY/tvblKHZs1CALikulF5w5WIFQgjmoQMaAgyYCAdCLqLFzm5FD8mYWvg2gv4QxYgIQs9SCfALGIBz6/4HKQ0z0h7MvHVjTLt/SfLIvCEHCDvGoFEAJ2kFkWBSpC0/9T2WkWD1hCGGQ7zxJgaYl+kF8mS4QJRO1l+oEsiQZI0klavmmF4ghg2kmUXSd3OmQz/QNwYe9plxrghjG5Hm2k+qmVH7v8A84wa2czimIhAAAAAElFTkSuQmCC&quot;,
+                &quot;approvedOffline&quot;: false,
+                &quot;declinedOffline&quot;: false,
+                &quot;pinVerified&quot;: null,
+                &quot;pinVerificationMethod&quot;: null,
+                &quot;aid&quot;: &quot;A0000000032010&quot;,
+                &quot;emvData&quot;: &quot;5f201a5649534120414351554952455220544553542f434152442032309b02e800950502800080009f1c0861303030303832329f3901739f4005e000f0a001d7187e235938fe785af367586d6833e954fc5c75b09d8b6500ee4f07a00000000320109f0607a00000000320109f02060000000006009f03060000000000009f2608ea8cb1420dd2c9659f360200639f0902008c82025c00500d5649534120454c454354524f4e8c159f02069f03069f1a0295055f2a029a039c019f37048d178a029f02069f03069f1a0295055f2a029a039c019f37049f2701808e0e00000000000000001e0302031f009f34031e03008407a00000000320109f1e0834303030313533379f100706010a03a000009f160f3130303132313131323030303336365f3401019701009f3303e0f8c89f1a0202769f3501225f2a0209789a031806209f410204159c01009f3704c2ba72719f150289999f21030939489f1101019f1210454c454354524f4e20444520564953415f30020221&quot;,
+                &quot;emvUpdateData&quot;: &quot;9f26081206ddbc6d8008289f2701409f360200639f3704c2ba7271950502800080009b02f8009f34031e0300&quot;,
+                &quot;applicationLabel&quot;: &quot;VISA ELECTRON&quot;
+            }
+        }
+    ],
+    &quot;location&quot;: null,
+    &quot;clientInfo&quot;: null,
+    &quot;merchantReceiptId&quot;: 340,
+    &quot;cancelledBy&quot;: null,
+    &quot;shiftId&quot;: null,
+    &quot;cashRegisterId&quot;: null,
+    &quot;emailForReceipt&quot;: null,
+    &quot;emailForReceiptProvided&quot;: false,
+    &quot;multitender&quot;: true,
+    &quot;version&quot;: 0
+}
+</pre></div>
+
+
+<h2 id="card-authorization-transaction-lifecycle">Card Authorization Transaction Lifecycle</h2>
+<p><img alt="Card Authorization Lifecycle" src="../images/card_authorization_lifecycle.png" /></p>
+<h2 id="card-capture-transaction-lifecycle">Card Capture Transaction Lifecycle</h2>
+<p><img alt="Card Capture Lifecycle" src="../images/card_capture_lifecycle.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see all <code class="codehilite">/v1/sales</code> request &amp; response examples, <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">click here</a>.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../card-purchase-flow/" title="Purchase Transaction Flow" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Purchase Transaction Flow
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../card-reversal-flow/" title="Reversal Transaction Flow" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Reversal Transaction Flow
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/WirecardMobileServices/Wirecard-ePOS-iOS" class="md-footer-social__link fa fa-apple"></a>
+    
+      <a href="https://github.com/WirecardMobileServices/Wirecard-ePOS-Android" class="md-footer-social__link fa fa-android"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.2ba8dec4.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../javascript/external-links.js"></script>
+      
+    
+  </body>
+</html>

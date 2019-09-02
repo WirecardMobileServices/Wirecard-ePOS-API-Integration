@@ -1,3 +1,5 @@
+**Purchase** transaction type takes funds from cardholder's account. 
+
 Every Purchase operation with **Card Purchase** transaction (EMV or Magstripe card payment) has to be confirmed or declined by follow-up Sale completion request, so 2 steps are needed:
 
 - Initial Purchase request
@@ -383,3 +385,6 @@ Example of `GET /v1/sales/{id}` call with excluded _merchant_, _user_ and _shop_
 ## Card Purchase Transaction Lifecycle
 
 ![Card Purchase Lifecycle](images/card_purchase_lifecycle.png)
+
+!!! Tip
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).

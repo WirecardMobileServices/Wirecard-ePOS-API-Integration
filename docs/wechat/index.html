@@ -77,7 +77,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#workflow" tabindex="1" class="md-skip">
+      <a href="#sequence-diagrams" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -295,10 +295,82 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="../card/" title="Card" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-2" type="checkbox" id="nav-3-2-2">
+    
+    <label class="md-nav__link" for="nav-3-2-2">
       Card
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-2-2">
+        Card
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card/" title="Introduction" class="md-nav__link">
+      Introduction
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-purchase-flow/" title="Purchase Transaction Flow" class="md-nav__link">
+      Purchase Transaction Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-auth-flow/" title="Authorization & Capture Transaction Flow" class="md-nav__link">
+      Authorization & Capture Transaction Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-reversal-flow/" title="Reversal Transaction Flow" class="md-nav__link">
+      Reversal Transaction Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../card-reference-refund-flow/" title="Reference Refund Transaction Flow" class="md-nav__link">
+      Reference Refund Transaction Flow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -343,8 +415,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#workflow" title="Workflow" class="md-nav__link">
-    Workflow
+  <a href="#sequence-diagrams" title="Sequence Diagrams" class="md-nav__link">
+    Sequence Diagrams
   </a>
   
     <nav class="md-nav">
@@ -646,8 +718,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#workflow" title="Workflow" class="md-nav__link">
-    Workflow
+  <a href="#sequence-diagrams" title="Sequence Diagrams" class="md-nav__link">
+    Sequence Diagrams
   </a>
   
     <nav class="md-nav">
@@ -834,22 +906,22 @@
 <p>In case end-consumer (buyer) is prompted to authorize payment with password or other equivalent (pin code, fingerprint, etc.) then merchant has to query Wirecard ePOS system in order to get the final status of WeChat transaction. Technically-wise, it means that initial <a href="#purchase-operation">request</a> (<em>PURCHASE</em>) has to be followed by <a href="#confirm-operation">query request</a> (<em>CONFIRM</em>).</p>
 </li>
 </ul>
-<h2 id="workflow">Workflow</h2>
+<h2 id="sequence-diagrams">Sequence Diagrams</h2>
 <h3 id="1-step-wechat-payment">1-step WeChat payment</h3>
 <p><img alt="WeChat" src="../images/wechat.png" /></p>
 <h3 id="2-step-wechat-payment">2-step WeChat payment</h3>
 <p><img alt="WeChat" src="../images/wechat2.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Purchase requests are serviced at following URL:</p>
+<p>Sale requests are serviced at following URL:</p>
 <div class="codehilite"><pre><span></span>https://switch.wirecard.com/mswitch-server/v1/sales
 </pre></div>
 
 
-<p>In context of Wirecard ePOS, term <strong>Purchase</strong> is used for both:</p>
+<p>In context of Wirecard ePOS, term <code class="codehilite">Purchase</code> is used for both:</p>
 <ul>
 <li>type of Sale - called <em>Sale-Purchase</em> - created by request with PURCHASE operation</li>
-<li>transaction type - <em>cash purchase</em> transaction, <em>card purchase</em> transaction, <em>alipay purchase</em> transaction and <em>wechat purchase</em> transaction</li>
+<li>transaction type - <em>Cash Purchase</em> transaction, <em>Card Purchase</em> transaction, <em>Alipay Purchase</em> transaction and <em>WeChat Purchase</em> transaction</li>
 </ul>
 </div>
 <h2 id="purchase-operation">Purchase Operation</h2>
@@ -880,14 +952,14 @@
 <li><code class="codehilite">&quot;FALSE&quot;</code> - deprecated</li>
 </ul>
 </li>
-<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">&quot;PURCHASE&quot;</code> operation creates Sale-Purchase record</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">PURCHASE</code> operation creates Sale-Purchase record</li>
 <li><code class="codehilite">&quot;note&quot;</code> - <em>optional field</em> - used for merchant tracking purposes; it is forwarded to payment gateway in <code class="codehilite">&lt;order-detail&gt;</code> field</li>
 <li><code class="codehilite">&quot;externalId&quot;</code> - <em>optional field</em> - used for merchant tracking purposes; it is forwarded to payment gateway in <code class="codehilite">&lt;order-number&gt;</code> field</li>
 <li><code class="codehilite">&quot;totalAmount&quot;</code> - defines amount of Sale-Purchase </li>
 <li><code class="codehilite">&quot;currencyCode&quot;</code> - defines currency, based on <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> standard</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method</li>
-<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;PURCHASE&quot;</code> transaction moves funds from end-consumer to merchant</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">PURCHASE</code> transaction moves funds from end-consumer to merchant</li>
 <li><code class="codehilite">&quot;amount&quot;</code> - defines transaction amount</li>
 <li><code class="codehilite">&quot;consumerId&quot;</code> - value of scanned barcode (QR code)</li>
 </ul>
@@ -1014,7 +1086,7 @@
 <li><code class="codehilite">&quot;operation&quot;</code> - echoed from request</li>
 <li><code class="codehilite">&quot;timeStamp&quot;</code> - date-time when response was constructed</li>
 <li><code class="codehilite">&quot;status&quot;</code><ul>
-<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means operation is successful, however follow-up <code class="codehilite">&quot;CONFIRM&quot;</code> request is required to complete WeChat purchase transaction</li>
+<li><code class="codehilite">&quot;code&quot;</code> - <code class="codehilite">&quot;1001&quot;</code> means operation is successful, however follow-up <code class="codehilite">CONFIRM</code> request is required to complete WeChat purchase transaction</li>
 <li><code class="codehilite">&quot;result&quot;</code> - <code class="codehilite">&quot;SUCCESS&quot;</code> means operation is successful</li>
 </ul>
 </li>
@@ -1055,11 +1127,11 @@
 
 
 <ul>
-<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">&quot;CONFIRM&quot;</code> operation does finish the WeChat Purchase transaction</li>
+<li><code class="codehilite">&quot;operation&quot;</code> - defines type of Sale request; <code class="codehilite">CONFIRM</code> operation does finish the WeChat Purchase transaction</li>
 <li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
-<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">&quot;CONFIRM&quot;</code> operation must include <code class="codehilite">&quot;CONFIRM&quot;</code> transaction type</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of transaction; <code class="codehilite">CONFIRM</code> operation must include <code class="codehilite">CONFIRM&quot;</code> transaction type</li>
 </ul>
 </li>
 </ul>
@@ -1156,8 +1228,8 @@
 <li><code class="codehilite">&quot;originalSaleId&quot;</code> - identifier of original Sale-Purchase</li>
 <li><code class="codehilite">&quot;payments&quot;</code> - includes payment-specific information<ul>
 <li><code class="codehilite">&quot;paymentMethod&quot;</code> - defines payment method; it must be same as original payment transaction</li>
-<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of this transaction; <code class="codehilite">&quot;REVERSE&quot;</code> operation must include <code class="codehilite">&quot;REVERSAL&quot;</code> transaction type</li>
-<li><code class="codehilite">&quot;originalTransactionId&quot;</code> - identifier of original purchase transaction</li>
+<li><code class="codehilite">&quot;transactionType&quot;</code> - defines type of this transaction; <code class="codehilite">REVERSE</code> operation must include <code class="codehilite">REVERSAL</code> transaction type</li>
+<li><code class="codehilite">&quot;originalTransactionId&quot;</code> - identifier of original WeChat purchase transaction which will be reversed</li>
 </ul>
 </li>
 </ul>
@@ -1257,10 +1329,6 @@
 </pre></div>
 
 
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>To see all <code class="codehilite">/v1/sales</code> request &amp; response examples, <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">click here</a>.</p>
-</div>
 <h2 id="get-a-sale-call">Get a Sale Call</h2>
 <p>Example of <code class="codehilite"><span class="err">GET /v1/sales/{id}</span></code> call with excluded <em>merchant</em> and <em>user</em> fields (described in <a href="../merchant/">Merchant Details</a> and <a href="../user/">User Management</a> respectively):</p>
 <div class="codehilite"><pre><span></span>GET https://switch-test.wirecard.com/mswitch-server/v1/sales/3c9cf14fe82f42bfbecb6dec22edbfe3?excludeField=merchant&amp;excludeField=user
@@ -1329,6 +1397,10 @@
 
 <h2 id="purchase-transaction-lifecycle">Purchase Transaction Lifecycle</h2>
 <p><img alt="WeChat Purchase Lifecycle" src="../images/wechat_purchase_lifecycle.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see all <code class="codehilite">/v1/sales</code> request &amp; response examples, <a href="https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html">click here</a>.</p>
+</div>
                 
                   
                 

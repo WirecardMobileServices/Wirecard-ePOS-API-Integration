@@ -48,7 +48,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
 - `"multitender"` - boolean value
     - `"TRUE"` - required
     - `"FALSE"` - deprecated
-- `"operation"` - defines type of Sale request; `"PURCHASE"` operation creates Sale-Purchase record
+- `"operation"` - defines type of Sale request; `PURCHASE` operation creates Sale-Purchase record
 - `"note"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-detail>` field
 - `"externalId"` - _optional field_ - used for merchant tracking purposes; it is forwarded to payment gateway in `<order-number>` field
 - `"shopId"` - _optional field_ - reference to merchant's shop registered in Wirecard ePOS system, see more details in [Shop Management](shop.md)
@@ -56,7 +56,7 @@ In order to process Alipay payment, make a [`POST /v1/sales`](https://switch.wir
 - `"currencyCode"` - defines currency, based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) standard
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method
-    - `"transactionType"` - defines type of transaction; `"PURCHASE"` transaction moves funds from end-consumer to merchant
+    - `"transactionType"` - defines type of transaction; `PURCHASE` transaction moves funds from end-consumer to merchant
     - `"amount"` - defines transaction amount
     - `"consumerId"` - value of scanned barcode (QR code)
     
@@ -157,8 +157,8 @@ In order to reverse Alipay purchase transaction, make a [`POST /v1/sales`](https
 - `"originalSaleId"` - identifier of original Sale-Purchase
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method; must be same as original payment method
-    - `"transactionType"` - defines type of transaction; `"REVERSE"` operation must include `"REVERSAL"` transaction type
-    - `"originalTransactionId"` - identifier of original purchase transaction
+    - `"transactionType"` - defines type of transaction; `REVERSE` operation must include `REVERSAL` transaction type
+    - `"originalTransactionId"` - identifier of original Alipay purchase transaction which will be reversed
     
 ### Response
 
@@ -248,14 +248,14 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
         ]
     }
 
-- `"operation"` - defines type of Sale request; `"RETURN"` operation creates new Sale-Return record
+- `"operation"` - defines type of Sale request; `RETURN` operation creates new Sale-Return record
 - `"totalAmount"` - defines amount to be refunded; it can be equal (full return) or less (partial return) than total amount in original Sale-Purchase
 - `"currencyCode"` - must be same as for original Sale-Purchase
 - `"originalSaleId"` - identifier of original Sale-Purchase
 - `"payments"` - includes payment-specific information
     - `"paymentMethod"` - defines payment method
-    - `"transactionType"` - defines type of transaction; must be `"REFERENCE_REFUND"` when payment method is `"ALIPAY"`
-    - `"amount"` - defines amount to be refunded
+    - `"transactionType"` - defines type of transaction; must be `REFERENCE_REFUND` when payment method is `ALIPAY`
+    - `"amount"` - defines amount to be refunded; must be same as `totalAmount`
     - `"originalTransactionId"` - identifier of original Alipay purchase transaction which will be refunded
 
 ### Response
@@ -324,9 +324,6 @@ In order to process Alipay refund transaction, make a [`POST /v1/sales`](https:/
     - `"gatewayReference"` - identifier of transaction assigned by Wirecard payment gateway
 - `"externalId"` - echoed from request
 - `"merchantReceiptId"` - unique identifier for merchant; it is incremented with every Sale-Purchase and Sale-Return; it is advised to be printed on receipt as a barcode
-
-!!! Tip
-    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
     
 ## Get a Sale Call
 
@@ -397,3 +394,6 @@ Example of `GET /v1/sales/{id}` call with excluded _merchant_ and _user_ fields 
 ## Purchase Transaction Lifecycle
 
 ![Alipay Purchase Lifecycle](images/alipay_purchase_lifecycle.png)
+
+!!! Tip
+    To see all `/v1/sales` request & response examples, [click here](https://switch-test.wirecard.com/mswitch-server/doc/api-doc-sale-examples.html).
